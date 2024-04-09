@@ -70,7 +70,7 @@ import Typography from "layouts/sections/elements/typography";
 
 const routes = [
   {
-    name: "pages",
+    name: "내 근처 은행 찾기",
     icon: <Icon>dashboard</Icon>,
     columns: 1,
     rowsPerColumn: 2,
@@ -96,10 +96,8 @@ const routes = [
         ],
       },
       {
-        name: "account",
         collapse: [
           {
-            name: "sign in",
             route: "/pages/authentication/sign-in",
             component: <SignIn />,
           },
@@ -108,7 +106,7 @@ const routes = [
     ],
   },
   {
-    name: "sections",
+    name: "내 근처 주차장찾기",
     icon: <Icon>view_day</Icon>,
     collapse: [
       {
@@ -239,7 +237,7 @@ const routes = [
     ],
   },
   {
-    name: "docs",
+    name: "Q&A",
     icon: <Icon>article</Icon>,
     collapse: [
       {
@@ -267,7 +265,7 @@ const routes = [
   {
     name: "github",
     icon: <GitHubIcon />,
-    href: "https://www.github.com/creativetimofficial/material-kit-react",
+    href: "https://github.com/pangyosim/dwbb",
   },
 ];
 

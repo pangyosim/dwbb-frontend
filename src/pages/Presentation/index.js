@@ -44,7 +44,7 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 
 // Images
-import bgImage from "assets/images/bg-presentation.jpg";
+import bgImage from "assets/images/backgroundimg.jpg";
 
 function Presentation() {
   return (
@@ -52,8 +52,8 @@ function Presentation() {
       <DefaultNavbar
         routes={routes}
         action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
+          type: "internal",
+          route: "/pages/authentication/sign-in",
           label: "login",
           color: "info",
         }}
@@ -68,6 +68,7 @@ function Presentation() {
           backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
+          borderImage: "fill 0 linear-gradient(#0001,#000)",
         }}
       >
         <Container>
@@ -83,7 +84,7 @@ function Presentation() {
                 },
               })}
             >
-              Material Kit 2 React{" "}
+              Don't Worry Be Banking !
             </MKTypography>
             <MKTypography
               variant="body1"
@@ -92,8 +93,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              Free & Open Source Web UI Kit built over ReactJS &amp; MUI. Join over 1.6 million
-              developers around the world.
+              내 근처 IBK기업은행 대기인원 현황, 주차장 정보 확인 웹사이트
             </MKTypography>
           </Grid>
         </Container>
