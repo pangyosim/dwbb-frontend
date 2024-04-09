@@ -73,16 +73,15 @@ function DesignBlocks() {
           <MKBadge
             variant="contained"
             color="info"
-            badgeContent="Infinite combinations"
+            badgeContent="은행 평균 대기인원 및 정보"
             container
             sx={{ mb: 2 }}
           />
           <MKTypography variant="h2" fontWeight="bold">
-            Huge collection of sections
+            은행 및 주차장 데이터 현황
           </MKTypography>
           <MKTypography variant="body1" color="text">
-            We have created multiple options for you to put together and customise into pixel
-            perfect pages.
+            내 근처 은행 대기인원, 주차장 주소, 연락처를 확인할 수 있습니다.
           </MKTypography>
         </Grid>
       </Container>

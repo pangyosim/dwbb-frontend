@@ -46,15 +46,17 @@ function BuiltByDevelopers() {
       <Container>
         <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
           <MKTypography variant="h4" color="white" fontWeight="bold">
-            Built by developers
           </MKTypography>
           <MKTypography variant="h1" color="white" mb={1}>
-            Complex Documentation
+            공지사항 
           </MKTypography>
+          <br></br>
           <MKTypography variant="body1" color="white" opacity={0.8} mb={2}>
-            From colors, cards, typography to complex elements, you will find the full
-            documentation. Play with the utility classes and you will create unlimited combinations
-            for our components.
+            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  <br></br>
+            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  <br></br>
+            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18 <br></br>
+            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  
+            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  
           </MKTypography>
           <MKTypography
             component="a"
@@ -79,7 +81,7 @@ function BuiltByDevelopers() {
               },
             }}
           >
-            Read docs <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            더보기 <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
         </Grid>
       </Container>

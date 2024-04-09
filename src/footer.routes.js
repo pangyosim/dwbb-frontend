@@ -8,13 +8,13 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import MKTypography from "components/MKTypography";
 
 // Images
-import logoCT from "assets/images/logo-ct-dark.png";
+import logoCT from "assets/images/favicon.png";
 
 const date = new Date().getFullYear();
 
 const output = {
   brand: {
-    name: "Material Kit 2",
+    name: "DWBB",
     image: logoCT,
     route: "/",
   },
@@ -74,7 +74,7 @@ const output = {
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} Material Kit by{" "}
+      All rights reserved. Copyright &copy; {date} DWBB by{" "}
       <MKTypography
         component="a"
         href="https://www.creative-tim.com/"
@@ -83,7 +83,7 @@ const output = {
         variant="button"
         fontWeight="regular"
       >
-        Creative Tim
+        Don't Worry Be Banking
       </MKTypography>
       .
     </MKTypography>

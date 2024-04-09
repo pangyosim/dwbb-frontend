@@ -27,8 +27,9 @@ import RotatingCardBack from "examples/Cards/RotatingCard/RotatingCardBack";
 import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 
 // Images
-import bgFront from "assets/images/rotating-card-bg-front.jpeg";
-import bgBack from "assets/images/rotating-card-bg-back.jpeg";
+// import bgFront from "assets/images/rotating-card-bg-front.jpeg";
+// import bgBack from "assets/images/rotating-card-bg-back.jpeg";
+import bgimg from "assets/images/bgimg.png";
 
 function Information() {
   return (
@@ -38,25 +39,25 @@ function Information() {
           <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
             <RotatingCard>
               <RotatingCardFront
-                image={bgFront}
+                image={bgimg}
                 icon="touch_app"
                 title={
                   <>
-                    Feel the
+                    은행 & 주차장
                     <br />
-                    Material Kit
+                    정보안내서비스                
                   </>
                 }
-                description="All the MUI components that you need in a development have been re-design with the new look."
+                // description="IBK기업은행 대기인원현황 & 주차장정보확인 서비스"
               />
               <RotatingCardBack
-                image={bgBack}
-                title="Discover More"
-                description="You will save a lot of time going from prototyping to full-functional code because all elements are implemented."
+                image={bgimg}
+                title="IBK기업은행 대기인원현황,주차장정보"
+                description="내 근처 2km 이내 지점 6개 정보를 확인할 수 있습니다."
                 action={{
                   type: "internal",
-                  route: "/sections/page-sections/page-headers",
-                  label: "start with header",
+                  route: "/pages/landing-pages/contact-us",
+                  label: "지도 보러가기 >",
                 }}
               />
             </RotatingCard>
@@ -65,33 +66,32 @@ function Information() {
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="content_copy"
-                  title="Full Documentation"
-                  description="Built by developers for developers. Check the foundation and you will find
-                    everything inside our documentation."
+                  icon="account_balance"
+                  title="은행"
+                  description="공공데이터 중소기업대기현황 API를 통해 실시간 은행 대기현황 데이터를 제공받아 서비스 중입니다."
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="flip_to_front"
-                  title="MUI Ready"
-                  description="The world's most popular react components library for building user interfaces."
+                  icon="directions_car_filled"
+                  title="주차장"
+                  description="열린광장 주차장 API를 통해 실시간 주차장 정보 데이터를 제공받아 서비스 중입니다."
                 />
               </Grid>
             </Grid>
             <Grid container spacing={3} sx={{ mt: { xs: 0, md: 6 } }}>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="price_change"
-                  title="Save Time & Money"
-                  description="Creating your design from scratch with dedicated designers can be very expensive. Start with our Design System."
+                  icon="schedule"
+                  title="시간효율성 UP"
+                  description="대기인원이 적은 은행에서 업무보고, 시간을 절약할 수 있습니다."
                 />
               </Grid>
               <Grid item xs={12} md={6}>
                 <DefaultInfoCard
-                  icon="devices"
-                  title="Fully Responsive"
-                  description="Regardless of the screen size, the website content will naturally fit the given resolution."
+                  icon="browser_updated"
+                  title="서비스 상시 업데이트"
+                  description="좋은 서비스를 제공하기 위해, 끈임없이 노력하고 업데이트하고있습니다."
                 />
               </Grid>
             </Grid>
