@@ -43,7 +43,7 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/city-profile.jpg";
 
 function SignInBasic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -54,12 +54,6 @@ function SignInBasic() {
     <>
       <DefaultNavbar
         routes={routes}
-        action={{
-          type: "internal",
-          route: "/pages/authentication/sign-in",
-          label: "로그인",
-          color: "info",
-        }}
         transparent
         light
       />
@@ -97,7 +91,7 @@ function SignInBasic() {
                 textAlign="center"
               >
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
+                  DWBB
                 </MKTypography>
                 <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
                   <Grid item xs={2}>
@@ -120,7 +114,7 @@ function SignInBasic() {
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
                   <MKBox mb={2}>
-                    <MKInput type="email" label="Email" fullWidth />
+                    <MKInput type="email" label="ID" fullWidth />
                   </MKBox>
                   <MKBox mb={2}>
                     <MKInput type="password" label="Password" fullWidth />
@@ -134,17 +128,17 @@ function SignInBasic() {
                       onClick={handleSetRememberMe}
                       sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
                     >
-                      &nbsp;&nbsp;Remember me
+                      &nbsp;&nbsp;아이디 저장
                     </MKTypography>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth>
-                      sign in
+                      로그인
                     </MKButton>
                   </MKBox>
                   <MKBox mt={3} mb={1} textAlign="center">
                     <MKTypography variant="button" color="text">
-                      Don&apos;t have an account?{" "}
+                      가입한 아이디가 없다면? &nbsp;
                       <MKTypography
                         component={Link}
                         to="/authentication/sign-up/cover"
@@ -153,7 +147,7 @@ function SignInBasic() {
                         fontWeight="medium"
                         textGradient
                       >
-                        Sign up
+                        회원가입
                       </MKTypography>
                     </MKTypography>
                   </MKBox>
