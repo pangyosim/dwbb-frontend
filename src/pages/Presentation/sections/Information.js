@@ -48,7 +48,7 @@ function Information() {
                     정보안내서비스                
                   </>
                 }
-                // description="IBK기업은행 대기인원현황 & 주차장정보확인 서비스"
+                description=""
               />
               <RotatingCardBack
                 image={bgimg}

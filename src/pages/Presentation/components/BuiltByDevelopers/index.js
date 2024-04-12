@@ -44,20 +44,18 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <Grid container item xs={12} lg={6} sx={{ ml: { xs: 0, lg: 6 } }}>
-          <MKTypography variant="h4" color="white" fontWeight="bold">
-          </MKTypography>
+        <Grid container item xs={12} lg={3.5} sx={{ ml: { xs: 0, lg: 6 } }}>
+          {/* <MKTypography variant="h4" color="white" fontWeight="bold">
+          </MKTypography> */}
           <MKTypography variant="h1" color="white" mb={1}>
-            공지사항 
+            공지사항
           </MKTypography>
           <br></br>
-          <MKTypography variant="body1" color="white" opacity={0.8} mb={2}>
-            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  <br></br>
-            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  <br></br>
-            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18 <br></br>
-            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  
-            [공지] 수출서류 해외 발송 우편료 인상 안내     2024-02-18  
+          <MKTypography variant="body2" color="white" opacity={0.8} mb={10}>
+            [공지] 홈페이지 은행지도 시스템 점검 안내  <br></br>
+            [공지] 홈페이지 보안관련 점검 안내<br></br>
           </MKTypography>
+          <br></br>
           <MKTypography
             component="a"
             href="https://www.creative-tim.com/learning-lab/react/overview/material-kit/"
@@ -65,11 +63,11 @@ function BuiltByDevelopers() {
             rel="noreferrer"
             variant="body2"
             color="white"
-            fontWeight="regular"
+            fontWeight="bold"
             sx={{
               display: "flex",
               alignItems: "center",
-
+              
               "& .material-icons-round": {
                 fontSize: "1.125rem",
                 transform: `translateX(3px)`,

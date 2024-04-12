@@ -12,9 +12,7 @@ Coded by www.creative-tim.com
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
-
-const imagesPrefix =
-  "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/material-design-system/presentation/sections";
+import bgimg from "assets/images/favicon.png";
 
 const output = [
   {
@@ -22,38 +20,38 @@ const output = [
     description: "IBK기업은행 대상으로 서비스하고 있으며, 점차 다른 은행들도 추가할 예정입니다.",
     items: [
       {
-        image: `${imagesPrefix}/headers.jpg`,
-        name: "Page Headers",
+        image: `${bgimg}`,
+        name: "IBK기업은행 역삼점",
         count: 10,
         route: "/sections/page-sections/page-headers",
       },
       {
-        image: `${imagesPrefix}/features.jpg`,
-        name: "Features",
+        image: `${bgimg}`,
+        name: "IBK기업은행 선릉점",
         count: 14,
         route: "/sections/page-sections/features",
       },
       {
-        image: `${imagesPrefix}/headers.jpg`,
-        name: "Page Headers",
+        image: `${bgimg}`,
+        name: "IBK기업은행 강남점",
         count: 10,
         route: "/sections/page-sections/page-headers",
       },
       {
-        image: `${imagesPrefix}/features.jpg`,
-        name: "Features",
+        image: `${bgimg}`,
+        name: "IBK기업은행 논현점",
         count: 14,
         route: "/sections/page-sections/features",
       },
       {
-        image: `${imagesPrefix}/headers.jpg`,
-        name: "Page Headers",
+        image: `${bgimg}`,
+        name: "IBK기업은행 강남대로점",
         count: 10,
         route: "/sections/page-sections/page-headers",
       },
       {
-        image: `${imagesPrefix}/features.jpg`,
-        name: "Features",
+        image: `${bgimg}`,
+        name: "IBK기업은행 강남시티점",
         count: 14,
         route: "/sections/page-sections/features",
       },
@@ -64,38 +62,38 @@ const output = [
     description: "서울시 대상으로 서비스하고 있으며, 점차 다른 지역도 추가할 예정입니다.",
     items: [
       {
-        image: `${imagesPrefix}/navbars.jpg`,
-        name: "Navbars",
+        image: `${bgimg}`,
+        name: "테헤란로26길노상공영주차장",
         count: 4,
         route: "/sections/navigation/navbars",
       },
       {
-        image: `${imagesPrefix}/nav-tabs.jpg`,
-        name: "Nav Tabs",
+        image: `${bgimg}`,
+        name: "역삼하이츠빌딩주차장",
         count: 2,
         route: "/sections/navigation/nav-tabs",
       },
       {
-        image: `${imagesPrefix}/pagination.jpg`,
-        name: "Pagination",
+        image: `${bgimg}`,
+        name: "코레이트타워주차장",
         count: 3,
         route: "/sections/navigation/pagination",
       },
       {
-        image: `${imagesPrefix}/navbars.jpg`,
-        name: "Navbars",
+        image: `${bgimg}`,
+        name: "현대주차장",
         count: 4,
         route: "/sections/navigation/navbars",
       },
       {
-        image: `${imagesPrefix}/nav-tabs.jpg`,
-        name: "Nav Tabs",
+        image: `${bgimg}`,
+        name: "장원민영주차장",
         count: 2,
         route: "/sections/navigation/nav-tabs",
       },
       {
-        image: `${imagesPrefix}/pagination.jpg`,
-        name: "Pagination",
+        image: `${bgimg}`,
+        name: "강남N타워 민영주차장",
         count: 3,
         route: "/sections/navigation/pagination",
       },

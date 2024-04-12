@@ -97,7 +97,7 @@ function ExampleCard({ image, name, count, pro, ...rest }) {
           )}
           {count > 0 && (
             <MKTypography variant="button" fontWeight="regular" color="secondary">
-              {count} {count === 1 ? "Example" : "Examples"}
+              {count}{count === 1 ? "명 대기중" : "명 대기중"}
             </MKTypography>
           )}
         </MKBox>

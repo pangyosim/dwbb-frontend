@@ -28,6 +28,8 @@ import Presentation from "layouts/pages/presentation";
 
 // Material Kit 2 React routes
 import routes from "routes";
+import SignIn from "layouts/pages/authentication/sign-in";
+import SignOut from "layouts/pages/authentication/sign-out";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -58,6 +60,8 @@ export default function App() {
         {getRoutes(routes)}
         <Route path="/presentation" element={<Presentation />} />
         <Route path="*" element={<Navigate to="/presentation" />} />
+        <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
+        <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
       </Routes>
     </ThemeProvider>
   );

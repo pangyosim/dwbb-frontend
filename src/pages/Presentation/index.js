@@ -47,15 +47,23 @@ import footerRoutes from "footer.routes";
 import bgImage from "assets/images/backgroundimg.jpg";
 
 function Presentation() {
+  let isLogin = localStorage.getItem("token");
   return (
     <>
       <DefaultNavbar
         routes={routes}
-        action={{
-          type: "internal",
-          route: "/pages/authentication/sign-in",
-          label: "로그인", 
-          color:"info",
+        action={isLogin !== null ? 
+          {
+            type: "internal",
+            route: "/pages/authentication/sign-out",
+            label: "로그아웃", 
+            color:"info",
+          } :
+          {
+            type: "internal",
+            route: "/pages/authentication/sign-in",
+            label: "로그인", 
+            color:"info",
         }}
       />
       <MKBox

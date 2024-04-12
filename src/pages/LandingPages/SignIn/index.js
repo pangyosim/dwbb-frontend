@@ -1,22 +1,7 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState } from "react";
 
 // react-router-dom components
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // @mui material components
 import Card from "@mui/material/Card";
@@ -29,27 +14,50 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import GoogleIcon from "@mui/icons-material/Google";
 
-// Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
-
-// Material Kit 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import SimpleFooter from "examples/Footers/SimpleFooter";
-
-// Material Kit 2 React page layout routes
 import routes from "routes";
-
-// Images
 import bgImage from "assets/images/city-profile.jpg";
+import axios from "axios";
 
 function SignInBasic() {
   const [rememberMe, setRememberMe] = useState(false);
-
   const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const [values, setValues] = useState({
+    id: '',
+    pw: ''
+  })
+  const navigate = useNavigate();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues((prevValues) => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  }
 
+  const handleSubmit = () => {
+      axios.post('http://129.213.127.53:8080/check-login',{
+        id: values.id,
+        pw: values.pw
+      }).then((res)=>{
+        if(res.data !== "loginfail"){
+          alert('로그인 성공!');
+          localStorage.setItem("token",res.data);
+          navigate('/presentation');
+        } else {
+          alert("아이디 혹은 비밀번호가 틀립니다 !")
+        }
+      })
+      .catch((e)=>{
+        console.log('error ! : ' + e)
+      })
+  }
+  
   return (
     <>
       <DefaultNavbar
@@ -112,12 +120,12 @@ function SignInBasic() {
                 </Grid>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
-                <MKBox component="form" role="form">
+                <MKBox component="form" role="form" onSubmit={handleSubmit}>
                   <MKBox mb={2}>
-                    <MKInput type="email" label="ID" fullWidth />
+                    <MKInput type="id" id="id" name="id" label="ID" fullWidth onChange={handleChange}/>
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput type="password" label="Password" fullWidth />
+                    <MKInput type="password" id="pw" name="pw" label="Password" fullWidth onChange={handleChange}/>
                   </MKBox>
                   <MKBox display="flex" alignItems="center" ml={-1}>
                     <Switch checked={rememberMe} onChange={handleSetRememberMe} />
@@ -132,7 +140,7 @@ function SignInBasic() {
                     </MKTypography>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth>
+                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="info" fullWidth>
                       로그인
                     </MKButton>
                   </MKBox>
@@ -148,6 +156,21 @@ function SignInBasic() {
                         textGradient
                       >
                         회원가입
+                      </MKTypography>
+                    </MKTypography>
+                  </MKBox>
+                  <MKBox mt={1} mb={1} textAlign="center">
+                    <MKTypography variant="button" color="text">
+                      아이디를 잊으셨다면? &nbsp;
+                      <MKTypography
+                        component={Link}
+                        to="/authentication/sign-up/cover"
+                        variant="button"
+                        color="info"
+                        fontWeight="medium"
+                        textGradient
+                      >
+                        아이디/비밀번호찾기
                       </MKTypography>
                     </MKTypography>
                   </MKBox>
