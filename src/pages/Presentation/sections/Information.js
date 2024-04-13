@@ -32,6 +32,7 @@ import DefaultInfoCard from "examples/Cards/InfoCards/DefaultInfoCard";
 import bgimg from "assets/images/bgimg.png";
 
 function Information() {
+  let isLogin = localStorage.getItem("token");
   return (
     <MKBox component="section" py={6} my={6}>
       <Container>
@@ -56,7 +57,7 @@ function Information() {
                 description="내 근처 2km 이내 지점 6개 정보를 확인할 수 있습니다."
                 action={{
                   type: "internal",
-                  route: "/pages/landing-pages/contact-us",
+                  route: isLogin != null ? "/pages/landing-pages/contact-us" : "/pages/authentication/sign-in",
                   label: "지도 보러가기 >",
                 }}
               />

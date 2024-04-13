@@ -30,17 +30,16 @@ import Presentation from "layouts/pages/presentation";
 import routes from "routes";
 import SignIn from "layouts/pages/authentication/sign-in";
 import SignOut from "layouts/pages/authentication/sign-out";
+import SignUp from "layouts/pages/authentication/sign-up";
 
 export default function App() {
   const { pathname } = useLocation();
-
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
   }, [pathname]);
-
-  const getRoutes = (allRoutes) =>
+  const getRoutes = (allRoutes) => 
     allRoutes.map((route) => {
       if (route.collapse) {
         return getRoutes(route.collapse);
@@ -62,6 +61,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/presentation" />} />
         <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
         <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
+        <Route path="/pages/authentication/sign-up" element={<SignUp/>}/>
       </Routes>
     </ThemeProvider>
   );

@@ -1,17 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 // @mui material components
 import Grid from "@mui/material/Grid";
@@ -32,18 +18,27 @@ import footerRoutes from "footer.routes";
 
 // Image
 import bgImage from "assets/images/illustrations/illustration-reset.jpg";
+import exceptionroutes from "exceptionroutes";
 
 function ContactUs() {
+  let isLogin = localStorage.getItem("token");
   return (
     <>
       <MKBox position="fixed" top="0.5rem" width="100%">
         <DefaultNavbar
-          routes={routes}
-          action={{
-            type: "internal",
-            route: "/pages/authentication/sign-in",
-            label: "로그인",
-            color: "info",
+          routes={isLogin !== null ? routes : exceptionroutes}
+          action={isLogin !== null ? 
+            {
+              type: "internal",
+              route: "/pages/authentication/sign-out",
+              label: "로그아웃", 
+              color:"info",
+            } :
+            {
+              type: "internal",
+              route: "/pages/authentication/sign-in",
+              label: "로그인", 
+              color:"info",
           }}
         />
       </MKBox>

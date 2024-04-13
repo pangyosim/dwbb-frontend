@@ -42,16 +42,18 @@ import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
+import exceptionroutes from "exceptionroutes";
 
 // Images
 import bgImage from "assets/images/backgroundimg.jpg";
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
+  
   return (
     <>
       <DefaultNavbar
-        routes={routes}
+        routes={isLogin !== null ? routes : exceptionroutes}
         action={isLogin !== null ? 
           {
             type: "internal",

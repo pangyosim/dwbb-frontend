@@ -23,6 +23,7 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 import bgImage from "assets/images/city-profile.jpg";
 import axios from "axios";
+import exceptionroutes from "../../../exceptionroutes";
 
 function SignInBasic() {
   const [rememberMe, setRememberMe] = useState(false);
@@ -39,6 +40,7 @@ function SignInBasic() {
       [name]: value,
     }));
   }
+  let isLogin = localStorage.getItem("token");
 
   const handleSubmit = () => {
       axios.post('https://129.213.127.53:8080/check-login',{
@@ -61,7 +63,7 @@ function SignInBasic() {
   return (
     <>
       <DefaultNavbar
-        routes={routes}
+        routes={isLogin !== null ? routes : exceptionroutes}
         transparent
         light
       />
@@ -149,7 +151,7 @@ function SignInBasic() {
                       가입한 아이디가 없다면? &nbsp;
                       <MKTypography
                         component={Link}
-                        to="/authentication/sign-up/cover"
+                        to="/pages/authentication/sign-up"
                         variant="button"
                         color="info"
                         fontWeight="medium"
