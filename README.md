@@ -1,5 +1,5 @@
 
-> 프로젝트 URL : &nbsp; 배포 준비중...
+> 프로젝트 URL : &nbsp; https://dwbb.vercel.app
 
 ---
 # 1.&nbsp;프로젝트 개요
