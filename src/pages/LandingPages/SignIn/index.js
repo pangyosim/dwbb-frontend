@@ -19,7 +19,7 @@ import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import SimpleFooter from "examples/Footers/SimpleFooter";
+// import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 import bgImage from "assets/images/city-profile.jpg";
 import axios from "axios";
@@ -182,9 +182,9 @@ function SignInBasic() {
           </Grid>
         </Grid>
       </MKBox>
-      <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
+      {/* <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
         <SimpleFooter light />
-      </MKBox>
+      </MKBox> */}
     </>
   );
 }
