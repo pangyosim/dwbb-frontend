@@ -166,7 +166,7 @@ function SignInBasic() {
                       아이디를 잊으셨다면? &nbsp;
                       <MKTypography
                         component={Link}
-                        to="/authentication/sign-up/cover"
+                        to="/pages/authentication/find-id"
                         variant="button"
                         color="info"
                         fontWeight="medium"

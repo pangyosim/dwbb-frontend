@@ -31,6 +31,7 @@ import routes from "routes";
 import SignIn from "layouts/pages/authentication/sign-in";
 import SignOut from "layouts/pages/authentication/sign-out";
 import SignUp from "layouts/pages/authentication/sign-up";
+import FindId from "layouts/pages/authentication/find-id";
 
 export default function App() {
   const { pathname } = useLocation();
@@ -62,6 +63,7 @@ export default function App() {
         <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
         <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
         <Route path="/pages/authentication/sign-up" element={<SignUp/>}/>
+        <Route path="/pages/authentication/find-id" element={<FindId/>}/>
       </Routes>
     </ThemeProvider>
   );
