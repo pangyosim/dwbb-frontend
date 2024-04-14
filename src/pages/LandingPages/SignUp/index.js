@@ -39,7 +39,11 @@ function SignUpBasic() {
         pw: false,
         phone: false,
         email: false,
+        code: false,
     })
+    const [isChecked, setisChecked ] = useState({
+        email: false,
+    });
     const navigate = useNavigate();
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -112,13 +116,14 @@ function SignUpBasic() {
                     [name]: false,
                 }));
             }
-        }
+        } 
     }
 
     const handleSubmit = () => {
         const errcheck = Object.values(errors).includes(true);
+        const emailcheck = Object.values(isChecked).includes(true);
         const nullcheck = Object.values(values).includes("");
-        if (!errcheck && !nullcheck ){
+        if (!errcheck && !nullcheck && !emailcheck){
             axios.post('https://129.213.127.53:8080/signup',{
                 nickname: values.nickname,
                 id: values.id,
@@ -133,10 +138,37 @@ function SignUpBasic() {
                 }
             })
             .catch((e)=>{
-                console.log('error ! : ' + e)
+                alert('sign-up_error : ' + e)
             })
         } else {
             alert('정보를 확인해주세요.')
+        }
+    }
+    const handleDistinct = () => {
+        const null_check = values.email !== "" ? true : false;
+        if(null_check){
+            axios.post('https://129.213.127.53:8080/distinct-email',{
+                email: values.email
+            })
+            .then((res)=>{
+                if(res.data === "distinct"){
+                    setisChecked((preValues)=>({
+                        ...preValues,
+                        email: true,
+                    }))
+                } else {
+                    setisChecked((preValues)=>({
+                        ...preValues,
+                        email: false,
+                    }))
+                    alert('사용 가능한 이메일입니다.')
+                }
+            })
+            .catch((e)=>{
+                alert('check_email_error : ' + e)
+            })
+        } else {
+            alert('이메일을 입력해주세요.');
         }
     }
     return(
@@ -176,36 +208,45 @@ function SignUpBasic() {
                                     <MKBox mb={2}>
                                         <MKInput type="id" id="id" name="id" error={errors.id} label={<><PersonIcon/> &nbsp;아이디</>} fullWidth onChange={handleChange}/>
                                     </MKBox>
-                                    <MKBox mb={4.5}>
+                                    <MKBox mb={2}>
                                         <MKInput type="password" id="pw" name="pw" error={errors.pw}label={<><LockIcon/> &nbsp;비밀번호</>} fullWidth onChange={handleChange}/>
-                                        <p style={{fontSize:"11px", color:"red"}}>
-                                            {errors.nickname ? "* 닉네임: 3~10자의 영문 대/소문자,숫자만 사용 가능합니다." : ""}
-                                        </p>
-                                        <p style={{fontSize:"11px", color:"red"}}>
-                                            {errors.id ? "* 아이디: 4~12자의 영문 대/소문자,숫자만 사용 가능합니다." : ""}
-                                        </p>
-                                        <p style={{fontSize:"11px", color:"red"}}>
-                                            {errors.pw ? "* 비밀번호: 8~16자의 영문 대/소문자,숫자,특수문자를 사용해주세요." : ""}
-                                        </p>
                                     </MKBox>
                                     
                                     <MKBox mb={2}>
                                         <MKInput type="phone" id="phone" name="phone" error={errors.phone} label={<><PhoneAndroidIcon/> &nbsp;휴대전화번호</>} fullWidth onChange={handleChange}/>
                                     </MKBox>
                                     <MKBox mb={2}>
-                                        <MKInput type="email" id="email" name="email" error={errors.email} label={<><EmailIcon/> &nbsp;이메일주소 (비밀번호 찾기 등 본인 확인용)</>} fullWidth onChange={handleChange}/>
-                                        <p style={{fontSize:"11px", color:"red"}}>
-                                            {errors.phone ? "* 휴대전화번호: 휴대전화번호가 정확한지 확인해 주세요." : ""}
-                                        </p>
-                                        <p style={{fontSize:"11px", color:"red"}}>
-                                            {errors.email ? "* 이메일: 이메일 주소가 정확한지 확인해주세요." : ""}
-                                        </p>
+                                        <MKInput type="email" id="email" name="email" error={errors.email || isChecked.email} label={<><EmailIcon/> &nbsp;이메일 (아이디찾기 본인 확인용)</>} fullWidth onChange={handleChange}/>
+                                        <MKButton type="button" size="small" variant="gradient" onClick={handleDistinct} 
+                                        style={{width:"77px", right:"27px",top:"278px",fontSize:"12px",padding:"0",position:"absolute"}} 
+                                        color="success" 
+                                        >
+                                            중복확인
+                                        </MKButton>
+                                        {errors.nickname ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 닉네임: 3~10자의 영문 대/소문자,숫자만 사용 가능합니다.
+                                        </p>: ""}
+                                       {errors.id ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 아이디: 4~12자의 영문 대/소문자,숫자만 사용 가능합니다.
+                                       </p>:""}
+                                        {errors.pw ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 비밀번호: 8~16자의 영문 대/소문자,숫자,특수문자를 사용해주세요.
+                                        </p>:""}
+                                        {errors.phone ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 휴대전화번호: 휴대전화번호가 정확한지 확인해 주세요.
+                                        </p>:""}
+                                        {errors.email ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 이메일: 이메일 주소가 정확한지 확인해주세요.
+                                        </p>:""}
+                                        {isChecked.email ? <p style={{fontSize:"11px", color:"red"}}>
+                                            * 이메일 : 기존에 가입된 이메일입니다. 다른 이메일을 사용해주세요.
+                                        </p>:""}
                                     </MKBox>
                                 </MKBox>
-                                <MKBox mt={3} mb={1}>
-                                <MKButton type="button" onClick={handleSubmit} variant="gradient" color="secondary" fullWidth>
-                                    회원가입
-                                </MKButton>
+                                <MKBox mt={2} mb={1}>
+                                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="secondary" fullWidth>
+                                        회원가입
+                                    </MKButton>
                                 </MKBox>
                             </MKBox>
                         </Card>

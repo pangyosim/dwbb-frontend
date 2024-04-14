@@ -28,7 +28,6 @@ function FindIDBasic () {
     })
     const [isChecked, setisChecked ] = useState({
         email: false,
-        subemail: false,
         code: false,
     });
     const [findId, setFindId] = useState([]);
