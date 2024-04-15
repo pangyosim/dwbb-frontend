@@ -68,7 +68,7 @@ function ContactUs() {
   }
 
   useEffect(()=>{
-    axios.post('https://localhost:8080/notice-all',{
+    axios.post('https://129.213.127.53:8080/notice-all',{
     })
     .then((res)=>{
       setNoticeData(res.data);
