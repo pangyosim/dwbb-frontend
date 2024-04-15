@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import EmailIcon from '@mui/icons-material/Email';
 import MuiLink from "@mui/material/Link";
 import Icon from "@mui/material/Icon";
+import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import bgImage from "assets/images/city-profile.jpg";
@@ -124,11 +125,26 @@ function FindIDBasic () {
                 <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
                     <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
                         <Card>
-                            <MKBox pt={4} pb={3} px={3}>
+                            <MKBox
+                                variant="gradient"
+                                bgColor="info"
+                                borderRadius="lg"
+                                coloredShadow="info"
+                                mx={2}
+                                mt={-3}
+                                p={2}
+                                mb={1}
+                                textAlign="center"
+                            >
+                                <MKTypography variant="h4" fontWeight="bold" color="white" mt={1}>
+                                <SearchIcon/> 아이디/비밀번호 찾기
+                                </MKTypography>
+                            </MKBox>
+                            <MKBox pt={1} pb={1} px={4}>
                                 <MKBox id="signupform" component="form" role="form">
                                     <MKBox mb={2}>
                                         <MKInput type="email" id="email" name="email" error={errors.email} label={<><EmailIcon/> &nbsp;이메일주소</>} fullWidth onChange={handleChange}/>
-                                        <MKButton type="button" size="small" onClick={handleEmailSend} variant="gradient" style={{width:"85px", right:"27px",top:"38px",fontSize:"12px",padding:"0",position:"absolute"}} color="success" >
+                                        <MKButton type="button" size="small" onClick={handleEmailSend} variant="gradient" style={{width:"85px", right:"35px",top:"71px",fontSize:"12px",padding:"0",position:"absolute"}} color="success" >
                                             이메일 인증
                                         </MKButton>
                                         {errors.email ? <p style={{fontSize:"11px", color:"red"}}>
@@ -153,7 +169,7 @@ function FindIDBasic () {
                                                         }));
                                                     }
                                                     }} 
-                                                    style={{width:"20px", right:"27px",top:"115px",fontSize:"12px",padding:"0",position:"absolute"}} 
+                                                    style={{width:"20px", right:"27px",top:"173px",fontSize:"12px",padding:"0",position:"absolute"}} 
                                                     color="success">
                                                     확인
                                                 </MKButton>
@@ -166,8 +182,8 @@ function FindIDBasic () {
                                     { isChecked.code ? 
                                         <MKBox mb={2}>
                                             <MKInput type="findid" id="findid" name="findid" value={"아이디      "+findId.id}  fullWidth/>
-                                            <MKInput type="findpw" id="findpw" name="findpw" value={"비밀번호   "+findId.pw} fullWidth/>
-                                            <MKButton type="button" variant="gradient" color="info" href="/pages/authentication/sign-in" fullWidth>
+                                            <MKInput style={{marginBottom:"10px"}} type="findpw" id="findpw" name="findpw" value={"비밀번호   "+findId.pw} fullWidth/>
+                                            <MKButton type="button" variant="gradient" color="info" href="/pages/authentication/sign-in" fullWidth style={{fontSize:"17px"}}>
                                                 로그인 페이지로 이동
                                             </MKButton>
                                         </MKBox> :

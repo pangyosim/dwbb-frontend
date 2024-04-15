@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
@@ -7,12 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
-import MuiLink from "@mui/material/Link";
+// import MuiLink from "@mui/material/Link";
 
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import GitHubIcon from "@mui/icons-material/GitHub";
+// import GoogleIcon from "@mui/icons-material/Google";
 
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -24,12 +24,13 @@ import routes from "routes";
 import bgImage from "assets/images/city-profile.jpg";
 import axios from "axios";
 import exceptionroutes from "../../../exceptionroutes";
+import { useCookies } from "react-cookie";
 
 function SignInBasic() {
-  const [rememberMe, setRememberMe] = useState(false);
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
+  const [rememberMe, setRememberMe] = useState(cookies.rememberUserId !== undefined ? true : false);
   const [values, setValues] = useState({
-    id: '',
+    id: cookies.rememberUserId !== undefined ? cookies.rememberUserId : '',
     pw: ''
   })
   const navigate = useNavigate();
@@ -42,6 +43,28 @@ function SignInBasic() {
   }
   let isLogin = localStorage.getItem("token");
 
+  useEffect(()=>{
+    if(localStorage.getItem("token") !== null ){
+      navigate('/presentation');
+    }
+    if (cookies.rememberUserId !== undefined) {
+      setValues((prevValues)=>({
+        ...prevValues,
+        id: cookies.rememberUserId,
+      }));
+      setRememberMe(rememberMe);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+  const handleSetRememberMe = (e) =>{
+    setRememberMe(e.target.checked);
+    if (e.target.checked) {
+      setCookie('rememberUserId', values.id, {maxAge: 2000});
+    } else {
+      removeCookie("rememberUserId");
+    }
+  } 
   const handleSubmit = () => {
       axios.post('https://129.213.127.53:8080/check-login',{
         id: values.id,
@@ -50,6 +73,7 @@ function SignInBasic() {
         if(res.data !== "loginfail"){
           alert('로그인 성공!');
           localStorage.setItem("token",res.data);
+          setCookie(cookies.rememberUserId)
           navigate('/presentation');
         } else {
           alert("아이디 혹은 비밀번호가 틀립니다 !")
@@ -100,10 +124,14 @@ function SignInBasic() {
                 mb={1}
                 textAlign="center"
               >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+                
+                <MKTypography variant="h4" fontWeight="bold" color="white" mt={1}>
                   DWBB
                 </MKTypography>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
+                <MKTypography variant="a" fontWeight="light" color="white" mt={1} style={{fontSize:"17px"}}>
+                  은행 대기인원 & 주차장 현황 사이트
+                </MKTypography>
+                {/* <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
                   <Grid item xs={2}>
                     <MKTypography component={MuiLink} href="#" variant="body1" color="white">
                       <FacebookIcon color="inherit" />
@@ -119,12 +147,12 @@ function SignInBasic() {
                       <GoogleIcon color="inherit" />
                     </MKTypography>
                   </Grid>
-                </Grid>
+                </Grid> */}
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form" onSubmit={handleSubmit}>
                   <MKBox mb={2}>
-                    <MKInput type="id" id="id" name="id" label="ID" fullWidth onChange={handleChange}/>
+                    <MKInput type="id" id="id" name="id" label="ID" value={values.id} fullWidth onChange={handleChange}/>
                   </MKBox>
                   <MKBox mb={2}>
                     <MKInput type="password" id="pw" name="pw" label="Password" fullWidth onChange={handleChange}/>
@@ -135,14 +163,13 @@ function SignInBasic() {
                       variant="button"
                       fontWeight="regular"
                       color="text"
-                      onClick={handleSetRememberMe}
                       sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
                     >
                       &nbsp;&nbsp;아이디 저장
                     </MKTypography>
                   </MKBox>
                   <MKBox mt={4} mb={1}>
-                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="info" fullWidth>
+                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="info" fullWidth style={{fontSize:"17px"}}>
                       로그인
                     </MKButton>
                   </MKBox>

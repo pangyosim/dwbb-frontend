@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 // import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
 // import MuiLink from "@mui/material/Link";
 
 // @mui icons
@@ -17,6 +18,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import BadgeIcon from '@mui/icons-material/Badge';
 import EmailIcon from '@mui/icons-material/Email';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 // import AppleIcon from "@mui/icons-material/Apple";
 
 // @mui icons
@@ -200,6 +202,21 @@ function SignUpBasic() {
                 <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
                     <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
                         <Card>
+                            <MKBox
+                                variant="gradient"
+                                bgColor="info"
+                                borderRadius="lg"
+                                coloredShadow="info"
+                                mx={2}
+                                mt={-3}
+                                p={2}
+                                mb={1}
+                                textAlign="center"
+                            >
+                                <MKTypography variant="h4" fontWeight="bold" color="white" mt={1} >
+                                <AssignmentIndIcon/> 회원가입
+                                </MKTypography>
+                            </MKBox>
                             <MKBox pt={4} pb={3} px={3}>
                                 <MKBox id="signupform" component="form" role="form" onSubmit={handleSubmit}>
                                     <MKBox mb={2}>
@@ -218,7 +235,7 @@ function SignUpBasic() {
                                     <MKBox mb={2}>
                                         <MKInput type="email" id="email" name="email" error={errors.email || isChecked.email} label={<><EmailIcon/> &nbsp;이메일 (아이디찾기 본인 확인용)</>} fullWidth onChange={handleChange}/>
                                         <MKButton type="button" size="small" variant="gradient" onClick={handleDistinct} 
-                                        style={{width:"77px", right:"27px",top:"278px",fontSize:"12px",padding:"0",position:"absolute"}} 
+                                        style={{width:"77px", right:"27px",top:"335px",fontSize:"12px",padding:"0",position:"absolute"}} 
                                         color="success" 
                                         >
                                             중복확인
@@ -244,8 +261,8 @@ function SignUpBasic() {
                                     </MKBox>
                                 </MKBox>
                                 <MKBox mt={2} mb={1}>
-                                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="secondary" fullWidth>
-                                        회원가입
+                                    <MKButton type="button" onClick={handleSubmit} variant="gradient" color="info" fullWidth style={{fontSize:"17px"}}>
+                                    회원가입
                                     </MKButton>
                                 </MKBox>
                             </MKBox>
