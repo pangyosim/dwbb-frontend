@@ -45,6 +45,7 @@ function SignInBasic() {
 
   useEffect(()=>{
     if(localStorage.getItem("token") !== null ){
+      alert('로그인된 계정이 있습니다. 로그아웃 후 사용해주세요.')
       navigate('/presentation');
     }
     if (cookies.rememberUserId !== undefined) {

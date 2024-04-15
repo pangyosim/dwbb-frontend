@@ -13,7 +13,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import bgImage from "assets/images/city-profile.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MKTypography from "components/MKTypography";
 
 function FindIDBasic () {
@@ -31,6 +31,13 @@ function FindIDBasic () {
         email: false,
         code: false,
     });
+    useEffect(()=>{
+        if(localStorage.getItem("token") !== null ){
+            alert('로그인된 계정이 있습니다. 로그아웃 후 사용해주세요.')
+            navigate('/presentation');
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     const [findId, setFindId] = useState([]);
     const navigate = useNavigate();
     const handleEmailSend = () => {

@@ -23,7 +23,7 @@ import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
 
 // @mui icons
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignUpBasic() {
@@ -173,6 +173,15 @@ function SignUpBasic() {
             alert('이메일을 입력해주세요.');
         }
     }
+
+    useEffect(()=>{
+        if(localStorage.getItem("token") !== null ){
+            alert('로그인된 계정이 있습니다. 로그아웃 후 사용해주세요.')
+            navigate('/presentation');
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
     return(
         <>
             <DefaultNavbar
