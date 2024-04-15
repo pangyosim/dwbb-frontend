@@ -1,11 +1,9 @@
-
 // @mui material components
 import Grid from "@mui/material/Grid";
+import Icon from "@mui/material/Icon";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import MKInput from "components/MKInput";
-import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 
 // Material Kit 2 React examples
@@ -15,16 +13,75 @@ import DefaultFooter from "examples/Footers/DefaultFooter";
 // Routes
 import routes from "routes";
 import footerRoutes from "footer.routes";
-
-// Image
-import bgImage from "assets/images/illustrations/illustration-reset.jpg";
 import exceptionroutes from "exceptionroutes";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import MKPagination from "components/MKPagination";
 
 function ContactUs() {
   let isLogin = localStorage.getItem("token");
+  const [noticeData, setNoticeData] = useState([]);
+  const [pagingData, setPagingData] = useState({
+    totalPage: Math.floor(noticeData/2)+1,
+    page: 1,
+    limit: 5,
+    offset: 0,
+    prev: 0,
+  });
+  const [pagination, setPagination] = useState([[...Array(pagingData.totalPage+1)].fill(false)]);
+
+  const postData = (post) => {
+    if(post){
+      let result = post.slice((pagingData.page-1)*pagingData.limit, (pagingData.page-1)*pagingData.limit + pagingData.limit);
+      return result;
+    }
+  }
+
+  const handleNextPaging = (e) => {
+    console.log('pageNext : '+pagingData.page);
+    if(pagingData.page < pagingData.totalPage+1){
+      const update_prevarr = [...Array(pagingData.totalPage+1).fill(false)];
+      update_prevarr[pagination.indexOf(true)] = false;
+      setPagingData((prevValues)=>({
+        ...prevValues,
+        page: pagingData.page+1,
+        prev: pagination.indexOf(true)
+      }))
+      update_prevarr[pagination.indexOf(true)+1] = true;
+      setPagination(update_prevarr);
+    } 
+
+  }
+  const handlePrevPaging = (e) => {
+    console.log('pagePrev : '+pagingData.page);
+    if(pagingData.page > 1 ){
+      const update_nextarr = [...Array(pagingData.totalPage+1).fill(false)];
+      update_nextarr[pagination.indexOf(true)] = false;
+      setPagingData((prevValues)=>({
+        ...prevValues,
+        page: pagingData.page-1,
+        prev: pagination.indexOf(true)
+      }))
+      update_nextarr[pagination.indexOf(true)-1] = true;
+      setPagination(update_nextarr);
+    } 
+  }
+
+  useEffect(()=>{
+    axios.post('https://localhost:8080/notice-all',{
+    })
+    .then((res)=>{
+      setNoticeData(res.data);
+    })
+    .catch((error)=>{
+      alert('Inform Error : ' + error);
+    })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[])
+
   return (
     <>
-      <MKBox position="fixed" top="0.5rem" width="100%">
+      <MKBox position="fixed" top="0rem" width="100%">
         <DefaultNavbar
           routes={isLogin !== null ? routes : exceptionroutes}
           action={isLogin !== null ? 
@@ -42,18 +99,7 @@ function ContactUs() {
           }}
         />
       </MKBox>
-      <Grid container spacing={3} alignItems="center">
-        <Grid item xs={12} lg={6}>
-          <MKBox
-            display={{ xs: "none", lg: "flex" }}
-            width="calc(100% - 2rem)"
-            height="calc(100vh - 2rem)"
-            borderRadius="lg"
-            ml={2}
-            mt={2}
-            sx={{ backgroundImage: `url(${bgImage})` }}
-          />
-        </Grid>
+      <Grid container spacing={1} alignItems="center" justifyContent="center">
         <Grid
           item
           xs={12}
@@ -73,61 +119,59 @@ function ContactUs() {
             justifyContent="center"
             mt={{ xs: 20, sm: 18, md: 20 }}
             mb={{ xs: 20, sm: 18, md: 20 }}
-            mx={3}
+            mx={0}
           >
             <MKBox
               variant="gradient"
-              bgColor="info"
-              coloredShadow="info"
+              bgColor="secondary"
+              coloredShadow="secondary"
               borderRadius="lg"
               p={2}
               mx={2}
               mt={-3}
             >
               <MKTypography variant="h3" color="white">
-                Contact us
+                공지사항
               </MKTypography>
             </MKBox>
-            <MKBox p={3}>
-              <MKTypography variant="body2" color="text" mb={3}>
-                For further questions, including partnership opportunities, please email
-                hello@creative-tim.com or contact using our contact form.
-              </MKTypography>
+            <MKBox p={3} >
               <MKBox width="100%" component="form" method="post" autoComplete="off">
-                <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
-                    <MKInput
-                      variant="standard"
-                      label="Full Name"
-                      InputLabelProps={{ shrink: true }}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <MKInput
-                      type="email"
-                      variant="standard"
-                      label="Email"
-                      InputLabelProps={{ shrink: true }}
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <MKInput
-                      variant="standard"
-                      label="What can we help you?"
-                      placeholder="Describe your problem in at least 250 characters"
-                      InputLabelProps={{ shrink: true }}
-                      multiline
-                      fullWidth
-                      rows={6}
-                    />
-                  </Grid>
+                <Grid container spacing={3} p={1} >
+                  {postData(noticeData).map((notice)=>{
+                    let noticeday = notice.noticecreateday;
+                    return(
+                      <Grid item xs={12} md={25} key={notice.noticeseq} borderRadius="lg">
+                        <MKTypography style={{fontSize:"20px", fontWeight:"bold"}}>{notice.noticetitle}</MKTypography>
+                        <MKTypography style={{fontSize:"13px"}}>작성일 : {noticeday.substring(0,noticeday.indexOf('T'))} / 작성자 : {notice.noticeid} / 조회수 {notice.noticeviews}</MKTypography>
+                      </Grid>
+                    )
+                  })}
                 </Grid>
                 <Grid container item justifyContent="center" xs={12} mt={5} mb={2}>
-                  <MKButton type="submit" variant="gradient" color="info">
-                    Send Message
-                  </MKButton>
+                  <MKPagination variant="contained" size="small" color="secondary">
+                    <MKPagination item onClick={handlePrevPaging}>
+                      <Icon>keyboard_arrow_left</Icon>
+                    </MKPagination>
+                    {pagination.map((v,i)=>{
+                      console.log('pagination :'+pagination)
+                      const handlerPaging = (e) =>{
+                          const update_arr = [...Array(pagingData.totalPage+1).fill(false)];
+                          update_arr[pagingData.prev] = false;
+                          setPagingData((prevValues)=>({
+                            ...prevValues,
+                            page: Number(e.target.name),
+                            prev: pagination.indexOf(true)
+                          }))
+                          update_arr[e.target.name-1] = true;
+                          setPagination(update_arr);
+                      }
+                      return(
+                        <MKPagination item key={i} active={Boolean(pagination[i])} onClick={handlerPaging} name={i+1}>{i+1}</MKPagination>
+                    )})}
+                    <MKPagination item onClick={handleNextPaging}>
+                      <Icon>keyboard_arrow_right</Icon>
+                    </MKPagination>
+                  </MKPagination>
                 </Grid>
               </MKBox>
             </MKBox>

@@ -37,8 +37,6 @@ import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
-// Images
-import bgImage from "assets/images/bg-about-us.jpg";
 
 function AboutUs() {
   return (
@@ -62,7 +60,7 @@ function AboutUs() {
             `${linearGradient(
               rgba(gradients.dark.main, 0.6),
               rgba(gradients.dark.state, 0.6)
-            )}, url(${bgImage})`,
+            )}, url()`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           display: "grid",

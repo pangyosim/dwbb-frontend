@@ -6,7 +6,6 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
 import ContactUs from "layouts/pages/landing-pages/contact-us";
-
 const routes = [
   {
     name: "은행",
