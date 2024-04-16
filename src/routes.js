@@ -5,7 +5,7 @@ import Icon from "@mui/material/Icon";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
-import ContactUs from "layouts/pages/landing-pages/contact-us";
+import Notice from "layouts/pages/landing-pages/notice";
 const routes = [
   {
     name: "은행",
@@ -18,8 +18,8 @@ const routes = [
         collapse: [
           {
             name: "지도",
-            route: "/pages/landing-pages/contact-us",
-            component: <ContactUs />,
+            route: "/pages/landing-pages/notice",
+            component: <Notice />,
           },
          
         ],
@@ -38,8 +38,8 @@ const routes = [
           collapse: [
             {
               name: "지도",
-              route: "/pages/landing-pages/contact-us",
-              component: <ContactUs />,
+              route: "/pages/landing-pages/notice",
+              component: <Notice />,
             },
           ]
         }
@@ -56,13 +56,13 @@ const routes = [
         collapse: [
           {
             name: "공지사항",
-            route: "/pages/landing-pages/contact-us",
-            component: <ContactUs />,
+            route: "/pages/landing-pages/notice",
+            component: <Notice />,
           },
           {
             name: "Q&A",
-            route: "/pages/landing-pages/contact-us",
-            component: <ContactUs />,
+            route: "/pages/landing-pages/notice",
+            component: <Notice />,
           },
         ]
       }

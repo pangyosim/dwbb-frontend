@@ -176,7 +176,7 @@ function FindIDBasic () {
                                                         }));
                                                     }
                                                     }} 
-                                                    style={{width:"20px", right:"27px",top:"173px",fontSize:"12px",padding:"0",position:"absolute"}} 
+                                                    style={{width:"20px", right:"35px",top:"148px",fontSize:"12px",padding:"0",position:"absolute"}} 
                                                     color="success">
                                                     확인
                                                 </MKButton>

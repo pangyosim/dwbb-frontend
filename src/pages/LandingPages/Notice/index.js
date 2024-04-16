@@ -17,8 +17,9 @@ import exceptionroutes from "exceptionroutes";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MKPagination from "components/MKPagination";
+import { useNavigate } from "react-router-dom";
 
-function ContactUs() {
+function Notice() {
   let isLogin = localStorage.getItem("token");
   const [noticeData, setNoticeData] = useState([]);
   const [pagingData, setPagingData] = useState({
@@ -28,17 +29,29 @@ function ContactUs() {
     offset: 0,
     prev: 0,
   });
-  const [pagination, setPagination] = useState([[...Array(pagingData.totalPage+1)].fill(false)]);
+  const [pagination, setPagination] = useState(()=>{
+    const pagination_arr = [...Array(pagingData.totalPage+1)].fill(false,1,pagingData.totalPage+1);
+    pagination_arr[0] = true;
+    return (
+      pagination_arr
+    )
+  });
+
+  const navigator = useNavigate();
 
   const postData = (post) => {
     if(post){
+      post = post.sort(function compare (a,b){
+        if( a.noticecreateday > b.noticecreateday ) return -1;
+        if( a.noticecreateday < b.noticecreateday ) return 1;
+        return 0;
+      });
       let result = post.slice((pagingData.page-1)*pagingData.limit, (pagingData.page-1)*pagingData.limit + pagingData.limit);
       return result;
     }
   }
 
-  const handleNextPaging = (e) => {
-    console.log('pageNext : '+pagingData.page);
+  const handleNextPaging = () => {
     if(pagingData.page < pagingData.totalPage+1){
       const update_prevarr = [...Array(pagingData.totalPage+1).fill(false)];
       update_prevarr[pagination.indexOf(true)] = false;
@@ -52,8 +65,7 @@ function ContactUs() {
     } 
 
   }
-  const handlePrevPaging = (e) => {
-    console.log('pagePrev : '+pagingData.page);
+  const handlePrevPaging = () => {
     if(pagingData.page > 1 ){
       const update_nextarr = [...Array(pagingData.totalPage+1).fill(false)];
       update_nextarr[pagination.indexOf(true)] = false;
@@ -67,6 +79,21 @@ function ContactUs() {
     } 
   }
 
+  const handlerNoticeClick = (notice,e) => {
+    e.preventDefault();
+    console.log(notice.noticetitle)
+    navigator('/pages/lading-pages/noticedetail', {
+      state : {
+        title : notice.noticetitle,
+        contents : notice.noticecontents,
+        file : notice.noticefile,
+        id : notice.noticeid,
+        views : notice.noticeviews,
+        createday : notice.noticecreateday
+      },
+    });
+  }
+
   useEffect(()=>{
     axios.post('https://129.213.127.53:8080/notice-all',{
     })
@@ -76,7 +103,6 @@ function ContactUs() {
     .catch((error)=>{
       alert('Inform Error : ' + error);
     })
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   return (
@@ -140,7 +166,7 @@ function ContactUs() {
                   {postData(noticeData).map((notice)=>{
                     let noticeday = notice.noticecreateday;
                     return(
-                      <Grid item xs={12} md={25} key={notice.noticeseq} borderRadius="lg">
+                      <Grid item xs={12} md={25} key={notice.noticeseq} borderRadius="lg" onClick={(e) => handlerNoticeClick(notice,e)} style={{cursor:"pointer"}}>
                         <MKTypography style={{fontSize:"20px", fontWeight:"bold"}}>{notice.noticetitle}</MKTypography>
                         <MKTypography style={{fontSize:"13px"}}>작성일 : {noticeday.substring(0,noticeday.indexOf('T'))} / 작성자 : {notice.noticeid} / 조회수 {notice.noticeviews}</MKTypography>
                       </Grid>
@@ -153,7 +179,6 @@ function ContactUs() {
                       <Icon>keyboard_arrow_left</Icon>
                     </MKPagination>
                     {pagination.map((v,i)=>{
-                      console.log('pagination :'+pagination)
                       const handlerPaging = (e) =>{
                           const update_arr = [...Array(pagingData.totalPage+1).fill(false)];
                           update_arr[pagingData.prev] = false;
@@ -166,7 +191,7 @@ function ContactUs() {
                           setPagination(update_arr);
                       }
                       return(
-                        <MKPagination item key={i} active={Boolean(pagination[i])} onClick={handlerPaging} name={i+1}>{i+1}</MKPagination>
+                        <MKPagination item key={i} active={Boolean(v)} onClick={handlerPaging} name={i+1}>{i+1}</MKPagination>
                     )})}
                     <MKPagination item onClick={handleNextPaging}>
                       <Icon>keyboard_arrow_right</Icon>
@@ -185,4 +210,4 @@ function ContactUs() {
   );
 }
 
-export default ContactUs;
+export default Notice;
