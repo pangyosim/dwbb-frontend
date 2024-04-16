@@ -6,6 +6,8 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 
 // Pages
 import Notice from "layouts/pages/landing-pages/notice";
+import QnA from "pages/LandingPages/QnA";
+
 const routes = [
   {
     name: "은행",
@@ -46,7 +48,7 @@ const routes = [
     ],
   },
   {
-    name: "Q&A",
+    name: "HELP",
     icon: <Icon>question_answer</Icon>,
     columns: 1,
     rowsPerColumn: 1,
@@ -61,8 +63,8 @@ const routes = [
           },
           {
             name: "Q&A",
-            route: "/pages/landing-pages/notice",
-            component: <Notice />,
+            route: "/pages/lading-pages/qna",
+            component: <QnA/>,
           },
         ]
       }
