@@ -34,25 +34,26 @@ import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard";
 
 function Information() {
   return (
-    <MKBox component="section" py={12}>
+    <MKBox component="section" py={1}>
       <Container>
         <Grid
           container
           item
+          mt={10}
           xs={12}
           lg={6}
           justifyContent="center"
           sx={{ mx: "auto", textAlign: "center" }}
         >
-          <MKTypography variant="h2">Q&A게시판</MKTypography>
-          <MKTypography variant="h2" color="info" textGradient mb={2}>
+          <MKTypography variant="h1" mb={3}>Q&A게시판</MKTypography>
+          <MKTypography variant="h3" color="info" textGradient mb={2}>
             최근 고객들이 남겨주신 글현황입니다.
           </MKTypography>
-          <MKTypography variant="body1" color="text" mb={2}>
+          <MKTypography variant="body2" color="text" mb={2}>
             Q&A게시판을 통해 상시 고객들의 불편한 점들을 개선시키고자 노력하고있습니다.
           </MKTypography>
         </Grid>
-        <Grid container spacing={3} sx={{ mt: 8 }}>
+        <Grid container spacing={0} sx={{ mt: 2 }}>
           <Grid item xs={12} md={6} lg={4}>
             <DefaultReviewCard
               name="Nick Willever"
@@ -61,7 +62,7 @@ function Information() {
               rating={5}
             />
           </Grid>
-          <Grid item xs={12} md={6} lg={4}>
+          <Grid item xs={12} md={3} lg={4}>
             <DefaultReviewCard
               color="info"
               name="Shailesh Kushwaha"

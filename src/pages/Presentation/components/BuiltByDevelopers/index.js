@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -21,18 +6,38 @@ import Icon from "@mui/material/Icon";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function BuiltByDevelopers() {
+  const [noticeData, setNoticeData] = useState([]);
+
   const bgImage =
     "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/desktop.jpg";
-
+    useEffect(()=>{
+      axios.post('https://129.213.127.53:8080/notice-all')
+      .then((res)=>{
+        const arr = res.data;
+        arr.sort(function compare (a,b){
+          if( a.noticecreateday > b.noticecreateday ) return -1;
+          if( a.noticecreateday < b.noticecreateday ) return 1;
+          return 0;
+        });
+        setNoticeData(arr.slice(0,5));
+      })
+      .catch((error)=>{
+        alert('Inform Error : ' + error);
+      })
+    },[])
   return (
     <MKBox
       display="flex"
       alignItems="center"
       borderRadius="xl"
       my={2}
-      py={6}
+      width="100%"
+      py={5}
+      mt={0}
       sx={{
         backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
           `${linearGradient(
@@ -44,44 +49,47 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <Grid container item xs={12} lg={3.5} sx={{ ml: { xs: 0, lg: 6 } }}>
-          {/* <MKTypography variant="h4" color="white" fontWeight="bold">
-          </MKTypography> */}
-          <MKTypography variant="h1" color="white" mb={1}>
-            공지사항
-          </MKTypography>
-          <br></br>
-          <MKTypography variant="body2" color="white" opacity={0.8} mb={10}>
-            [공지] 홈페이지 은행지도 시스템 점검 안내  <br></br>
-            [공지] 홈페이지 보안관련 점검 안내<br></br>
-          </MKTypography>
-          <br></br>
+        <MKTypography variant="h1" color="white" mb={3.5} px={3.5}>
+          공지사항
+        </MKTypography>
+        {noticeData.map((v,i)=>{
+          let mb_val = 0;
+          if( i === noticeData.length-1 ) {
+            mb_val = 3;
+          } else {
+            mb_val = 0;
+          }
+          return(
+            <Grid container sx={{ ml: { xs: 1, lg: 4 } }} key={i} spacing={0} pl={0} mb={mb_val} flexDirection="row">
+                <Grid item md={10} xs={12} py={0} style={{color: "white"}}>
+                  <span style={{color:"red"}}>[공지]</span> {v.noticetitle}
+                </Grid>
+                <Grid  item md={1.5} xs={12} py={0} style={{color: "white"}}>
+                  {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
+                </Grid>
+            </Grid>
+          );
+        })}
           <MKTypography
             component="a"
-            href="https://www.creative-tim.com/learning-lab/react/overview/material-kit/"
-            target="_blank"
-            rel="noreferrer"
-            variant="body2"
+            href="/pages/landing-pages/notice"
+            variant="body1"
             color="white"
             fontWeight="bold"
             sx={{
-              display: "flex",
-              alignItems: "center",
-              
               "& .material-icons-round": {
                 fontSize: "1.125rem",
                 transform: `translateX(3px)`,
                 transition: "transform 0.2s cubic-bezier(0.34, 1.61, 0.7, 1.3)",
               },
-
               "&:hover .material-icons-round, &:focus .material-icons-round": {
                 transform: `translateX(6px)`,
               },
             }}
+            mx={4}
           >
-            더보기 <Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
+            더보기<Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
-        </Grid>
       </Container>
     </MKBox>
   );

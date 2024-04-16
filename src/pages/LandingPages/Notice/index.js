@@ -80,15 +80,16 @@ function Notice() {
   }
 
   const handlerNoticeClick = (notice,e) => {
+    axios.post('https://localhost:8080/notice-views', notice)
+    .catch((error) => alert('notice views error : ' + error));
     e.preventDefault();
-    console.log(notice.noticetitle)
     navigator('/pages/lading-pages/noticedetail', {
       state : {
         title : notice.noticetitle,
         contents : notice.noticecontents,
         file : notice.noticefile,
         id : notice.noticeid,
-        views : notice.noticeviews,
+        views : notice.noticeviews+1,
         createday : notice.noticecreateday
       },
     });
