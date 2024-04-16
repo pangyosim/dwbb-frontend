@@ -80,7 +80,7 @@ function Notice() {
   }
 
   const handlerNoticeClick = (notice,e) => {
-    axios.post('https://localhost:8080/notice-views', notice)
+    axios.post('https://129.213.127.53:8080/notice-views', notice)
     .catch((error) => alert('notice views error : ' + error));
     e.preventDefault();
     navigator('/pages/lading-pages/noticedetail', {
