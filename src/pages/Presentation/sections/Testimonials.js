@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -26,11 +11,6 @@ import MKTypography from "components/MKTypography";
 import DefaultReviewCard from "examples/Cards/ReviewCards/DefaultReviewCard";
 
 // // Images
-// import appleLogo from "assets/images/logos/gray-logos/logo-apple.svg";
-// import facebookLogo from "assets/images/logos/gray-logos/logo-facebook.svg";
-// import nasaLogo from "assets/images/logos/gray-logos/logo-nasa.svg";
-// import vodafoneLogo from "assets/images/logos/gray-logos/logo-vodafone.svg";
-// import digitalOceanLogo from "assets/images/logos/gray-logos/logo-digitalocean.svg";
 
 function Information() {
   return (
@@ -45,13 +25,19 @@ function Information() {
           justifyContent="center"
           sx={{ mx: "auto", textAlign: "center" }}
         >
-          <MKTypography variant="h1" mb={3}>Q&A게시판</MKTypography>
-          <MKTypography variant="h3" color="info" textGradient mb={2}>
-            최근 고객들이 남겨주신 글현황입니다.
-          </MKTypography>
-          <MKTypography variant="body2" color="text" mb={2}>
-            Q&A게시판을 통해 상시 고객들의 불편한 점들을 개선시키고자 노력하고있습니다.
-          </MKTypography>
+          <Grid item xs={12} md={6} lg={12}>
+            <MKTypography variant="h2" mb={3}>Q&A게시판</MKTypography> 
+          </Grid>
+          <Grid item xs={12} md={6} lg={12}>
+            <MKTypography variant="h3" color="info" textGradient mb={2}>
+              최근 고객들이 남겨주신 글현황입니다.
+            </MKTypography>
+          </Grid>
+          <Grid item xs={12} md={6} lg={12}>
+            <MKTypography variant="body2" color="text" mb={2}>
+              Q&A게시판을 통해 상시 고객들의 불편한 점들을 개선시키고자 노력하고있습니다.
+            </MKTypography>
+          </Grid>
         </Grid>
         <Grid container spacing={0} sx={{ mt: 2 }}>
           <Grid item xs={12} md={6} lg={4}>

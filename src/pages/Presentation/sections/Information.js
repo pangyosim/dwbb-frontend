@@ -53,11 +53,12 @@ function Information() {
               />
               <RotatingCardBack
                 image={bgimg}
-                title="IBK기업은행 대기인원현황,주차장정보"
-                description="내 근처 2km 이내 지점 6개 정보를 확인할 수 있습니다."
+                title="은행 평균대기인원,대기인원 현황 & 주차장정보"
+                description="내 근처 2km 이내 
+                              6개 지점을 확인할 수 있습니다."
                 action={{
                   type: "internal",
-                  route: isLogin != null ? "/pages/landing-pages/contact-us" : "/pages/authentication/sign-in",
+                  route: isLogin != null ? "/pages/landing-pages/notice" : "/pages/authentication/sign-in",
                   label: "지도 보러가기 >",
                 }}
               />

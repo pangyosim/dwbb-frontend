@@ -49,7 +49,7 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <MKTypography variant="h1" color="white" mb={3.5} px={3.5}>
+        <MKTypography variant="h2" color="white" mb={3.5} px={window.innerWidth > 768 ? 3.5 : 1}>
           공지사항
         </MKTypography>
         {noticeData.map((v,i)=>{
@@ -60,11 +60,11 @@ function BuiltByDevelopers() {
             mb_val = 0;
           }
           return(
-            <Grid container sx={{ ml: { xs: 1, lg: 4 } }} key={i} spacing={0} pl={0} mb={mb_val} flexDirection="row">
-                <Grid item md={10} xs={12} py={0} style={{color: "white"}}>
+            <Grid container sx={{ ml: { xs: 1, lg: window.innerWidth > 768 ? 5 : 0} }} key={i} spacing={0} pl={0} mb={mb_val}  fontSize={window.innerWidth > 768 ? "medium": 11}>
+                <Grid item md={10} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
                   <span style={{color:"red"}}>[공지]</span> {v.noticetitle}
                 </Grid>
-                <Grid  item md={1.5} xs={12} py={0} style={{color: "white"}}>
+                <Grid  item md={1.5} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
                   {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
                 </Grid>
             </Grid>
@@ -73,7 +73,7 @@ function BuiltByDevelopers() {
           <MKTypography
             component="a"
             href="/pages/landing-pages/notice"
-            variant="body1"
+            variant="body2"
             color="white"
             fontWeight="bold"
             sx={{
@@ -86,7 +86,7 @@ function BuiltByDevelopers() {
                 transform: `translateX(6px)`,
               },
             }}
-            mx={4}
+            mx={window.innerWidth > 768 ? 4 : 1}
           >
             더보기<Icon sx={{ fontWeight: "bold" }}>arrow_forward</Icon>
           </MKTypography>
