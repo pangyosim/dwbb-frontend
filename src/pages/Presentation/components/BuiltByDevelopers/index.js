@@ -61,10 +61,10 @@ function BuiltByDevelopers() {
           }
           return(
             <Grid container sx={{ ml: { xs: 1, lg: window.innerWidth > 768 ? 5 : 0} }} key={i} spacing={0} pl={0} mb={mb_val}  fontSize={window.innerWidth > 768 ? "medium": 11}>
-                <Grid item md={10} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
+                <Grid item md={9.5} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
                   <span style={{color:"red"}}>[공지]</span> {v.noticetitle}
                 </Grid>
-                <Grid  item md={1.5} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
+                <Grid  item md={2} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
                   {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
                 </Grid>
             </Grid>

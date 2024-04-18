@@ -6,20 +6,14 @@ import Card from "@mui/material/Card";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-// import MKSocialButton from "components/MKSocialButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
-// import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 
 // Presentation page sections
-// import Counters from "pages/Presentation/sections/Counters";
 import Information from "pages/Presentation/sections/Information";
-// import DesignBlocks from "pages/Presentation/sections/DesignBlocks";
-// import Pages from "pages/Presentation/sections/Pages";
 import Testimonials from "pages/Presentation/sections/Testimonials";
-// import Download from "pages/Presentation/sections/Download";
 
 // Presentation page components
 import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
@@ -32,7 +26,7 @@ import exceptionroutes from "exceptionroutes";
 // Images
 import bgImage from "assets/images/backgroundimg.jpg";
 
-function Presentation() {
+function Presentation({userdata}) {
   let isLogin = localStorage.getItem("token");
   
   return (
@@ -52,6 +46,7 @@ function Presentation() {
             label: "로그인", 
             color:"info",
         }}
+        userdata = {userdata}
       />
       <MKBox
         minHeight="75vh"

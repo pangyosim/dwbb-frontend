@@ -5,7 +5,7 @@ import Icon from "@mui/material/Icon";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-
+import MKPagination from "components/MKPagination";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -16,7 +16,6 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import MKPagination from "components/MKPagination";
 import { useNavigate } from "react-router-dom";
 
 function Notice() {
@@ -83,7 +82,7 @@ function Notice() {
     axios.post('https://129.213.127.53:8080/notice-views', notice)
     .catch((error) => alert('notice views error : ' + error));
     e.preventDefault();
-    navigator('/pages/lading-pages/noticedetail', {
+    navigator('/pages/landing-pages/noticedetail', {
       state : {
         title : notice.noticetitle,
         contents : notice.noticecontents,
@@ -133,7 +132,7 @@ function Notice() {
           sm={10}
           md={7}
           lg={6}
-          xl={4}
+          xl={6}
           ml={{ xs: "auto", lg: 6 }}
           mr={{ xs: "auto", lg: 6 }}
         >
@@ -150,14 +149,14 @@ function Notice() {
           >
             <MKBox
               variant="gradient"
-              bgColor="secondary"
-              coloredShadow="secondary"
+              bgColor="dark"
+              coloredShadow="dark"
               borderRadius="lg"
               p={2}
               mx={2}
               mt={-3}
             >
-              <MKTypography variant="h3" color="white">
+              <MKTypography variant="h3" color="white" textAlign="center">
                 공지사항
               </MKTypography>
             </MKBox>
@@ -175,7 +174,7 @@ function Notice() {
                   })}
                 </Grid>
                 <Grid container item justifyContent="center" xs={12} mt={5} mb={2}>
-                  <MKPagination variant="contained" size="small" color="secondary">
+                  <MKPagination variant="contained" size="small" color="dark">
                     <MKPagination item onClick={handlePrevPaging}>
                       <Icon>keyboard_arrow_left</Icon>
                     </MKPagination>

@@ -1,3 +1,4 @@
+
 // @mui material components
 import Grid from "@mui/material/Grid";
 // import Icon from "@mui/material/Icon";
@@ -18,12 +19,13 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import { useNavigate } from "react-router-dom";
 
-function NoticeDetail ({notice}) {
+
+function QnADetailBasic ({qna}) { 
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
     return(
         <>
-            <MKBox position="fixed" top="0rem" width="100%">
+             <MKBox position="fixed" top="0rem" width="100%">
                 <DefaultNavbar
                 routes={isLogin !== null ? routes : exceptionroutes}
                 action={isLogin !== null ? 
@@ -66,8 +68,8 @@ function NoticeDetail ({notice}) {
                     >
                         <MKBox
                         variant="gradient"
-                        bgColor="dark"
-                        coloredShadow="dark"
+                        bgColor="secondary"
+                        coloredShadow="secondary"
                         borderRadius="lg"
                         p={2}
                         width="94%"
@@ -75,7 +77,7 @@ function NoticeDetail ({notice}) {
                         mt={-3}
                         >
                             <MKTypography variant="h3" color="white" textAlign="center">
-                                공지사항 상세페이지
+                                Q&A 상세페이지
                             </MKTypography>
                         </MKBox>
                         <MKBox p={3} px={{ xs : 1}}>
@@ -84,28 +86,28 @@ function NoticeDetail ({notice}) {
                                     {/* line 1 */}
                                     <Grid item md={25} xs={12} py={1} borderRadius="lg" >
                                         <MKTypography  fontWeight="bold" fontSize="25px">
-                                            {notice.title}
+                                            {qna.title}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 2 */}
-                                    <Grid item md={1.4} xs={2.2} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             작성자
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={8.2} xs={5.8} borderRadius="lg" >
+                                    <Grid item md={8.2} xs={6} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
-                                            {notice.id}
+                                            {qna.nickname}
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={1.4} xs={1.9} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             조회수
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={1} xs={2.1} borderRadius="lg" >
+                                    <Grid item md={1} xs={0} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
-                                            {notice.views}
+                                            {qna.views}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 3 */}
@@ -114,15 +116,19 @@ function NoticeDetail ({notice}) {
                                             작성일자
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={10.4} xs={8.9} borderRadius="lg" >
+                                    <Grid item md={8} xs={5.8} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
-                                            {notice.createday.substring(0,notice.createday.indexOf('T'))} {notice.createday.substring(notice.createday.indexOf('T')+1,notice.createday.indexOf('.'))}
+                                            {qna.createday.substring(0,qna.createday.indexOf('T'))} {qna.createday.substring(qna.createday.indexOf('T')+1,qna.createday.indexOf('.'))}
+                                        </MKTypography>
+                                    </Grid><Grid item md={2.4} xs={3} borderRadius="lg" >
+                                        <MKTypography fontWeight="light"  fontSize="13px">
+                                            {qna.state ? "답변완료": "작성완료"}
                                         </MKTypography>
                                     </Grid>
                                     {/* line F*/}
                                     <Grid item mb={3} md={12} xs={12} borderRadius="lg" >
                                         <MKTypography  fontWeight="light" fontSize="13px">
-                                            {notice.contents}
+                                            {qna.contents}
                                         </MKTypography>
                                     </Grid>
                                 </Grid>
@@ -143,4 +149,4 @@ function NoticeDetail ({notice}) {
     );
 }
 
-export default NoticeDetail;
+export default QnADetailBasic;

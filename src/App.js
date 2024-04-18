@@ -33,9 +33,10 @@ import SignOut from "layouts/pages/authentication/sign-out";
 import SignUp from "layouts/pages/authentication/sign-up";
 import FindId from "layouts/pages/authentication/find-id";
 import NoticeDetailPage from "layouts/pages/landing-pages/noticedetail";
-
+import QnADetailPage from "layouts/pages/landing-pages/qnadetail";
 export default function App() {
   const { pathname } = useLocation();
+  
   // Setting page scroll to 0 when changing the route
   useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -60,12 +61,14 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation" />} />
+        <Route path="*" element={<Navigate to="/presentation"/>} />
         <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
         <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
         <Route path="/pages/authentication/sign-up" element={<SignUp/>}/>
         <Route path="/pages/authentication/find-id" element={<FindId/>}/>
-        <Route path="/pages/lading-pages/noticedetail" element={<NoticeDetailPage/>}/>
+        <Route path="/pages/landing-pages/noticedetail" element={<NoticeDetailPage/>}/>
+        <Route path="/pages/landing-pages/qnadetail" element={<QnADetailPage/>}/>
+        <Route path="/pages/landing-pages/presentation" element={<Presentation/>}/>
       </Routes>
     </ThemeProvider>
   );

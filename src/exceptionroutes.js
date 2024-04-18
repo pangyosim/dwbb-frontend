@@ -46,7 +46,7 @@ const routes = [
     ],
   },
   {
-    name: "Q&A",
+    name: "HELP",
     icon: <Icon>question_answer</Icon>,
     columns: 1,
     rowsPerColumn: 1,

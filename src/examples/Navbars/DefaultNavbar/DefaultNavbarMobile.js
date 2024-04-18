@@ -32,13 +32,13 @@ import MKTypography from "components/MKTypography";
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 
-function DefaultNavbarMobile({ routes, open }) {
+function DefaultNavbarMobile({ routes, open, userdata }) {
   const [collapse, setCollapse] = useState("");
 
   const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
 
   const renderNavbarItems = routes.map(
-    ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
+    ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse, userdata }) => (
       <DefaultNavbarDropdown
         key={name}
         name={name}
@@ -47,6 +47,7 @@ function DefaultNavbarMobile({ routes, open }) {
         onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}
+        userdata={userdata}
         collapse={Boolean(navCollapse)}
       >
         <MKBox sx={{ height: "4.5rem", maxHeight: "15rem", overflowY: "scroll" }}>
