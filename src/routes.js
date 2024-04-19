@@ -8,7 +8,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import Notice from "layouts/pages/landing-pages/notice";
 import QnA from "pages/LandingPages/QnA";
 
-const routes = [
+const routes  = [
   {
     name: "은행",
     icon: <Icon>monetization_on</Icon>,
@@ -65,6 +65,7 @@ const routes = [
             name: "Q&A",
             route: "/pages/lading-pages/qna",
             component: <QnA/>,
+            userdata: null,
           },
         ]
       }

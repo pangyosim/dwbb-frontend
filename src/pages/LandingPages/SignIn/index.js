@@ -27,7 +27,7 @@ import exceptionroutes from "../../../exceptionroutes";
 import { useCookies } from "react-cookie";
 // import MKAlert from "components/MKAlert";
 
-function SignInBasic({userdata}) {
+function SignInBasic() {
   const [cookies, setCookie, removeCookie] = useCookies(["rememberUserId"]);
   const [rememberMe, setRememberMe] = useState(cookies.rememberUserId !== undefined ? true : false);
   const [values, setValues] = useState({
@@ -74,14 +74,11 @@ function SignInBasic({userdata}) {
       }).then((res)=>{
         if(res.data !== null){
           alert('로그인 성공 !');
-          localStorage.setItem("token",res.data[2]);
+          localStorage.setItem("nickname",res.data[0]);
+          localStorage.setItem("role", res.data[1]);
+          localStorage.setItem("token", res.data[2]);
           setCookie(cookies.rememberUserId)
-          navigate('/presentation',{
-            state: {
-              nickname : res.data[0],
-              role : res.data[1],
-            }
-          });
+          navigate('/presentation');
         } else {
           alert("아이디 혹은 비밀번호가 틀립니다 !")
         }
@@ -90,7 +87,6 @@ function SignInBasic({userdata}) {
         console.log('error ! : ' + e)
       })
   }
-  
   return (
     <>
       <DefaultNavbar

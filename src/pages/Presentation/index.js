@@ -26,9 +26,8 @@ import exceptionroutes from "exceptionroutes";
 // Images
 import bgImage from "assets/images/backgroundimg.jpg";
 
-function Presentation({userdata}) {
+function Presentation() {
   let isLogin = localStorage.getItem("token");
-  
   return (
     <>
       <DefaultNavbar
@@ -46,7 +45,6 @@ function Presentation({userdata}) {
             label: "로그인", 
             color:"info",
         }}
-        userdata = {userdata}
       />
       <MKBox
         minHeight="75vh"

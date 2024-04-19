@@ -134,10 +134,10 @@ function QnADetailBasic ({qna}) {
                                 </Grid>
                             </MKBox>
                             <MKBox mt={2} mb={1}>
-                            <MKTypography pl={3} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
-                                <ArrowBackIcon /> 뒤로가기
-                            </MKTypography>
-                        </MKBox>
+                                <MKTypography pl={3} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
+                                    <ArrowBackIcon /> 뒤로가기
+                                </MKTypography>
+                            </MKBox>
                         </MKBox>
                     </MKBox>
                 </Grid>

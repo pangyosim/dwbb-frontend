@@ -22,6 +22,8 @@ const SignOut = () => {
     const navigate = useNavigate();
     useEffect(()=>{
         localStorage.removeItem("token");
+        localStorage.removeItem("nickname");
+        localStorage.removeItem("role");
         alert("로그아웃 되셨습니다.");
         if(localStorage.getItem("token") === null ){
             navigate('/presentation');

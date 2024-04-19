@@ -104,13 +104,7 @@ function QnABasic () {
     }
 
     const handlerRegister = () => {
-        // 닉네임 정보전달
-        // navigator('/pages/landing-pages/qna-register',{
-        //     state: {
-        //         nickname : user.nickname,
-        //         role : user.role
-        //     }
-        // })
+        navigator('/pages/landing-pages/qna-register');
     }
 
     return(
@@ -167,7 +161,6 @@ function QnABasic () {
                                 Q&A
                             </MKTypography>
                         </MKBox>
-
                         <MKBox p={3}>
                             <MKBox>
                                 <Grid container mb={2} borderTop="1px solid black">
@@ -186,18 +179,19 @@ function QnABasic () {
                                     <Grid item xs={2} md={2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
                                         <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 처리 상태 </MKTypography>
                                     </Grid>
-                                    {postData(qnaData).map((qna)=>{
+                                    {postData(qnaData).map((qna,idx)=>{
                                         let qnacreateday = qna.qnacreateday;
+                                        
                                         return(
-                                            <>
+                                            <Grid container mb={0} spacing={0} key={idx}>
                                                 <Grid item xs={1.2} md={1.2} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnaseq} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={4.8} md={4.8} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={title_style} onClick={(e)=>handlerTitle(qna,e)}> {qna.qnatitle} </MKTypography>
+                                                    <MKTypography style={title_style} onClick={(e)=>handlerTitle(qna,e)}> {window.innerWidth > 768 || qna.qnatitle.length <= 13 ? qna.qnatitle :qna.qnatitle.substring(0,13)+"..."} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={2} md={1.5} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnanickname} </MKTypography>
+                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {window.innerWidth > 768 || qna.qnanickname.length <= 7 ? qna.qnanickname : qna.qnanickname.substring(0,7)+"..."} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {qnacreateday.substring(0,qnacreateday.indexOf('T'))} </MKTypography>
@@ -205,7 +199,7 @@ function QnABasic () {
                                                 <Grid item xs={2} md={2} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnastate ? "답변완료" : "접수완료"} </MKTypography>
                                                 </Grid>
-                                            </>
+                                            </Grid>
                                         );
                                     })}
                                 </Grid>

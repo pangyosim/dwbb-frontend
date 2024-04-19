@@ -37,10 +37,8 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   const [arrowRef, setArrowRef] = useState(null);
   const [mobileNavbar, setMobileNavbar] = useState(false);
   const [mobileView, setMobileView] = useState(false);
-
   const openMobileNavbar = () => setMobileNavbar(!mobileNavbar);
   useEffect(() => {
- 
     // A function that sets the display state for the DefaultNavbarMobile.
     function displayMobileNavbar() {
       if (window.innerWidth < breakpoints.values.lg) {
@@ -85,7 +83,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
   ));
 
   // Render the routes on the dropdown menu
-  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn }) => {
+  const renderRoutes = routes.map(({ name, collapse, columns, rowsPerColumn}) => {
     let template;
 
     // Render the dropdown menu that should be display as columns

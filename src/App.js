@@ -34,6 +34,7 @@ import SignUp from "layouts/pages/authentication/sign-up";
 import FindId from "layouts/pages/authentication/find-id";
 import NoticeDetailPage from "layouts/pages/landing-pages/noticedetail";
 import QnADetailPage from "layouts/pages/landing-pages/qnadetail";
+import QnARegisterPage from "layouts/pages/landing-pages/qna-register";
 export default function App() {
   const { pathname } = useLocation();
   
@@ -68,7 +69,7 @@ export default function App() {
         <Route path="/pages/authentication/find-id" element={<FindId/>}/>
         <Route path="/pages/landing-pages/noticedetail" element={<NoticeDetailPage/>}/>
         <Route path="/pages/landing-pages/qnadetail" element={<QnADetailPage/>}/>
-        <Route path="/pages/landing-pages/presentation" element={<Presentation/>}/>
+        <Route path="/pages/landing-pages/qna-register" element={<QnARegisterPage/>}/>
       </Routes>
     </ThemeProvider>
   );

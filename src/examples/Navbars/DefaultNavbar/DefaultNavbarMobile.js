@@ -1,17 +1,3 @@
-/**
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
 
 import { useState } from "react";
 
@@ -32,13 +18,13 @@ import MKTypography from "components/MKTypography";
 // Material Kit 2 React example components
 import DefaultNavbarDropdown from "examples/Navbars/DefaultNavbar/DefaultNavbarDropdown";
 
-function DefaultNavbarMobile({ routes, open, userdata }) {
+function DefaultNavbarMobile({ routes, open}) {
   const [collapse, setCollapse] = useState("");
 
   const handleSetCollapse = (name) => (collapse === name ? setCollapse(false) : setCollapse(name));
 
   const renderNavbarItems = routes.map(
-    ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse, userdata }) => (
+    ({ name, icon, collapse: routeCollapses, href, route, collapse: navCollapse }) => (
       <DefaultNavbarDropdown
         key={name}
         name={name}
@@ -47,7 +33,6 @@ function DefaultNavbarMobile({ routes, open, userdata }) {
         onClick={() => handleSetCollapse(name)}
         href={href}
         route={route}
-        userdata={userdata}
         collapse={Boolean(navCollapse)}
       >
         <MKBox sx={{ height: "4.5rem", maxHeight: "15rem", overflowY: "scroll" }}>
