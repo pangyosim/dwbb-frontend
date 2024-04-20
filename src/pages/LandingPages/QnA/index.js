@@ -45,7 +45,7 @@ function QnABasic () {
     });
     const navigator = useNavigate();
     useEffect(()=>{
-        axios.post("https://localhost:8080/qna-all")
+        axios.post("https://129.213.127.53:8080/qna-all")
         .then((res)=> setQnaData(res.data))
         .catch((error)=> alert('qna-all error : ' + error));
     },[])
@@ -89,7 +89,7 @@ function QnABasic () {
 
     const handlerTitle = (qna,e) => {
         e.preventDefault();
-        axios.post('https://localhost:8080/qna-views', qna)
+        axios.post('https://129.213.127.53:8080/qna-views', qna)
         .catch((error) => alert('qna views error : ' + error));
         navigator('/pages/landing-pages/qnadetail', {
             state : {
