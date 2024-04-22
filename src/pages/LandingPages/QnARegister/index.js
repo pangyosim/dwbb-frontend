@@ -5,7 +5,7 @@ import Grid from "@mui/material/Grid";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-// import MKButton from "components/MKButton";
+import MKButton from "components/MKButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -18,7 +18,6 @@ import exceptionroutes from "exceptionroutes";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import MKButton from "components/MKButton";
 
 function QnAResgisterBasic () {
     let isLogin = localStorage.getItem("token");
@@ -39,8 +38,8 @@ function QnAResgisterBasic () {
           ...prevValues,
           [name]: value,
         }));
-        const reqnatitle_check = /^[^?a-zA-Z0-9/]{3,20}$/;
-        const reqnacontents_check = /^[^?a-zA-Z0-9/||?]{10,100}$/;
+        const reqnatitle_check = /^[^?a-zA-Z/]{3,20}$/;
+        const reqnacontents_check = /^[^?a-zA-Z/||?]{10,100}$/;
         if( name === "reqnatitle"){
             if ( !reqnatitle_check.test(value) ){
                 setErrors((preValues)=>({
@@ -77,9 +76,12 @@ function QnAResgisterBasic () {
                 qnacontents: values.reqnacontents,
                 qnanickname: localStorage.getItem("nickname"),
             }).then((res)=>{
-                if(res.data === "QnARegisterSuccess"){
+                if(res.data !== "register-fail"){
+                    console.log(res.data);
                     alert('문의 성공 !');
                     navigate(-1);
+                } else {
+                    console.log(res.data);
                 }
             })
             .catch((e)=>{

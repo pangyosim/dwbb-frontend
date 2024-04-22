@@ -7,7 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-// import MKButton from "components/MKButton";
+import MKButton from "components/MKButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -18,11 +18,26 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import { useNavigate } from "react-router-dom";
-
+import axios from "axios";
 
 function QnADetailBasic ({qna}) { 
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
+    const handlerDelete = () => {
+        axios.post("https://localhost:8080/qna-delete",{
+            qnaseq :Number(qna.seq),
+        })
+        .then((res)=>{
+            if(res.data === "delete-success"){
+                alert("글 삭제 완료 !");
+                navigator(-1);
+            }
+        })
+        .catch((err)=> console.log('qna-delete error : ' + err))
+
+        
+    }
+
     return(
         <>
              <MKBox position="fixed" top="0rem" width="100%">
@@ -82,20 +97,20 @@ function QnADetailBasic ({qna}) {
                         </MKBox>
                         <MKBox p={3} px={{ xs : 1}}>
                             <MKBox width="100%" autoComplete="off">
-                                <Grid container spacing={3} pl={3} py={3} flexDirection="row">
+                                <Grid container spacing={3} pl={5} py={3} flexDirection="row">
                                     {/* line 1 */}
-                                    <Grid item md={25} xs={12} py={1} borderRadius="lg" >
+                                    <Grid item md={24} xs={12} py={1} borderRadius="lg" >
                                         <MKTypography  fontWeight="bold" fontSize="25px">
                                             {qna.title}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 2 */}
-                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
+                                    <Grid item  md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             작성자
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={8.2} xs={6} borderRadius="lg" >
+                                    <Grid item md={7.2} xs={5} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             {qna.nickname}
                                         </MKTypography>
@@ -105,22 +120,22 @@ function QnADetailBasic ({qna}) {
                                             조회수
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={1} xs={0} borderRadius="lg" >
+                                    <Grid item md={2} xs={1} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             {qna.views}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 3 */}
-                                    <Grid item md={1.6} xs={2.2} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2.2} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             작성일자
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={8} xs={5.8} borderRadius="lg" >
+                                    <Grid item md={7.2} xs={4.8} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             {qna.createday.substring(0,qna.createday.indexOf('T'))} {qna.createday.substring(qna.createday.indexOf('T')+1,qna.createday.indexOf('.'))}
                                         </MKTypography>
-                                    </Grid><Grid item md={2.4} xs={3} borderRadius="lg" >
+                                    </Grid><Grid item md={3.4} xs={4} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             {qna.state ? "답변완료": "작성완료"}
                                         </MKTypography>
@@ -131,12 +146,19 @@ function QnADetailBasic ({qna}) {
                                             {qna.contents}
                                         </MKTypography>
                                     </Grid>
+                                    {/* line 5*/}
+                                    <Grid item mb={3} md={8.5} xs={6.5} borderRadius="lg" >
+                                    <MKTypography mt={2} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
+                                        <ArrowBackIcon /> 뒤로가기
+                                    </MKTypography>
+                                    </Grid>
+                                    <Grid item mb={3} md={3.5} xs={4.5} borderRadius="lg" >
+                                    {localStorage.getItem("nickname") === qna.nickname ? 
+                                    <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>글삭제</MKButton>
+                                    :
+                                    ""}
+                                    </Grid>
                                 </Grid>
-                            </MKBox>
-                            <MKBox mt={2} mb={1}>
-                                <MKTypography pl={3} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
-                                    <ArrowBackIcon /> 뒤로가기
-                                </MKTypography>
                             </MKBox>
                         </MKBox>
                     </MKBox>
