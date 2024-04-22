@@ -24,7 +24,7 @@ function QnADetailBasic ({qna}) {
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
     const handlerDelete = () => {
-        axios.post("https://localhost:8080/qna-delete",{
+        axios.post("https://129.213.127.53:8080/qna-delete",{
             qnaseq :Number(qna.seq),
         })
         .then((res)=>{
