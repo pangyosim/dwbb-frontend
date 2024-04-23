@@ -64,7 +64,7 @@ function Presentation() {
               variant="h1"
               color="white"
               mt={-6}
-              mb={1}
+              mb={6}
               sx={({ breakpoints, typography: { size } }) => ({
                 [breakpoints.down("md")]: {
                   fontSize: size["3xl"],
@@ -80,7 +80,7 @@ function Presentation() {
               px={{ xs: 6, lg: 12 }}
               mt={1}
             >
-              내 근처 IBK기업은행 대기인원 현황, 주차장 정보 확인 웹사이트
+              내 근처 IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
             </MKTypography>
           </Grid>
         </Container>
