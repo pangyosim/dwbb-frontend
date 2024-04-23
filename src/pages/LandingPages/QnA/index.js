@@ -32,7 +32,7 @@ function QnABasic () {
     let isLogin = localStorage.getItem("token");
     const [qnaData, setQnaData] = useState([]);
     const [pagingData, setPagingData] = useState({
-        totalPage: Math.floor(qnaData/2),
+        totalPage: Math.floor(qnaData/2)+1,
         page: 1,
         limit: 7,
         offset: 0,
