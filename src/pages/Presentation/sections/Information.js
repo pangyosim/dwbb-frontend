@@ -42,7 +42,7 @@ function Information() {
                 description={<>내 근처 2km 이내<br></br>6개 지점을 확인할 수 있습니다.</>}
                 action={{
                   type: "internal",
-                  route: isLogin != null ? "/pages/landing-pages/notice" : "/pages/authentication/sign-in",
+                  route: isLogin != null ? "/pages/landing-pages/map" : "/pages/authentication/sign-in",
                   label: "지도 보러가기 >",
                 }}
               />

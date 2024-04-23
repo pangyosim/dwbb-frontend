@@ -37,6 +37,7 @@ import QnADetailPage from "layouts/pages/landing-pages/qnadetail";
 import QnARegisterPage from "layouts/pages/landing-pages/qna-register";
 import NoticeRegisterPage from "layouts/pages/landing-pages/notice-register";
 import MapPage from "layouts/pages/landing-pages/map";
+
 export default function App() {
   const { pathname } = useLocation();
   
@@ -59,22 +60,22 @@ export default function App() {
     });
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Routes>
-        {getRoutes(routes)}
-        <Route path="/presentation" element={<Presentation />} />
-        <Route path="*" element={<Navigate to="/presentation"/>} />
-        <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
-        <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
-        <Route path="/pages/authentication/sign-up" element={<SignUp/>}/>
-        <Route path="/pages/authentication/find-id" element={<FindId/>}/>
-        <Route path="/pages/landing-pages/noticedetail" element={<NoticeDetailPage/>}/>
-        <Route path="/pages/landing-pages/qnadetail" element={<QnADetailPage/>}/>
-        <Route path="/pages/landing-pages/qna-register" element={<QnARegisterPage/>}/>
-        <Route path="/pages/landing-pages/notice-register" element={<NoticeRegisterPage/>}/>
-        <Route path="/pages/landing-pages/map" element={<MapPage/>}/>
-      </Routes>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Routes>
+          {getRoutes(routes)}
+          <Route path="/presentation" element={<Presentation />} />
+          <Route path="*" element={<Navigate to="/presentation"/>} />
+          <Route path="/pages/authentication/sign-in" element={<SignIn/>}/>
+          <Route path="/pages/authentication/sign-out" element={<SignOut/>}/>
+          <Route path="/pages/authentication/sign-up" element={<SignUp/>}/>
+          <Route path="/pages/authentication/find-id" element={<FindId/>}/>
+          <Route path="/pages/landing-pages/noticedetail" element={<NoticeDetailPage/>}/>
+          <Route path="/pages/landing-pages/qnadetail" element={<QnADetailPage/>}/>
+          <Route path="/pages/landing-pages/qna-register" element={<QnARegisterPage/>}/>
+          <Route path="/pages/landing-pages/notice-register" element={<NoticeRegisterPage/>}/>
+          <Route path="/pages/landing-pages/map" element={<MapPage/>}/>
+        </Routes>
+      </ThemeProvider>
   );
 }
