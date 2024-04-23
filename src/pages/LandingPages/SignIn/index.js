@@ -68,11 +68,11 @@ function SignInBasic() {
     }
   } 
   const handleSubmit = () => {
-      axios.post('https://129.213.127.53:8080/check-login',{
+      axios.post('https://localhost:8080/check-login',{
         id: values.id,
         pw: values.pw
       }).then((res)=>{
-        if(res.data !== null){
+        if(res.data !== ""){
           alert('로그인 성공 !');
           localStorage.setItem("nickname",res.data[0]);
           localStorage.setItem("role", res.data[1]);
