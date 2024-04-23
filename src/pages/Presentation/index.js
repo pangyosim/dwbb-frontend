@@ -97,10 +97,10 @@ function Presentation() {
         }}
       >
       <Information />
-      <Container>
-        <BuiltByDevelopers />
-        <Testimonials/>
-      </Container>
+        <Container>
+          <BuiltByDevelopers />
+          <Testimonials/>
+        </Container>
       </Card>
       <MKBox pt={6} px={1} mt={6}>
         <DefaultFooter content={footerRoutes} />

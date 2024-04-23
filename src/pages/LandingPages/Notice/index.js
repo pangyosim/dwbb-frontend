@@ -37,7 +37,9 @@ function Notice() {
   });
 
   const navigator = useNavigate();
-
+  if(localStorage.getItem("token") ===null){
+    navigator("/pages/authentication/sign-in");
+  }
   const postData = (post) => {
     if(post){
       post = post.sort(function compare (a,b){

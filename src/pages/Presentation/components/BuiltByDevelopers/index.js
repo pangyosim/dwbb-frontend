@@ -62,7 +62,8 @@ function BuiltByDevelopers() {
           return(
             <Grid container sx={{ ml: { xs: 1, lg: window.innerWidth > 768 ? 5 : 0} }} key={i} spacing={0} pl={0} mb={mb_val}  fontSize={window.innerWidth > 768 ? "medium": 11}>
                 <Grid item md={9.5} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
-                  <span style={{color:"red"}}>[공지]</span> {v.noticetitle}
+                  <span style={{color:"red"}}>[공지]</span>
+                  {window.innerWidth > 768 || v.noticetitle.length <= 13 ? v.noticetitle : v.noticetitle.substring(0,13)+"..."}
                 </Grid>
                 <Grid  item md={2} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
                   {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
@@ -72,7 +73,7 @@ function BuiltByDevelopers() {
         })}
           <MKTypography
             component="a"
-            href="/pages/landing-pages/notice"
+            href={localStorage.getItem("token") ? "/pages/landing-pages/notice" : "/pages/authentication/sign-in"}
             variant="body2"
             color="white"
             fontWeight="bold"

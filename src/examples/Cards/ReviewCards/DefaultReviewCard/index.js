@@ -1,18 +1,3 @@
-/*
-=========================================================
-* Material Kit 2 React - v2.1.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-kit-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 // prop-types is library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -24,79 +9,79 @@ import MKBox from "components/MKBox";
 import MKAvatar from "components/MKAvatar";
 import MKTypography from "components/MKTypography";
 
-function DefaultReviewCard({ color, image, name, date, review, rating }) {
-  const ratings = {
-    0.5: [
-      <Icon key={1}>star_outline</Icon>,
-      <Icon key={2}>star_outline</Icon>,
-      <Icon key={3}>star_outline</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    1: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star_outline</Icon>,
-      <Icon key={3}>star_outline</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    1.5: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star_half</Icon>,
-      <Icon key={3}>star_outline</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    2: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star_outline</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    2.5: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star_half</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    3: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star</Icon>,
-      <Icon key={4}>star_outline</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    3.5: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star</Icon>,
-      <Icon key={4}>star_half</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    4: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star</Icon>,
-      <Icon key={4}>star</Icon>,
-      <Icon key={5}>star_outline</Icon>,
-    ],
-    4.5: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star</Icon>,
-      <Icon key={4}>star</Icon>,
-      <Icon key={5}>star_half</Icon>,
-    ],
-    5: [
-      <Icon key={1}>star</Icon>,
-      <Icon key={2}>star</Icon>,
-      <Icon key={3}>star</Icon>,
-      <Icon key={4}>star</Icon>,
-      <Icon key={5}>star</Icon>,
-    ],
-  };
+function DefaultReviewCard({ color, image, name, date, review, state }) {
+  // const ratings = {
+  //   0.5: [
+  //     <Icon key={1}>star_outline</Icon>,
+  //     <Icon key={2}>star_outline</Icon>,
+  //     <Icon key={3}>star_outline</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   1: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star_outline</Icon>,
+  //     <Icon key={3}>star_outline</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   1.5: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star_half</Icon>,
+  //     <Icon key={3}>star_outline</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   2: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star_outline</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   2.5: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star_half</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   3: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star</Icon>,
+  //     <Icon key={4}>star_outline</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   3.5: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star</Icon>,
+  //     <Icon key={4}>star_half</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   4: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star</Icon>,
+  //     <Icon key={4}>star</Icon>,
+  //     <Icon key={5}>star_outline</Icon>,
+  //   ],
+  //   4.5: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star</Icon>,
+  //     <Icon key={4}>star</Icon>,
+  //     <Icon key={5}>star_half</Icon>,
+  //   ],
+  //   5: [
+  //     <Icon key={1}>star</Icon>,
+  //     <Icon key={2}>star</Icon>,
+  //     <Icon key={3}>star</Icon>,
+  //     <Icon key={4}>star</Icon>,
+  //     <Icon key={5}>star</Icon>,
+  //   ],
+  // };
 
   return (
     <MKBox
@@ -145,6 +130,21 @@ function DefaultReviewCard({ color, image, name, date, review, rating }) {
         &quot;{review}&quot;
       </MKTypography>
       <MKTypography
+        variant="h5"
+        color={color === "transparent" || color === "light" ? "text" : "white"}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          ml: 0.375,
+
+          "& .material-icons-round": {
+            ml: -0.375,
+          },
+        }}
+      >
+        {state ? "답변완료" : "접수완료"}
+      </MKTypography>
+      {/* <MKTypography
         variant="h4"
         color={color === "transparent" || color === "light" ? "text" : "white"}
         sx={{
@@ -158,7 +158,7 @@ function DefaultReviewCard({ color, image, name, date, review, rating }) {
         }}
       >
         {ratings[rating]}
-      </MKTypography>
+      </MKTypography> */}
     </MKBox>
   );
 }
@@ -186,7 +186,8 @@ DefaultReviewCard.propTypes = {
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   review: PropTypes.string.isRequired,
-  rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
+  state : PropTypes.bool.isRequired,
+  // rating: PropTypes.oneOf([1, 2, 3, 4, 5]).isRequired,
 };
 
 export default DefaultReviewCard;

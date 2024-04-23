@@ -1,8 +1,5 @@
 // @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 
 // Material Kit 2 React components
 import MKTypography from "components/MKTypography";
@@ -11,7 +8,6 @@ import MKTypography from "components/MKTypography";
 import logoCT from "assets/images/favicon.png";
 
 const date = new Date().getFullYear();
-
 const output = {
   brand: {
     name: "DWBB",
@@ -20,55 +16,31 @@ const output = {
   },
   socials: [
     {
-      icon: <FacebookIcon />,
-      link: "https://www.facebook.com/CreativeTim/",
-    },
-    {
-      icon: <TwitterIcon />,
-      link: "https://twitter.com/creativetim/",
-    },
-    {
       icon: <GitHubIcon />,
-      link: "https://github.com/creativetimofficial/",
-    },
-    {
-      icon: <YouTubeIcon />,
-      link: "https://www.youtube.com/channel/UCVyTG4sCw-rOvB9oHkzZD1w/",
+      link: "https://github.com/pangyosim/dwbb",
     },
   ],
   menus: [
     {
-      name: "company",
-      items: [
-        { name: "about us", href: "https://www.creative-tim.com/presentation/" },
-        { name: "freebies", href: "https://www.creative-tim.com/templates/free/" },
-        { name: "premium tools", href: "https://www.creative-tim.com/templates/premium/" },
-        { name: "blog", href: "https://www.creative-tim.com/blog/" },
-      ],
-    },
-    {
       name: "resources",
       items: [
-        { name: "illustrations", href: "https://iradesign.io/" },
-        { name: "bits & snippets", href: "https://www.creative-tim.com/bits/" },
-        { name: "affiliate program", href: "https://www.creative-tim.com/affiliates/new/" },
+        { name: "frontend teamplates", href: "https://www.creative-tim.com/" },
+        { name: "React", href: "https://react.dev/learn" },
+        { name: "Springboot", href: "https://www.baeldung.com/spring-boot" },
+        { name: "Bank Data", href: "https://www.data.go.kr/data/15125567/openapi.do"}
       ],
     },
     {
       name: "help & support",
       items: [
-        { name: "contact us", href: "https://www.creative-tim.com/contact-us/" },
-        { name: "knowledge center", href: "https://www.creative-tim.com/knowledge-center/" },
-        { name: "custom development", href: "https://services.creative-tim.com/" },
-        { name: "sponsorships", href: "https://www.creative-tim.com/sponsorships/" },
+        { name: "Notice", href: "https://dwbb.vercel.app/pages/landing-pages/notice"},
+        { name: "Q&A", href: "http://dwbb.vercel.app/pages/lading-pages/qna" },
       ],
     },
     {
-      name: "legal",
+      name: "Github",
       items: [
-        { name: "terms & conditions", href: "https://www.creative-tim.com/terms/" },
-        { name: "privacy policy", href: "https://www.creative-tim.com/privacy/" },
-        { name: "licenses (EULA)", href: "https://www.creative-tim.com/license/" },
+        { name: "URL", href: "https://github.com/pangyosim/dwbb" },
       ],
     },
   ],
@@ -77,7 +49,7 @@ const output = {
       All rights reserved. Copyright &copy; {date} DWBB by{" "}
       <MKTypography
         component="a"
-        href="https://www.creative-tim.com/"
+        href="https://github.com/pangyosim/dwbb"
         target="_blank"
         rel="noreferrer"
         variant="button"

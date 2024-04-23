@@ -44,6 +44,9 @@ function QnABasic () {
         return (pagination_arr)
     });
     const navigator = useNavigate();
+    if(localStorage.getItem("token") ===null){
+        navigator("/pages/authentication/sign-in");
+    }
     useEffect(()=>{
         axios.post("https://129.213.127.53:8080/qna-all")
         .then((res)=> setQnaData(res.data))
@@ -164,7 +167,7 @@ function QnABasic () {
                         <MKBox p={3}>
                             <MKBox>
                                 <Grid container mb={2} borderTop="1px solid black">
-                                    <Grid item xs={1.2} md={1.2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
+                                    <Grid item xs={1} md={1.2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
                                         <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 번호 </MKTypography>
                                     </Grid>
                                     <Grid item xs={4.8} md={4.8} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
@@ -173,7 +176,7 @@ function QnABasic () {
                                     <Grid item xs={2} md={1.5} py={1} borderRadius="lg"borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
                                         <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 작성자 </MKTypography>
                                     </Grid>
-                                    <Grid item xs={2} md={2.5} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
+                                    <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
                                         <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 등록일 </MKTypography>
                                     </Grid>
                                     <Grid item xs={2} md={2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
@@ -184,16 +187,16 @@ function QnABasic () {
                                         
                                         return(
                                             <Grid container mb={0} spacing={0} key={idx}>
-                                                <Grid item xs={1.2} md={1.2} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
+                                                <Grid item xs={1} md={1.2} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnaseq} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={4.8} md={4.8} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={title_style} onClick={(e)=>handlerTitle(qna,e)}> {window.innerWidth > 768 || qna.qnatitle.length <= 13 ? qna.qnatitle :qna.qnatitle.substring(0,13)+"..."} </MKTypography>
+                                                    <MKTypography style={title_style} onClick={(e)=>handlerTitle(qna,e)}> {window.innerWidth > 768 || qna.qnatitle.length <= 10 ? qna.qnatitle :qna.qnatitle.substring(0,10)+"..."} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={2} md={1.5} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {window.innerWidth > 768 || qna.qnanickname.length <= 7 ? qna.qnanickname : qna.qnanickname.substring(0,7)+"..."} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
+                                                <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
                                                     <MKTypography style={{fontSize:"12px", color:"black"}}> {qnacreateday.substring(0,qnacreateday.indexOf('T'))} </MKTypography>
                                                 </Grid>
                                                 <Grid item xs={2} md={2} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
