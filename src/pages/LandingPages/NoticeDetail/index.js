@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
-// import MKButton from "components/MKButton";
+import MKButton from "components/MKButton";
 
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
@@ -17,10 +17,25 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function NoticeDetail ({notice}) {
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
+
+    const handlerDelete = () => {
+        axios.post("https://129.213.127.53:8080/notice-delete",{
+            noticeseq :Number(notice.seq),
+        })
+        .then((res)=>{
+            if(res.data === "delete-success"){
+                alert("공지 삭제 완료 !");
+                navigator(-1);
+            }
+        })
+        .catch((err)=> console.log('notice-delete error : ' + err))
+    }
+
     return(
         <>
             <MKBox position="fixed" top="0rem" width="100%">
@@ -80,36 +95,36 @@ function NoticeDetail ({notice}) {
                         </MKBox>
                         <MKBox p={3} px={{ xs : 1}}>
                             <MKBox width="100%" autoComplete="off">
-                                <Grid container spacing={3} pl={3} py={3} flexDirection="row">
+                                <Grid container spacing={3} pl={5} py={3} flexDirection="row">
                                     {/* line 1 */}
-                                    <Grid item md={25} xs={12} py={1} borderRadius="lg" >
+                                    <Grid item md={24} xs={12} py={1} borderRadius="lg" >
                                         <MKTypography  fontWeight="bold" fontSize="25px">
                                             {notice.title}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 2 */}
-                                    <Grid item md={1.4} xs={2.2} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             작성자
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={8.2} xs={5.8} borderRadius="lg" >
+                                    <Grid item md={7.2} xs={5} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             {notice.id}
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={1.4} xs={1.9} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             조회수
                                         </MKTypography>
                                     </Grid>
-                                    <Grid item md={1} xs={2.1} borderRadius="lg" >
+                                    <Grid item md={2} xs={1} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             {notice.views}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 3 */}
-                                    <Grid item md={1.6} xs={2.2} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2.2} borderRadius="lg" >
                                         <MKTypography fontWeight="light"  fontSize="13px">
                                             작성일자
                                         </MKTypography>
@@ -125,13 +140,20 @@ function NoticeDetail ({notice}) {
                                             {notice.contents}
                                         </MKTypography>
                                     </Grid>
+                                    {/* line 5*/}
+                                    <Grid item mb={3} md={8.5} xs={6.5} borderRadius="lg" >
+                                    <MKTypography mt={2} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
+                                        <ArrowBackIcon /> 뒤로가기
+                                    </MKTypography>
+                                    </Grid>
+                                    <Grid item mb={3} md={3.5} xs={4.5} borderRadius="lg" >
+                                    {localStorage.getItem("role") === "ADMIN" ? 
+                                    <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>공지삭제</MKButton>
+                                    :
+                                    ""}
+                                    </Grid>
                                 </Grid>
                             </MKBox>
-                            <MKBox mt={2} mb={1}>
-                            <MKTypography pl={3} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
-                                <ArrowBackIcon /> 뒤로가기
-                            </MKTypography>
-                        </MKBox>
                         </MKBox>
                     </MKBox>
                 </Grid>

@@ -6,6 +6,7 @@ import Icon from "@mui/material/Icon";
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKPagination from "components/MKPagination";
+import MKButton from "components/MKButton";
 // Material Kit 2 React examples
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import DefaultFooter from "examples/Footers/DefaultFooter";
@@ -37,7 +38,7 @@ function Notice() {
   });
 
   const navigator = useNavigate();
-  if(localStorage.getItem("token") ===null){
+  if(localStorage.getItem("token") === null){
     navigator("/pages/authentication/sign-in");
   }
   const postData = (post) => {
@@ -86,6 +87,7 @@ function Notice() {
     e.preventDefault();
     navigator('/pages/landing-pages/noticedetail', {
       state : {
+        seq : notice.noticeseq,
         title : notice.noticetitle,
         contents : notice.noticecontents,
         file : notice.noticefile,
@@ -94,6 +96,9 @@ function Notice() {
         createday : notice.noticecreateday
       },
     });
+  }
+  const handlerRegister = () => {
+    navigator('/pages/landing-pages/notice-register');
   }
 
   useEffect(()=>{
@@ -165,15 +170,21 @@ function Notice() {
             <MKBox p={3} >
               <MKBox width="100%" component="form" method="post" autoComplete="off">
                 <Grid container spacing={3} p={1} >
-                  {postData(noticeData).map((notice)=>{
+                  {postData(noticeData).map((notice,)=>{
                     let noticeday = notice.noticecreateday;
-                    return(
-                      <Grid item xs={12} md={25} key={notice.noticeseq} borderRadius="lg" onClick={(e) => handlerNoticeClick(notice,e)} style={{cursor:"pointer"}}>
-                        <MKTypography style={{fontSize:"20px", fontWeight:"bold"}}>{notice.noticetitle}</MKTypography>
-                        <MKTypography style={{fontSize:"13px"}}>작성일 : {noticeday.substring(0,noticeday.indexOf('T'))} / 작성자 : {notice.noticeid} / 조회수 {notice.noticeviews}</MKTypography>
-                      </Grid>
-                    )
+                      return(
+                        <Grid item xs={12} md={25} key={notice.noticeseq} borderRadius="lg" onClick={(e) => handlerNoticeClick(notice,e)} style={{cursor:"pointer"}}>
+                          <MKTypography style={{fontSize:"20px", fontWeight:"bold"}}>{notice.noticetitle}</MKTypography>
+                          <MKTypography style={{fontSize:"13px"}}>작성일:{noticeday.substring(0,noticeday.indexOf('T'))} / 작성자:{notice.noticeid} / 조회수 {notice.noticeviews}</MKTypography>
+                        </Grid>
+                      );
                   })}
+                  <Grid item md={4} xs={3}>
+                    {localStorage.getItem("role") === "ADMIN" ? 
+                      <MKButton style={{backgroundColor:"black",color:"white",width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerRegister}>글작성</MKButton>
+                      :
+                    ""}
+                  </Grid>
                 </Grid>
                 <Grid container item justifyContent="center" xs={12} mt={5} mb={2}>
                   <MKPagination variant="contained" size="small" color="dark">

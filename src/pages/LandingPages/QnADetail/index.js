@@ -34,8 +34,6 @@ function QnADetailBasic ({qna}) {
             }
         })
         .catch((err)=> console.log('qna-delete error : ' + err))
-
-        
     }
 
     return(
@@ -105,7 +103,7 @@ function QnADetailBasic ({qna}) {
                                         </MKTypography>
                                     </Grid>
                                     {/* line 2 */}
-                                    <Grid item  md={1.4} xs={2} borderRadius="lg" >
+                                    <Grid item md={1.4} xs={2} borderRadius="lg" >
                                         <MKTypography fontWeight="light" fontSize="13px">
                                             작성자
                                         </MKTypography>
@@ -153,7 +151,7 @@ function QnADetailBasic ({qna}) {
                                     </MKTypography>
                                     </Grid>
                                     <Grid item mb={3} md={3.5} xs={4.5} borderRadius="lg" >
-                                    {localStorage.getItem("nickname") === qna.nickname ? 
+                                    {localStorage.getItem("nickname") === qna.nickname || localStorage.getItem("role") === "ADMIN" ? 
                                     <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>글삭제</MKButton>
                                     :
                                     ""}
