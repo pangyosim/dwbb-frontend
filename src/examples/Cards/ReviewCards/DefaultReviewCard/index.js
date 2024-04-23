@@ -90,6 +90,8 @@ function DefaultReviewCard({ color, image, name, date, review, state }) {
       borderRadius="xl"
       shadow={color === "transparent" ? "none" : "md"}
       p={3}
+      width="100%"
+      height="100%"
     >
       {image && (
         <MKAvatar
@@ -125,7 +127,7 @@ function DefaultReviewCard({ color, image, name, date, review, state }) {
       <MKTypography
         variant="body2"
         color={color === "transparent" || color === "light" ? "text" : "white"}
-        my={4}
+        my={7}
       >
         &quot;{review}&quot;
       </MKTypography>

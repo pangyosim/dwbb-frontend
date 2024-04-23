@@ -96,13 +96,13 @@ function Presentation() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-      <Information />
-        <Container>
+      <Information/>
+        <Container style={window.innerWidth > 984 ? {display:"inline-flex"} : null}>
           <BuiltByDevelopers />
           <Testimonials/>
         </Container>
       </Card>
-      <MKBox pt={6} px={1} mt={6}>
+      <MKBox pt={6} px={0} mt={6}>
         <DefaultFooter content={footerRoutes} />
       </MKBox>
     </>

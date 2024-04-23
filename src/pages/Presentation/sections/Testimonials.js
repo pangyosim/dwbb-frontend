@@ -34,7 +34,7 @@ function Information() {
   },[])
   
   return (
-    <MKBox component="section" py={1}>
+    <MKBox component="section" py={1} width="100%">
       <Container>
         <Grid
           container
@@ -45,17 +45,17 @@ function Information() {
           justifyContent="center"
           sx={{ mx: "auto", textAlign: "center" }}
         >
-          <Grid item xs={12} md={6} lg={12}>
-            <MKTypography variant="h2" mb={3}>Q&A게시판</MKTypography> 
+          <Grid item xs={12} md={12} lg={12}>
+            <MKTypography variant="h2" mb={3}>Q&A 게시판</MKTypography> 
           </Grid>
-          <Grid item xs={12} md={6} lg={12}>
-            <MKTypography variant="h3" color="info" textGradient mb={2}>
-              최근 고객들이 남겨주신 글현황입니다.
+          <Grid item xs={12} md={12} lg={12}>
+            <MKTypography variant="h5" color="info" textGradient mb={2}>
+              최근 고객들이 남겨주신 <br></br>Q&A 글입니다.
             </MKTypography>
           </Grid>
-          <Grid item xs={12} md={6} lg={12}>
+          <Grid item xs={12} md={12} lg={12}>
             <MKTypography variant="body2" color="text" mb={2}>
-              Q&A게시판을 통해 상시 고객들의 불편한 점들을 개선시키고자 노력하고있습니다.
+              상시 고객들의 불편한 점들을 <br></br>개선시키고자 노력하고있습니다.
             </MKTypography>
           </Grid>
         </Grid>

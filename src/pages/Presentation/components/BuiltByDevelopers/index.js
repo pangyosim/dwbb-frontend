@@ -36,8 +36,10 @@ function BuiltByDevelopers() {
       borderRadius="xl"
       my={2}
       width="100%"
+      height="350px"
       py={5}
-      mt={0}
+      mt={15}
+      mr={3}
       sx={{
         backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
           `${linearGradient(
@@ -60,12 +62,12 @@ function BuiltByDevelopers() {
             mb_val = 0;
           }
           return(
-            <Grid container sx={{ ml: { xs: 1, lg: window.innerWidth > 768 ? 5 : 0} }} key={i} spacing={0} pl={0} mb={mb_val}  fontSize={window.innerWidth > 768 ? "medium": 11}>
-                <Grid item md={9.5} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
+            <Grid container sx={{ ml: { xs: 1, lg: window.innerWidth > 768 ? 3.5 : 0} }} key={i} spacing={0} pl={0} mb={mb_val}  fontSize={window.innerWidth > 768 ? "medium": 11}>
+                <Grid item md={8} xs={window.innerWidth > 768 ? 3 : 9} py={0} style={{color: "white"}}>
                   <span style={{color:"red"}}>[공지]</span>
                   {window.innerWidth > 768 || v.noticetitle.length <= 13 ? v.noticetitle : v.noticetitle.substring(0,13)+"..."}
                 </Grid>
-                <Grid  item md={2} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
+                <Grid  item md={4} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
                   {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
                 </Grid>
             </Grid>
