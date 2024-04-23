@@ -7,6 +7,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 // Pages
 import Notice from "layouts/pages/landing-pages/notice";
 import QnA from "pages/LandingPages/QnA";
+import Map from "layouts/pages/landing-pages/map";
 
 const routes  = [
   {
@@ -20,8 +21,8 @@ const routes  = [
         collapse: [
           {
             name: "지도",
-            route: "/pages/landing-pages/notice",
-            component: <Notice />,
+            route: "/pages/landing-pages/map",
+            component: <Map />,
           },
          
         ],
@@ -40,8 +41,8 @@ const routes  = [
           collapse: [
             {
               name: "지도",
-              route: "/pages/landing-pages/notice",
-              component: <Notice />,
+              route: "/pages/landing-pages/map",
+              component: <Map />,
             },
           ]
         }

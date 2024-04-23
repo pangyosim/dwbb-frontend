@@ -36,6 +36,7 @@ import NoticeDetailPage from "layouts/pages/landing-pages/noticedetail";
 import QnADetailPage from "layouts/pages/landing-pages/qnadetail";
 import QnARegisterPage from "layouts/pages/landing-pages/qna-register";
 import NoticeRegisterPage from "layouts/pages/landing-pages/notice-register";
+import MapPage from "layouts/pages/landing-pages/map";
 export default function App() {
   const { pathname } = useLocation();
   
@@ -72,6 +73,7 @@ export default function App() {
         <Route path="/pages/landing-pages/qnadetail" element={<QnADetailPage/>}/>
         <Route path="/pages/landing-pages/qna-register" element={<QnARegisterPage/>}/>
         <Route path="/pages/landing-pages/notice-register" element={<NoticeRegisterPage/>}/>
+        <Route path="/pages/landing-pages/map" element={<MapPage/>}/>
       </Routes>
     </ThemeProvider>
   );

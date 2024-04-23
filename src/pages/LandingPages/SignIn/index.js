@@ -7,19 +7,12 @@ import { Link, useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
-// import MuiLink from "@mui/material/Link";
-
-// @mui icons
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import GitHubIcon from "@mui/icons-material/GitHub";
-// import GoogleIcon from "@mui/icons-material/Google";
 
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-// import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 import bgImage from "assets/images/city-profile.jpg";
 import axios from "axios";
@@ -68,7 +61,7 @@ function SignInBasic() {
     }
   } 
   const handleSubmit = () => {
-      axios.post('https://localhost:8080/check-login',{
+      axios.post('https://129.213.127.53:8080/check-login',{
         id: values.id,
         pw: values.pw
       }).then((res)=>{
