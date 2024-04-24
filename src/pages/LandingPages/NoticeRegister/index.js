@@ -16,6 +16,7 @@ import exceptionroutes from "exceptionroutes";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function NoticeRegisterBasic () {
     const isLogin= localStorage.getItem("token");
@@ -30,6 +31,11 @@ function NoticeRegisterBasic () {
         renoticecontents: false,
     })
 
+    useEffect(()=>{
+        if(localStorage.getItem("token") === null){
+        navigator("/pages/authentication/sign-in");
+        }
+    })
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues((prevValues) => ({

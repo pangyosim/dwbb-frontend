@@ -18,11 +18,17 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
 
 function NoticeDetail ({notice}) {
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
 
+    useEffect(()=>{
+        if(localStorage.getItem("token") === null){
+        navigator("/pages/authentication/sign-in");
+        }
+    })
     const handlerDelete = () => {
         axios.post("https://129.213.127.53:8080/notice-delete",{
             noticeseq :Number(notice.seq),

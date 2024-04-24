@@ -44,9 +44,13 @@ function QnABasic () {
         return (pagination_arr)
     });
     const navigator = useNavigate();
-    if(localStorage.getItem("token") ===null){
-        navigator("/pages/authentication/sign-in");
-    }
+    
+    useEffect(()=>{
+        if(localStorage.getItem("token") ===null){
+            navigator("/pages/authentication/sign-in");
+        }
+    })
+
     useEffect(()=>{
         axios.post("https://129.213.127.53:8080/qna-all")
         .then((res)=> setQnaData(res.data))

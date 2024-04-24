@@ -16,7 +16,7 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function QnAResgisterBasic () {
@@ -31,7 +31,12 @@ function QnAResgisterBasic () {
         reqnatitle: false,
         reqnacontents: false,
     })
-
+    
+    useEffect(()=>{
+        if(localStorage.getItem("token") ===null){
+            navigator("/pages/authentication/sign-in");
+        }
+    })
     const handleChange = (e) => {
         const { name, value } = e.target;
         setValues((prevValues) => ({

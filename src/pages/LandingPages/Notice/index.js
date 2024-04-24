@@ -36,11 +36,14 @@ function Notice() {
       pagination_arr
     )
   });
-
   const navigator = useNavigate();
-  if(localStorage.getItem("token") === null){
-    navigator("/pages/authentication/sign-in");
-  }
+
+  useEffect(()=>{
+    if(localStorage.getItem("token") === null){
+      navigator("/pages/authentication/sign-in");
+    }
+  })
+  
   const postData = (post) => {
     if(post){
       post = post.sort(function compare (a,b){
