@@ -23,21 +23,18 @@ function Notice() {
   let isLogin = localStorage.getItem("token");
   const [noticeData, setNoticeData] = useState([]);
   const [pagingData, setPagingData] = useState({
-    totalPage: Math.floor(noticeData/2)+1,
     page: 1,
     limit: 5,
+    totalPage: 1,
     offset: 0,
     prev: 0,
   });
   const [pagination, setPagination] = useState(()=>{
-    const pagination_arr = [...Array(pagingData.totalPage+1)].fill(false,1,pagingData.totalPage+1);
+    const pagination_arr = [...Array(pagingData.totalPage)].fill(false,1,pagingData.totalPage-1);
     pagination_arr[0] = true;
-    return (
-      pagination_arr
-    )
+    return (pagination_arr)
   });
   const navigator = useNavigate();
-
   useEffect(()=>{
     if(localStorage.getItem("token") === null){
       navigator("/pages/authentication/sign-in");
@@ -108,10 +105,19 @@ function Notice() {
     axios.post('https://129.213.127.53:8080/notice-all',{
     })
     .then((res)=>{
+      setPagingData((prev)=>({
+        ...prev,
+        totalPage: Number(Math.floor(res.data.length/5)),
+      }))
       setNoticeData(res.data);
+      setPagination(()=>{
+        const pagination_arr = [...Array(Number(Math.floor(Number(Math.floor(res.data.length/5))+1)))].fill(false,1,Number(Math.floor(res.data.length/5))-1);
+        pagination_arr[0] = true;
+        return(pagination_arr)
+      });
     })
     .catch((error)=>{
-      alert('Inform Error : ' + error);
+      alert('Notice Error : ' + error);
     })
   },[])
 

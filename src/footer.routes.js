@@ -46,7 +46,7 @@ const output = {
   ],
   copyright: (
     <MKTypography variant="button" fontWeight="regular">
-      All rights reserved. Copyright &copy; {date} DWBB by{" "}
+      All rights reserved. Copyright &copy; {date} <br></br> DWBB by{" "}
       <MKTypography
         component="a"
         href="https://github.com/pangyosim/dwbb"

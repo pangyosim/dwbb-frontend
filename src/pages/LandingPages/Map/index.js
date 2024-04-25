@@ -21,10 +21,15 @@ function MapPageBasic () {
         navigator("/pages/authentication/sign-in");
         }
     })
+
     useEffect(()=>{
-        axios.post("https://localhost:8080/map-data",{})
+        axios.post("https://localhost:8080/map-data")
         .then((response)=>{
-            console.log('response : ' + response.data);
+            if(response.data === "") {
+                console.log('영업시간이 아닙니다.');
+            } else {
+                console.log('영업시간 테스트');
+            }
         })
         .catch((error) => console.log('map-data-error : ' + error))
     },[])

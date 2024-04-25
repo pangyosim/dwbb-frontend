@@ -30,16 +30,17 @@ const title_style = {
 
 function QnABasic () {
     let isLogin = localStorage.getItem("token");
+    const [noticeData, setNoticeData] = useState([]);
     const [qnaData, setQnaData] = useState([]);
     const [pagingData, setPagingData] = useState({
-        totalPage: Math.floor(qnaData/2)+1,
+        totalPage: Math.floor(qnaData.length/2)+1,
         page: 1,
         limit: 7,
         offset: 0,
         prev: 0,
       });
     const [pagination, setPagination] = useState(()=>{
-    const pagination_arr = [...Array(pagingData.totalPage+1)].fill(false,1,pagingData.totalPage+1);
+    const pagination_arr = [...Array(pagingData.totalPage)].fill(false,1,pagingData.totalPage-1);
         pagination_arr[0] = true;
         return (pagination_arr)
     });
@@ -52,9 +53,28 @@ function QnABasic () {
     })
 
     useEffect(()=>{
+        // qna list 
         axios.post("https://129.213.127.53:8080/qna-all")
-        .then((res)=> setQnaData(res.data))
+        .then((res)=> {
+            setQnaData(res.data)
+            setPagingData((prev)=>({
+                ...prev,
+                totalPage: Number(Math.floor(res.data.length/5)),
+            }));
+            setPagination(()=>{
+                const pagination_arr = [...Array(Number(Math.floor(Number(Math.floor(res.data.length/5))+1)))].fill(false,1,Number(Math.floor(res.data.length/5))-1);
+                pagination_arr[0] = true;
+                return(pagination_arr)
+            });
+        })
         .catch((error)=> alert('qna-all error : ' + error));
+        // notice list
+        axios.post('https://129.213.127.53:8080/notice-all',{
+        })
+        .then((res)=>setNoticeData(res.data.sort((a,b)=>(a.noticeseq-b.noticeseq)).reverse().slice(0,3)))
+        .catch((error)=>{
+            alert('Notice Error : ' + error);
+        })
     },[])
     const postData = (post) => {
         if(post){
@@ -107,7 +127,22 @@ function QnABasic () {
               views : qna.qnaviews+1,
               createday : qna.qnacreateday
             },
-          });
+        });
+    }
+
+    const handlerNoticeTitle = (notice,e) => {
+        e.preventDefault();
+        navigator('/pages/landing-pages/noticedetail', {
+            state : {
+              seq : notice.noticeseq,
+              title : notice.noticetitle,
+              contents : notice.noticecontents,
+              file : notice.noticefile,
+              id : notice.noticeid,
+              views : notice.noticeviews+1,
+              createday : notice.noticecreateday
+            },
+        });
     }
 
     const handlerRegister = () => {
@@ -184,8 +219,31 @@ function QnABasic () {
                                         <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 등록일 </MKTypography>
                                     </Grid>
                                     <Grid item xs={2} md={2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 처리 상태 </MKTypography>
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 조회/상태 </MKTypography>
                                     </Grid>
+                                    {noticeData.map((notice,idx)=>{
+                                        let noticecday = notice.noticecreateday;
+                                        
+                                        return(
+                                            <Grid container mb={0} spacing={0} key={idx} style={{background:"#f4f4f4",borderLeft:"3px solid red"}}>
+                                                <Grid item xs={1} md={1.1} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> 공지 </MKTypography>
+                                                </Grid>
+                                                <Grid item xs={4.8} md={4.9} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"red", cursor: "pointer", fontWeight:"bold"}} onClick={(e)=>handlerNoticeTitle(notice,e)}> {window.innerWidth > 768 || notice.noticetitle.length <= 10 ? notice.noticetitle :notice.noticetitle.substring(0,10)+"..."} </MKTypography>
+                                                </Grid>
+                                                <Grid item xs={2} md={1.5} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {window.innerWidth > 768 || notice.noticeid.length <= 7 ? notice.noticeid : notice.noticeid.substring(0,7)+"..."} </MKTypography>
+                                                </Grid>
+                                                <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {noticecday.substring(0,noticecday.indexOf('T'))} </MKTypography>
+                                                </Grid>
+                                                <Grid item xs={2} md={2} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {notice.noticeviews} </MKTypography>
+                                                </Grid>
+                                            </Grid>
+                                        );
+                                    })}
                                     {postData(qnaData).map((qna,idx)=>{
                                         let qnacreateday = qna.qnacreateday;
                                         
