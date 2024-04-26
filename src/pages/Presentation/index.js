@@ -28,6 +28,7 @@ import bgImage from "assets/images/backgroundimg.jpg";
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
+
   return (
     <>
       <DefaultNavbar
@@ -96,7 +97,7 @@ function Presentation() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-      <Information/>
+        <Information/>
         <Container style={window.innerWidth > 984 ? {display:"inline-flex"} : null}>
           <BuiltByDevelopers />
           <Testimonials/>

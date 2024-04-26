@@ -5,8 +5,10 @@ import routes from "routes";
 import exceptionroutes from "../../../exceptionroutes";
 import { Container as MapDiv, NaverMap, Marker, useNavermaps } from 'react-naver-maps';
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "pages/Presentation/components/Loading";
+import loadingimg from "../../../assets/images/Loading.gif";
 
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
@@ -14,16 +16,34 @@ function MapPageBasic () {
     const handlerMarkerClick = () => {
         console.log("Marker Click !");
     }
-    const navigator = useNavigate();
+    const [loc, setLoc] = useState({
+        lat: 0,
+        lng: 0
+    })
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if(localStorage.getItem("token") === null){
-        navigator("/pages/authentication/sign-in");
+        navigate("/pages/authentication/sign-in");
         }
     })
 
     useEffect(()=>{
-        axios.post("https://localhost:8080/map-data")
+        let tmp = { geox : 0, geoy: 0};
+        if (navigator.geolocation !== null) {
+            navigator.geolocation.getCurrentPosition((position)=>{
+                tmp.geox=position.coords.latitude
+                tmp.geoy=position.coords.longitude
+                setLoc({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                })
+            });
+        }
+        axios.post("https://localhost:8080/map-data",{
+            geox: tmp.geox,
+            geoy: tmp.geoy
+        })
         .then((response)=>{
             if(response.data === "") {
                 console.log('영업시간이 아닙니다.');
@@ -32,9 +52,10 @@ function MapPageBasic () {
             }
         })
         .catch((error) => console.log('map-data-error : ' + error))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-    
+
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -56,19 +77,21 @@ function MapPageBasic () {
                 />
             </MKBox>
             <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
-            <MapDiv
+                {loc.lat !== 0 ?
+                <MapDiv
                 style={{
                     width: '100%',
                     height: '100%',
                 }}
                 >
-                <NaverMap
-                defaultCenter={new navermaps.LatLng(37.3595704, 127.105399)}
-                defaultZoom={15}
-                >
-                    <Marker position={new navermaps.LatLng(37.3595704, 127.105399)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
-                </NaverMap>
+                    <NaverMap
+                    defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
+                    defaultZoom={15}
+                    >
+                        <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
+                    </NaverMap>
                 </MapDiv>
+                : <Loading image={loadingimg}/>}
             </MKBox>
         </>
     );
