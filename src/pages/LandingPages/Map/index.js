@@ -33,7 +33,7 @@ function MapPageBasic () {
         })
         .catch((error) => console.log('map-data-error : ' + error))
     },[])
-
+    
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
