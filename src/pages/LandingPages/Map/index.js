@@ -33,6 +33,7 @@ function MapPageBasic () {
         })
         .catch((error) => console.log('map-data-error : ' + error))
     },[])
+
     
     return (
         <>
