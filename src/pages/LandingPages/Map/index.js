@@ -40,20 +40,21 @@ function MapPageBasic () {
                 })
             });
         }
-        axios.post("https://localhost:8080/map-data",{
-            geox: tmp.geox,
-            geoy: tmp.geoy
-        })
-        .then((response)=>{
-            if(response.data === "") {
-                console.log('영업시간이 아닙니다.');
-            } else {
-                console.log('영업시간 테스트');
-            }
-        })
-        .catch((error) => console.log('map-data-error : ' + error))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+        if(loc.lat!==0){
+            axios.post("https://localhost:8080/map-data",{
+                geox: loc.lat,
+                geoy: loc.lng
+            })
+            .then((response)=>{
+                if(response.data === "") {
+                    console.log('영업시간이 아닙니다.');
+                } else {
+                    console.log(response.data);
+                }
+            })
+            .catch((error) => console.log('map-data-error : ' + error))
+        }
+    },[loc.lat,loc.lng])
 
 
     return (
@@ -78,19 +79,19 @@ function MapPageBasic () {
             </MKBox>
             <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
                 {loc.lat !== 0 ?
-                <MapDiv
-                style={{
-                    width: '100%',
-                    height: '100%',
-                }}
-                >
-                    <NaverMap
-                    defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
-                    defaultZoom={15}
+                    <MapDiv
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                    }}
                     >
-                        <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
-                    </NaverMap>
-                </MapDiv>
+                        <NaverMap
+                        defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
+                        defaultZoom={17}
+                        >
+                            <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
+                        </NaverMap>
+                    </MapDiv>
                 : <Loading image={loadingimg}/>}
             </MKBox>
         </>

@@ -162,7 +162,7 @@ function DefaultNavbar({ brand, routes, transparent, light, action, sticky, rela
                       top: "50%",
                       left: "-4px",
                       transform: "translateY(-45%)",
-                      height: "90%",
+                      height: "50%",
                     }}
                   />
                 )}

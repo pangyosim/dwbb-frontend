@@ -23,7 +23,7 @@ function BuiltByDevelopers() {
           if( a.noticecreateday < b.noticecreateday ) return 1;
           return 0;
         });
-        setNoticeData(arr.slice(0,5));
+        setNoticeData(arr.slice(0,10));
       })
       .catch((error)=>{
         alert('Inform Error : ' + error);
@@ -36,9 +36,9 @@ function BuiltByDevelopers() {
       borderRadius="xl"
       my={2}
       width="100%"
-      height="350px"
+      height={window.innerWidth > 768 ? "500px" : "350px"}
       py={5}
-      mt={15}
+      mt={12}
       mr={3}
       sx={{
         backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
@@ -51,7 +51,7 @@ function BuiltByDevelopers() {
       }}
     >
       <Container>
-        <MKTypography variant="h2" color="white" mb={3.5} px={window.innerWidth > 768 ? 3.5 : 1}>
+        <MKTypography variant={window.innerWidth > 768 ? "h2" : "h3"} color="white" mb={3.5} px={window.innerWidth > 768 ? 3.5 : 1}>
           공지사항
         </MKTypography>
         {noticeData.map((v,i)=>{
@@ -76,9 +76,9 @@ function BuiltByDevelopers() {
           <MKTypography
             component="a"
             href={localStorage.getItem("token") ? "/pages/landing-pages/notice" : "/pages/authentication/sign-in"}
-            variant="body2"
             color="white"
             fontWeight="bold"
+            fontSize={window.innerWidth > 768 ? "20px" : "12px"}
             sx={{
               "& .material-icons-round": {
                 fontSize: "1.125rem",

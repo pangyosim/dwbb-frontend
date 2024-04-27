@@ -24,7 +24,7 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 
 // Images
-import bgImage from "assets/images/backgroundimg.jpg";
+import bgImage from "assets/images/background3dimg.png";
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
@@ -48,7 +48,7 @@ function Presentation() {
         }}
       />
       <MKBox
-        minHeight="75vh"
+        minHeight="105vh"
         width="100%"
         sx={{
           backgroundImage: `url(${bgImage})`,
@@ -56,32 +56,32 @@ function Presentation() {
           backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
-          borderImage: "fill 0 linear-gradient(#0001,#000)",
+          borderImage: "fill top linear-gradient(#fff,#fff1)",
         }}
+        
       >
         <Container>
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
             <MKTypography
               variant="h1"
-              color="white"
-              mt={-6}
-              mb={6}
+              mt={-30}
+              mb={0}
               sx={({ breakpoints, typography: { size } }) => ({
                 [breakpoints.down("md")]: {
                   fontSize: size["3xl"],
                 },
               })}
+              textAlign="center"
             >
-              Don't Worry <br></br>Be Banking !
+              은행 대기인원 <br></br> DWBB에서 간편하게
             </MKTypography>
             <MKTypography
               variant="body1"
-              color="white"
               textAlign="center"
               px={{ xs: 6, lg: 12 }}
-              mt={1}
+              mt={-10}
             >
-              내 근처 IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
+              IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
             </MKTypography>
           </Grid>
         </Container>
@@ -90,7 +90,7 @@ function Presentation() {
         sx={{
           p: 2,
           mx: { xs: 2, lg: 3 },
-          mt: -8,
+          mt: -1,
           mb: 4,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
           backdropFilter: "saturate(200%) blur(30px)",
@@ -98,7 +98,7 @@ function Presentation() {
         }}
       >
         <Information/>
-        <Container style={window.innerWidth > 984 ? {display:"inline-flex"} : null}>
+        <Container style={window.innerWidth > 1200 ? {display:"inline-flex"} : null}>
           <BuiltByDevelopers />
           <Testimonials/>
         </Container>

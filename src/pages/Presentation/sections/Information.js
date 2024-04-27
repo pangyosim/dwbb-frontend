@@ -19,11 +19,11 @@ import bgimg from "assets/images/bgimg.png";
 function Information() {
   let isLogin = localStorage.getItem("token");
   return (
-    <MKBox component="section" mt={15} mb={5}>
+    <MKBox component="section" mt={5} mb={5}>
       <Container>
-        <Grid container item xs={11} spacing={3} alignItems="center" sx={{ mx: "auto" }}>
-          <Grid item xs={12} lg={4} sx={{ mx: "auto" }}>
-            <RotatingCard>
+        <Grid container item xs={11} spacing={0} alignItems="center" sx={{ mx: "auto" }}>
+          <Grid item xs={12} lg={4} sx={{ mx: "auto" }} mb={10}>
+            <RotatingCard >
               <RotatingCardFront
                 image={bgimg}
                 icon="touch_app"
@@ -39,7 +39,7 @@ function Information() {
               <RotatingCardBack
                 image={bgimg}
                 title={<>은행 대기인원 현황<br></br> & 주차장정보</>}
-                description={<>내 근처 2km 이내<br></br>6개 지점을 확인할 수 있습니다.</>}
+                description={<>내 근처 7km 이내<br></br>지점을 확인할 수 있습니다.</>}
                 action={{
                   type: "internal",
                   route: isLogin != null ? "/pages/landing-pages/map" : "/pages/authentication/sign-in",
