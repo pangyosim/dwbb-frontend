@@ -24,7 +24,12 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 
 // Images
-import bgImage from "assets/images/background3dimg.png";
+import bgImage1 from "../../assets/images/background3dimg1.png";
+import bgImage2 from "../../assets/images/background3dimg2.png";
+import bgImage3 from "../../assets/images/background3dimg3.png";
+
+// Carousel
+import {Carousel} from "react-responsive-carousel";
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
@@ -47,18 +52,29 @@ function Presentation() {
             color:"info",
         }}
       />
+      <Carousel
+          showArrows={true}
+          centerMode={true}
+          centerSlidePercentage={30}
+          showThumbs={false}
+          showStatus={false}
+          autoPlay={true}
+          infiniteLoop={true}
+        >
+          <img src={bgImage1} alt="image1" style={{position:"relative",zIndex:"-1"}}/>
+          <img src={bgImage2} alt="image2"/>
+          <img src={bgImage3} alt="image3"/>
+        </Carousel>
       <MKBox
         minHeight="105vh"
         width="100%"
         sx={{
-          backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
-          borderImage: "fill top linear-gradient(#fff,#fff1)",
+          //borderImage: "fill top linear-gradient(#fff,#fff1)",
         }}
-        
       >
         <Container>
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">

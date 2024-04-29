@@ -20,6 +20,8 @@ function MapPageBasic () {
         lat: 0,
         lng: 0
     })
+    const [nearbank,setNearbank] = useState([]);
+
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -49,14 +51,13 @@ function MapPageBasic () {
                 if(response.data === "") {
                     console.log('영업시간이 아닙니다.');
                 } else {
-                    console.log(response.data);
+                    setNearbank(response.data);
                 }
             })
             .catch((error) => console.log('map-data-error : ' + error))
         }
     },[loc.lat,loc.lng])
-
-
+    console.log(nearbank)
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -78,7 +79,7 @@ function MapPageBasic () {
                 />
             </MKBox>
             <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
-                {loc.lat !== 0 ?
+                {loc.lat !== 0 && nearbank.length !== 0 ?
                     <MapDiv
                     style={{
                         width: '100%',
@@ -90,6 +91,11 @@ function MapPageBasic () {
                         defaultZoom={17}
                         >
                             <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
+                            {nearbank.length !== 0 ? nearbank.map((v,idx)=>{
+                                return(
+                                    <Marker key={idx} position={new navermaps.LatLng(parseFloat(v.geox),parseFloat(v.geoy))} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
+                                )
+                            }) : ""}
                         </NaverMap>
                     </MapDiv>
                 : <Loading image={loadingimg}/>}
