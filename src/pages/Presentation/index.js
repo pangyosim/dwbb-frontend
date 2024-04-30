@@ -23,17 +23,33 @@ import routes from "routes";
 import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 
-// Images
+// Carousel
+import {Carousel} from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import bgImage1 from "../../assets/images/background3dimg1.png";
 import bgImage2 from "../../assets/images/background3dimg2.png";
 import bgImage3 from "../../assets/images/background3dimg3.png";
+import { useState } from "react";
 
-// Carousel
-import {Carousel} from "react-responsive-carousel";
+const slide_items = [
+  {
+    alt : "Slide image 1",
+    url : bgImage1,
+  },
+  {
+    alt : "Slide image 2",
+    url : bgImage2,
+  },
+  {
+    alt : "Slide image 3",
+    url : bgImage3,
+  }
+]
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
-
+  const [currentIndex, setCurrentIndex] = useState();
+  const [slideIndex, setSlideIndex] = useState(1);
   return (
     <>
       <DefaultNavbar
@@ -53,18 +69,35 @@ function Presentation() {
         }}
       />
       <Carousel
-          showArrows={true}
-          centerMode={true}
-          centerSlidePercentage={30}
-          showThumbs={false}
-          showStatus={false}
+          showArrows={false}
           autoPlay={true}
           infiniteLoop={true}
+          showThumbs={false}
+          stopOnHover={false}
+          showIndicators={false}
+          showStatus={false}
+          onChange={(idx)=> setCurrentIndex(idx)}
+          selectedItem={slide_items[currentIndex]}
         >
-          <img src={bgImage1} alt="image1" style={{position:"relative",zIndex:"-1"}}/>
-          <img src={bgImage2} alt="image2"/>
-          <img src={bgImage3} alt="image3"/>
-        </Carousel>
+        {slide_items.map((va,idx)=>{
+          console.log('idx : ' + idx)
+          console.log(slide_items)
+          if(idx === slide_items.length-1) {
+            slide_items.push({
+              alt: `Slide image ${slideIndex}`,
+              url: require(`../../assets/images/background3dimg${slideIndex}.png`)
+            })
+            setSlideIndex(()=>1);
+          } else if (idx > 3){
+            slide_items.shift()
+          }
+          return(
+            <div key={va.alt}>
+              <img src={va.url}  alt={va.alt}/>
+            </div>
+          )
+        })}
+      </Carousel>
       <MKBox
         minHeight="105vh"
         width="100%"
