@@ -24,32 +24,33 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 
 // Carousel
-import {Carousel} from "react-responsive-carousel";
+//import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import bgImage1 from "../../assets/images/background3dimg1.png";
-import bgImage2 from "../../assets/images/background3dimg2.png";
-import bgImage3 from "../../assets/images/background3dimg3.png";
-import { useState } from "react";
+import bgImage from "../../assets/images/background3dimg.png";
+// import bgImage1 from "../../assets/images/background3dimg1.png";
+// import bgImage2 from "../../assets/images/background3dimg2.png";
+// import bgImage3 from "../../assets/images/background3dimg3.png";
+// import { useState } from "react";
 
-const slide_items = [
-  {
-    alt : "Slide image 1",
-    url : bgImage1,
-  },
-  {
-    alt : "Slide image 2",
-    url : bgImage2,
-  },
-  {
-    alt : "Slide image 3",
-    url : bgImage3,
-  }
-]
+// const slide_items = [
+//   {
+//     alt : "Slide image 1",
+//     url : bgImage1,
+//   },
+//   {
+//     alt : "Slide image 2",
+//     url : bgImage2,
+//   },
+//   {
+//     alt : "Slide image 3",
+//     url : bgImage3,
+//   }
+// ]
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
-  const [currentIndex, setCurrentIndex] = useState();
-  const [slideIndex, setSlideIndex] = useState(1);
+  // const [currentIndex, setCurrentIndex] = useState();
+  // const [slideIndex, setSlideIndex] = useState(1);
   return (
     <>
       <DefaultNavbar
@@ -68,7 +69,7 @@ function Presentation() {
             color:"info",
         }}
       />
-      <Carousel
+      {/* <Carousel
           showArrows={false}
           autoPlay={true}
           infiniteLoop={true}
@@ -97,11 +98,12 @@ function Presentation() {
             </div>
           )
         })}
-      </Carousel>
+      </Carousel> */}
       <MKBox
         minHeight="105vh"
         width="100%"
         sx={{
+          backgroundImage: `url(${bgImage})`,
           backgroundSize: "cover",
           backgroundPosition: "top",
           display: "grid",
