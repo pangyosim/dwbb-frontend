@@ -1,0 +1,50 @@
+.arr {
+    margin: 0;
+    padding: 0;
+    width: 12vh; 
+    height: 4.5vh;
+    background: white; 
+    border-radius: 10vh; 
+    border: 2px solid #0675f4; 
+    display: flex; 
+    transition: 0.1s linear;
+    align-items: center;
+} 
+.arr:after{ 
+    border-top: 5px solid #0675f4;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    content: "";
+    position: absolute;
+    top: 41.5px;
+    left: 30px;
+}
+.arr:hover{
+    transform: scale(1.05);
+}
+.arr:active {
+    background-color: #0675f4;
+    color: white;
+}
+
+.wrap_myloc {
+    width: 30vh;
+    height: 30vh;
+    border: 3px solid blue;
+    text-align: center;
+    border-radius: 15vh;
+    background-color: #0675f4;
+    opacity: 0.1;
+    z-index: 0;
+}
+.wrap_myloc img {
+    margin-top: 35vh;
+    opacity: 1;
+    z-index: 10;
+}
+
+@media screen and (max-width: 768px) {
+    .arr:after{
+        top: 43.5px;;
+    }
+}

@@ -7,22 +7,28 @@ import { Container as MapDiv, NaverMap, Marker, useNavermaps } from 'react-naver
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// components
 import Loading from "pages/Presentation/components/Loading";
-import loadingimg from "../../../assets/images/Loading.gif";
+import Sidebar from "pages/Presentation/components/Sidebar";
+
+// Marker Image
 import ibk from "../../../assets/images/ibk.png";
+import loadingimg from "../../../assets/images/Loading.gif";
+import myloc from "../../../assets/images/myloc.png";
+import "./Map.css";
+import Contact from "pages/Presentation/components/Contact";
 
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
     const navermaps = useNavermaps();
-    const handlerMarkerClick = () => {
-        console.log("Marker Click !");
-    }
+   
     const [loc, setLoc] = useState({
         lat: 0,
         lng: 0
     })
     const [nearbank,setNearbank] = useState([]);
-
+    
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -44,7 +50,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post("https://localhost:8080/map-data",{
+            axios.post("https://129.213.127.53:8080/map-data",{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -58,6 +64,18 @@ function MapPageBasic () {
             .catch((error) => console.log('map-data-error : ' + error))
         }
     },[loc.lat,loc.lng])
+
+    const handlerBankClick = (e,v) => {
+        if(window.innerWidth > 768){
+            console.log(v)
+            return()=>(
+                <Sidebar width={560}>
+                    <Contact value={v}/>
+                </Sidebar>
+            )   
+        } 
+    }
+
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -77,6 +95,9 @@ function MapPageBasic () {
                     color:"info",
                 }}
                 />
+                <Sidebar width={560}>
+                    <Contact/>
+                </Sidebar>
             </MKBox>
             <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
                 {loc.lat !== 0 && nearbank.length !== 0?
@@ -89,42 +110,45 @@ function MapPageBasic () {
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
                         defaultZoom={17}
+                        minZoom={15}
+                        maxZoom={18}
                         >
-                            <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} onClick={handlerMarkerClick} style={{cursor:"pointer"}} />
+                            <Marker position={new navermaps.LatLng(loc.lat,loc.lng)}
+                                icon={{
+                                    content:
+                                    `
+                                        <div class="wrap_myloc">
+                                        </div>
+                                    `,
+                                    anchor: new navermaps.Point(130,130),
+                                }}
+                                zIndex="-1"
+                            />
+                            <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} 
+                                icon={{
+                                    content: 
+                                    `
+                                        <div>
+                                            <img src=${myloc}/ style="width: 2vh; height: 2vh;">
+                                        </div>
+                                    `,
+                                    anchor: new navermaps.Point(10,10),
+                                }}
+                                zIndex="99"
+
+                            />
                             {nearbank.length !== 0 ? nearbank.map((v,idx)=>{
                                 return(
-                                    <Marker key={idx} position={new navermaps.LatLng(parseFloat(v.geoy),parseFloat(v.geox))} style={{cursor:"pointer"}} 
+                                    <Marker key={idx} position={new navermaps.LatLng(parseFloat(v.geoy),parseFloat(v.geox))}
                                         icon={{
                                             content: 
-                                            `<style> 
-                                            .arr {
-                                                width: 15vh; 
-                                                height: 4.5vh;
-                                                background: white; 
-                                                border-radius: 10vh; 
-                                                border: 2px solid #0675f4; 
-                                                display: flex; 
-                                                transition: 0.1s linear;
-                                                align-items: center;
-                                            } 
-                                            .arr:after{ 
-                                                border-top: 5px solid #0675f4;
-                                                border-left: 4px solid transparent;
-                                                border-right: 4px solid transparent;
-                                                content: "";
-                                                position: absolute;
-                                                top: 41.5px;
-                                                left: 30px;
-                                            }
-                                            .arr:hover{
-                                                transform: scale(1.05);
-                                            }
-                                            </style>
-                                                <div class="arr">
-                                                    <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 1vh; font-size: 12px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm}</p>
+                                            `<div class="arr">
+                                                    <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 1vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm}</p>
                                                 </div>`,
-                                                scaledSize: new navermaps.Size(50, 50),
+                                            anchor: new navermaps.Point(30,40),
                                         }}
+                                        zIndex="1"
+                                        onClick={(e)=>(handlerBankClick(e,v))}
                                     />
                                 )
                             }) : ""}
