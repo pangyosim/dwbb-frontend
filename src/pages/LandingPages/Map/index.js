@@ -10,30 +10,29 @@ import { useNavigate } from "react-router-dom";
 
 // components
 import Loading from "pages/Presentation/components/Loading";
-import Sidebar from "pages/Presentation/components/Sidebar";
+// import Sidebar from "pages/Presentation/components/Sidebar";
 
 // Marker Image
 import ibk from "../../../assets/images/ibk.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
 import "./Map.css";
-import Contact from "pages/Presentation/components/Contact";
+// import Contact from "pages/Presentation/components/Contact";
 
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
     const navermaps = useNavermaps();
-   
+ 
     const [loc, setLoc] = useState({
         lat: 0,
         lng: 0
     })
     const [nearbank,setNearbank] = useState([]);
-    
     const navigate = useNavigate();
 
     useEffect(()=>{
         if(localStorage.getItem("token") === null){
-        navigate("/pages/authentication/sign-in");
+            navigate("/pages/authentication/sign-in");
         }
     })
 
@@ -68,14 +67,8 @@ function MapPageBasic () {
     const handlerBankClick = (e,v) => {
         if(window.innerWidth > 768){
             console.log(v)
-            return()=>(
-                <Sidebar width={560}>
-                    <Contact value={v}/>
-                </Sidebar>
-            )   
         } 
     }
-
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -95,11 +88,8 @@ function MapPageBasic () {
                     color:"info",
                 }}
                 />
-                <Sidebar width={560}>
-                    <Contact/>
-                </Sidebar>
             </MKBox>
-            <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
+            <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={1}>
                 {loc.lat !== 0 && nearbank.length !== 0?
                     <MapDiv
                     style={{
@@ -113,6 +103,7 @@ function MapPageBasic () {
                         minZoom={15}
                         maxZoom={18}
                         >
+                            {/* my location background */}
                             <Marker position={new navermaps.LatLng(loc.lat,loc.lng)}
                                 icon={{
                                     content:
@@ -120,10 +111,11 @@ function MapPageBasic () {
                                         <div class="wrap_myloc">
                                         </div>
                                     `,
-                                    anchor: new navermaps.Point(130,130),
+                                    anchor: new navermaps.Point(120,120),
                                 }}
                                 zIndex="-1"
                             />
+                            {/* my location */}
                             <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} 
                                 icon={{
                                     content: 
@@ -132,11 +124,11 @@ function MapPageBasic () {
                                             <img src=${myloc}/ style="width: 2vh; height: 2vh;">
                                         </div>
                                     `,
-                                    anchor: new navermaps.Point(10,10),
+                                    anchor: new navermaps.Point(1,1),
                                 }}
                                 zIndex="99"
-
                             />
+                            {/* Bank */}
                             {nearbank.length !== 0 ? nearbank.map((v,idx)=>{
                                 return(
                                     <Marker key={idx} position={new navermaps.LatLng(parseFloat(v.geoy),parseFloat(v.geox))}

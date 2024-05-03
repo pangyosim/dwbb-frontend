@@ -17,12 +17,12 @@
     content: "";
     position: absolute;
     top: 41.5px;
-    left: 30px;
+    left: 20px;
 }
 .arr:hover{
     transform: scale(1.05);
 }
-.arr:active {
+.arr:focus {
     background-color: #0675f4;
     color: white;
 }
@@ -38,12 +38,17 @@
     z-index: 0;
 }
 .wrap_myloc img {
-    margin-top: 35vh;
-    opacity: 1;
+    margin-top: 30vh;
     z-index: 10;
 }
 
 @media screen and (max-width: 768px) {
+    .arr{
+        margin: 0;
+        padding: 0;
+        width: 12vh;
+        height: 4.5vh;
+    }
     .arr:after{
         top: 37px;
     }
