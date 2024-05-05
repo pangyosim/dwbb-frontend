@@ -16,13 +16,13 @@
     border-right: 4px solid transparent;
     content: "";
     position: absolute;
-    top: 41.5px;
+    top: 41px;
     left: 20px;
 }
 .arr:hover{
     transform: scale(1.05);
 }
-.arr:focus {
+.arr:visited {
     background-color: #0675f4;
     color: white;
 }
@@ -41,6 +41,32 @@
     margin-top: 30vh;
     z-index: 10;
 }
+.arr0, .arr1, .arr3, .arr4, .arr5, .arr6, .arr7, .arr8, .arr9, .arr10,
+.arr11, .arr12, .arr13, .arr14, .arr15, .arr16, .arr17, .arr18, .arr19, .arr20 {
+    margin: 0;
+    padding: 0;
+    width: 12vh; 
+    height: 4.5vh;
+    background: #0675f4; 
+    border-radius: 10vh; 
+    border: 2px solid #0675f4; 
+    display: flex; 
+    color: white;
+    transition: 0.1s linear;
+    align-items: center;
+}
+
+.arr0:after, .arr1:after, .arr2:after, .arr3:after, .arr4:after, .arr5:after, .arr6:after, .arr7:after, .arr8:after, .arr9:after, .arr10:after,
+.arr11:after, .arr12:after, .arr13:after, .arr14:after, .arr15:after, .arr16:after, .arr17:after, .arr18:after, .arr19:after, .arr20:after{ 
+    border-top: 5px solid #0675f4;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    content: "";
+    position: absolute;
+    top: 41px;
+    left: 20px;
+}
+
 
 @media screen and (max-width: 768px) {
     .arr{

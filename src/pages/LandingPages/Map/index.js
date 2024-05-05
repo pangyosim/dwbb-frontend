@@ -17,19 +17,29 @@ import ibk from "../../../assets/images/ibk.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
 import "./Map.css";
+import MKButton from "components/MKButton";
+import MKTypography from "components/MKTypography";
 // import Contact from "pages/Presentation/components/Contact";
+import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
     const navermaps = useNavermaps();
- 
+    
     const [loc, setLoc] = useState({
         lat: 0,
         lng: 0
     })
+    const [isClicked, setIsClicked ] = useState("");
+    const [ btIsAcitived, setBtIsActived ] = useState({
+        bkbutton : true,
+        pkbutton : false
+    })
+    // const [isOpened, setIsOpened] = useState(false);
     const [nearbank,setNearbank] = useState([]);
     const navigate = useNavigate();
-
+    
     useEffect(()=>{
         if(localStorage.getItem("token") === null){
             navigate("/pages/authentication/sign-in");
@@ -64,10 +74,10 @@ function MapPageBasic () {
         }
     },[loc.lat,loc.lng])
 
-    const handlerBankClick = (e,v) => {
-        if(window.innerWidth > 768){
-            console.log(v)
-        } 
+    const handlerBankClick = (e,v,idx) => {
+        console.log(v);
+        setIsClicked(idx)
+        // setIsOpened(true);
     }
     return (
         <>
@@ -89,21 +99,28 @@ function MapPageBasic () {
                 }}
                 />
             </MKBox>
-            <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={1}>
-                {loc.lat !== 0 && nearbank.length !== 0?
+            <MKBox id="map" px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={1}>
+                {loc.lat !== 0 && nearbank.length !== 0  ?
                     <MapDiv
                     style={{
                         width: '100%',
                         height: '100%',
                     }}
-                    >
+                    >   
+                        <MKBox>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "calc(100% - 86%)",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton})}}>
+                                <AccountBalanceIcon/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
+                            </MKButton>
+                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton})}}>
+                                <DirectionsCarIcon/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
+                            </MKButton>
+                        </MKBox>
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
                         defaultZoom={17}
                         minZoom={15}
                         maxZoom={18}
                         >
-                            {/* my location background */}
                             <Marker position={new navermaps.LatLng(loc.lat,loc.lng)}
                                 icon={{
                                     content:
@@ -111,7 +128,7 @@ function MapPageBasic () {
                                         <div class="wrap_myloc">
                                         </div>
                                     `,
-                                    anchor: new navermaps.Point(120,120),
+                                    anchor: new navermaps.Point(135,135),
                                 }}
                                 zIndex="-1"
                             />
@@ -124,26 +141,29 @@ function MapPageBasic () {
                                             <img src=${myloc}/ style="width: 2vh; height: 2vh;">
                                         </div>
                                     `,
-                                    anchor: new navermaps.Point(1,1),
+                                    anchor: new navermaps.Point(15,15),
                                 }}
                                 zIndex="99"
                             />
                             {/* Bank */}
+                            {btIsAcitived.bkbutton ? (<>
                             {nearbank.length !== 0 ? nearbank.map((v,idx)=>{
                                 return(
-                                    <Marker key={idx} position={new navermaps.LatLng(parseFloat(v.geoy),parseFloat(v.geox))}
+                                    <Marker key={idx} position={new navermaps.LatLng(v.geoy,v.geox)}
                                         icon={{
                                             content: 
-                                            `<div class="arr">
+                                                `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
                                                     <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 1vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm}</p>
                                                 </div>`,
                                             anchor: new navermaps.Point(30,40),
                                         }}
-                                        zIndex="1"
-                                        onClick={(e)=>(handlerBankClick(e,v))}
+                                        zIndex="11"
+                                        onClick={(e)=>(handlerBankClick(e,v,idx))}
                                     />
                                 )
                             }) : ""}
+                            </>): ""}
+
                         </NaverMap>
                     </MapDiv>
                 : <Loading image={loadingimg}/>}
