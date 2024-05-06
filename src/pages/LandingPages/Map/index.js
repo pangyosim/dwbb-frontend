@@ -25,17 +25,18 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
     const navermaps = useNavermaps();
-    
+    const [map, setMap] = useState(null)
+
     const [loc, setLoc] = useState({
         lat: 0,
         lng: 0
     })
-    const [isClicked, setIsClicked ] = useState("");
+    const [ isClicked, setIsClicked ] = useState("");
     const [ btIsAcitived, setBtIsActived ] = useState({
         bkbutton : true,
         pkbutton : false
     })
-    // const [isOpened, setIsOpened] = useState(false);
+    const [ isWindow, setIsWindow ] = useState();
     const [nearbank,setNearbank] = useState([]);
     const navigate = useNavigate();
     
@@ -76,7 +77,24 @@ function MapPageBasic () {
     const handlerBankClick = (e,v,idx) => {
         console.log(v);
         setIsClicked(idx)
-        // setIsOpened(true);
+        const loc = new navermaps.LatLng(v.geoy,v.geox);
+        const infowindow = new navermaps.InfoWindow({
+            content :   `<div style="padding: 0px; width: 20vh; margin: 0px; border: 2px solid #0675f4; border-radius: 30px; background-color: white;">
+                            <div style="padding: 10px;">
+                                <div style="font-size: 12px;">${v.krnbrm}지점</div>
+                                <div style="font-size: 11px;">${v.brncnwbscadr}</div>
+                                <div style="font-size: 10px;">Tel ${v.brncTel}</div>
+                                <div style="font-size: 10px;">Fax ${v.rprsFax}</div>
+                                <div style="font-size: 10px;">${v.distance}km</div>
+                            </div>
+                        </div>`,
+            anchorSize : 0,
+            backgroundColor: null,
+            borderWidth: 0,
+            disableAutoPan: true,
+        });
+        setIsWindow(infowindow);
+        infowindow.open(map,loc);
     }
     return (
         <>
@@ -98,7 +116,7 @@ function MapPageBasic () {
                 }}
                 />
             </MKBox>
-            <MKBox id="map" px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={1}>
+            <MKBox px={1} width="100%" height="100vh" style={{margin:"0", padding:"0"}} mx="auto" position="relative" zIndex={1}>
                 {loc.lat !== 0 && nearbank.length !== 0  ?
                     <MapDiv
                     style={{
@@ -107,7 +125,7 @@ function MapPageBasic () {
                     }}
                     >   
                         <MKBox>
-                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: `${window.innerWidth > 1024 ? "14.5%" : "5%"}`,marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton})}}>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px",marginLeft:"15%",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow.close()}}>
                                 <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
                             </MKButton>
                             <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton})}}>
@@ -119,6 +137,7 @@ function MapPageBasic () {
                         defaultZoom={17}
                         minZoom={15}
                         maxZoom={18}
+                        ref={setMap}
                         >
                             <Marker position={new navermaps.LatLng(loc.lat,loc.lng)}
                                 icon={{
@@ -127,7 +146,7 @@ function MapPageBasic () {
                                         <div class="wrap_myloc">
                                         </div>
                                     `,
-                                    anchor: new navermaps.Point(135,135),
+                                    anchor: new navermaps.Point(132,132),
                                 }}
                                 zIndex="-1"
                             />
@@ -158,11 +177,12 @@ function MapPageBasic () {
                                         }}
                                         zIndex="11"
                                         onClick={(e)=>(handlerBankClick(e,v,idx))}
-                                    />
+                                    >
+                                    </Marker>
                                 )
                             }) : ""}
                             </>): ""}
-
+                       
                         </NaverMap>
                     </MapDiv>
                 : <Loading image={loadingimg}/>}
