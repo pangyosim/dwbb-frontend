@@ -20,7 +20,6 @@ import "./Map.css";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
 // import Contact from "pages/Presentation/components/Contact";
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 
 function MapPageBasic () {
@@ -108,11 +107,11 @@ function MapPageBasic () {
                     }}
                     >   
                         <MKBox>
-                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "calc(100% - 86%)",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton})}}>
-                                <AccountBalanceIcon/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: `${window.innerWidth > 1024 ? "14.5%" : "5%"}`,marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton})}}>
+                                <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
                             </MKButton>
                             <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton})}}>
-                                <DirectionsCarIcon/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
+                                <DirectionsCarIcon/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
                             </MKButton>
                         </MKBox>
                         <NaverMap
