@@ -89,7 +89,6 @@ function MapPageBasic () {
                     console.log('영업시간이 아닙니다.');
                 } else {
                     setNearpark(response.data);
-                    console.log(response.data)
                 }
             })
             .catch((error)=> console.log('park-data-error : ' + error))
@@ -206,7 +205,7 @@ function MapPageBasic () {
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
                         defaultZoom={17}
-                        minZoom={15}
+                        minZoom={14}
                         maxZoom={18}
                         ref={setMap}
                         >
