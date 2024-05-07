@@ -191,7 +191,7 @@ function MapPageBasic () {
                     <MapDiv
                     style={{
                         width: '100%',
-                        height: '100%',
+                        height: `${window.innerWidth > 768 ? '100%':'90%'}`,
                     }}
                     >   
                         <MKBox style={{textAlign: "center"}}>
