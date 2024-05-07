@@ -136,7 +136,7 @@ function MapPageBasic () {
         setParkIsClicked(idx)
         const loc = new navermaps.LatLng(v.lat,v.lng);
         const parkinfowindow = new navermaps.InfoWindow({
-            content :   `<div style="padding: 0; width: 25vh; margin: 0; border: 2px solid #4caf50; border-radius: 10px; background-color: white;">
+            content :   `<div style="padding: 0; width: 27vh; margin: 0; border: 2px solid #4caf50; border-radius: 10px; background-color: white;">
                             <div style="padding: 13px;">
                                 <div style="font-size: 13px; color: gray;"><span style="font-size: 17px; color: black; font-weight: bold;">&nbsp;${v.pkname}</span></div>
                                 <div style="font-size: 12px; color: gray;"> &nbsp;&nbsp;${v.type}</div>
