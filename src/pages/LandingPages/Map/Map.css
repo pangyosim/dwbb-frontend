@@ -9,7 +9,7 @@
     display: flex; 
     transition: 0.1s linear;
     align-items: center;
-} 
+}
 .arr:after{ 
     border-top: 5px solid #0675f4;
     border-left: 4px solid transparent;
@@ -19,13 +19,34 @@
     top: 41px;
     left: 20px;
 }
+.parkarr {
+    margin: 0;
+    padding: 0;
+    width: 12vh; 
+    height: 4.5vh;
+    background: white; 
+    border-radius: 10vh; 
+    border: 2px solid #4caf50; 
+    display: flex; 
+    transition: 0.1s linear;
+    align-items: center;
+} 
+.parkarr:after{ 
+    border-top: 5px solid #4caf50;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    content: "";
+    position: absolute;
+    top: 41px;
+    left: 20px;
+}
 .arr:hover{
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
-.arr:visited {
-    background-color: #0675f4;
-    color: white;
+.parkarr:hover{
+    transform: scale(1.02);
 }
+
 
 .wrap_myloc {
     width: 30vh;
@@ -41,7 +62,7 @@
     margin-top: 30vh;
     z-index: 10;
 }
-.arr0, .arr1, .arr3, .arr4, .arr5, .arr6, .arr7, .arr8, .arr9, .arr10,
+.arr0, .arr1, .arr2, .arr3, .arr4, .arr5, .arr6, .arr7, .arr8, .arr9, .arr10,
 .arr11, .arr12, .arr13, .arr14, .arr15, .arr16, .arr17, .arr18, .arr19, .arr20 {
     margin: 0;
     padding: 0;
@@ -67,6 +88,32 @@
     left: 20px;
 }
 
+.parkarr0, .parkarr1, .parkarr2, .parkarr3, .parkarr4, .parkarr5, .parkarr6, .parkarr7, .parkarr8, .parkarr9, .parkarr10,
+.parkarr11, .parkarr12, .parkarr13, .parkarr14, .parkarr15, .parkarr16, .parkarr17, .parkarr18, .parkarr19, .parkarr20 {
+    margin: 0;
+    padding: 0;
+    width: 12vh; 
+    height: 4.5vh;
+    background: #4caf50; 
+    border-radius: 10vh; 
+    border: 2px solid #4caf50; 
+    display: flex; 
+    color: white;
+    transition: 0.1s linear;
+    align-items: center;
+}
+
+.parkarr0:after, .parkarr1:after, .parkarr2:after, .parkarr3:after, .parkarr4:after, .parkarr5:after, .parkarr6:after, .parkarr7:after, .parkarr8:after, .parkarr9:after, .parkarr10:after,
+.parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after{ 
+    border-top: 5px solid #4caf50;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    content: "";
+    position: absolute;
+    top: 41px;
+    left: 20px;
+}
+
 
 @media screen and (max-width: 768px) {
     .arr{
@@ -76,6 +123,15 @@
         height: 4.5vh;
     }
     .arr:after{
+        top: 37px;
+    }
+    .parkarr{
+        margin: 0;
+        padding: 0;
+        width: 12vh;
+        height: 4.5vh;
+    }
+    .parkarr:after{
         top: 37px;
     }
 }

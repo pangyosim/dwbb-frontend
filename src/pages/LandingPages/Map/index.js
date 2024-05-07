@@ -10,34 +10,43 @@ import { useNavigate } from "react-router-dom";
 
 // components
 import Loading from "pages/Presentation/components/Loading";
-// import Sidebar from "pages/Presentation/components/Sidebar";
 
 // Marker Image
 import ibk from "../../../assets/images/ibk.png";
+import parking from "../../../assets/images/parking.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
 import "./Map.css";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
-// import Contact from "pages/Presentation/components/Contact";
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import Call from "../../../assets/images/Call.png";
+import Fax from "../../../assets/images/Fax.png";
+import Addr from "../../../assets/images/Addr.png";
+import Clock from "../../../assets/images/Clock.png";
+import Cash from "../../../assets/images/dollar.png";
+import Car from "../../../assets/images/Car.png";
 
 function MapPageBasic () {
     const isLogin = localStorage.getItem("token");
     const navermaps = useNavermaps();
-    const [map, setMap] = useState(null)
+    const [ map, setMap ] = useState(null)
 
-    const [loc, setLoc] = useState({
+    const [ loc, setLoc ] = useState({
         lat: 0,
         lng: 0
     })
     const [ isClicked, setIsClicked ] = useState("");
+    const [ parkisClicked, setParkIsClicked ] = useState("");
     const [ btIsAcitived, setBtIsActived ] = useState({
         bkbutton : true,
         pkbutton : false
     })
-    const [ isWindow, setIsWindow ] = useState();
-    const [nearbank,setNearbank] = useState([]);
+    const [ isWindow, setIsWindow ] = useState("");
+    const [ isParkWindow, setParkIsWindow ] = useState();
+    const [ nearbank, setNearbank ] = useState([]);
+    const [ nearpark, setNearpark ] = useState([]);
+
     const navigate = useNavigate();
     
     useEffect(()=>{
@@ -59,7 +68,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post("https://129.213.127.53:8080/map-data",{
+            axios.post("https://129.213.127.53:8080/bank-data",{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -70,31 +79,93 @@ function MapPageBasic () {
                     setNearbank(response.data);
                 }
             })
-            .catch((error) => console.log('map-data-error : ' + error))
+            .catch((error) => console.log('bank-data-error : ' + error))
+            axios.post("https://129.213.127.53:8080/park-data",{
+                lat: loc.lat,
+                lng: loc.lng
+            })
+            .then((response)=>{
+                if(response.data === "") {
+                    console.log('영업시간이 아닙니다.');
+                } else {
+                    setNearpark(response.data);
+                    console.log(response.data)
+                }
+            })
+            .catch((error)=> console.log('park-data-error : ' + error))
         }
     },[loc.lat,loc.lng])
 
     const handlerBankClick = (e,v,idx) => {
-        console.log(v);
+        setParkIsClicked("");
         setIsClicked(idx)
         const loc = new navermaps.LatLng(v.geoy,v.geox);
         const infowindow = new navermaps.InfoWindow({
-            content :   `<div style="padding: 0px; width: 20vh; margin: 0px; border: 2px solid #0675f4; border-radius: 30px; background-color: white;">
-                            <div style="padding: 10px;">
-                                <div style="font-size: 12px;">${v.krnbrm}지점</div>
-                                <div style="font-size: 11px;">${v.brncnwbscadr}</div>
-                                <div style="font-size: 10px;">Tel ${v.brncTel}</div>
-                                <div style="font-size: 10px;">Fax ${v.rprsFax}</div>
-                                <div style="font-size: 10px;">${v.distance}km</div>
+            content :   `<div style="padding: 0; width: 25vh; margin: 0; border: 2px solid #0675f4; border-radius: 10px; background-color: white;">
+                            <div style="padding: 13px;">
+                                <div style="font-size: 13px; color: gray; margin-bottom: 5px;"><span style="font-size: 17px; color: black; font-weight: bold;">&nbsp;${v.krnbrm}</span> 지점</div>
+                                <div style="font-size: 12px;"><img src=${Addr} alt="Addr" style="width: 12px; height: 12px;">&nbsp; ${v.brncnwbscadr}</div>
+                                <div style="font-size: 12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 내 위치에서부터 ${v.distance}km</div>
+                                <div style="font-size: 12px;"><img src=${Call} alt="call" style="width: 12px; height: 12px;"> &nbsp;${v.brncTel}</div>
+                                <div style="font-size: 12px;"><img src=${Fax} alt="Fax" style="width: 12px; height: 12px;"> &nbsp;${v.rprsFax}</div>
+                                <div style="font-size: 12px; margin-bottom: 10px;"><img src=${Clock} alt="call" style="width: 12px; height: 12px;"> &nbsp;영업시간:<span style="">09:00~16:00</span></div>
+                                <div style="font-size: 12px; display: flex; justify-content: center;">
+                                    ${v.tlwnList ? v.tlwnList.map((val)=>
+                                            `<div style="text-align: center; padding: 3px; ">
+                                                <div style="border-bottom: 1px solid lightgray;">
+                                                    ${val.trwnTgn}
+                                                </div>
+                                                ${val.waitCusCnt}
+                                            </div>
+                                            `
+                                    ).join(''): `<div style="font-weight: bold; color: red;">영업시간이 아닙니다.</div>`}
+                                </div>
                             </div>
                         </div>`,
             anchorSize : 0,
             backgroundColor: null,
             borderWidth: 0,
             disableAutoPan: true,
+            pixelOffset: new navermaps.Point(187,100),
         });
         setIsWindow(infowindow);
         infowindow.open(map,loc);
+    }
+
+    const handlerParkClick = (e,v,idx) => {
+        setIsClicked("");
+        setParkIsClicked(idx)
+        const loc = new navermaps.LatLng(v.lat,v.lng);
+        const parkinfowindow = new navermaps.InfoWindow({
+            content :   `<div style="padding: 0; width: 25vh; margin: 0; border: 2px solid #4caf50; border-radius: 10px; background-color: white;">
+                            <div style="padding: 13px;">
+                                <div style="font-size: 13px; color: gray;"><span style="font-size: 17px; color: black; font-weight: bold;">&nbsp;${v.pkname}</span></div>
+                                <div style="font-size: 12px; color: gray;"> &nbsp;&nbsp;${v.type}</div>
+                                <div style="font-size: 12px; margin-bottom: 5px;">&nbsp;  <span style="color: gray;">${v.pkrule}</span> <span style="font-weight: bold; color: #4caf50;">${v.paytype}</span></div>
+                                <div style="font-size: 12px;"><img src=${Addr} alt="Addr" style="width: 12px; height: 12px;">&nbsp; ${v.pkaddr}</div>
+                                <div style="font-size: 12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 내 위치에서부터 ${v.distance}km</div>
+                                <div style="font-size: 12px;"><img src=${Call} alt="call" style="width: 12px; height: 12px;"> &nbsp;${v.tel}</div>
+                                <div style="font-size: 12px; margin-bottom: 10px;">
+                                    <img src=${Car} alt="Star" style="width: 12px; height: 12px;"> &nbsp;최대 ${v.capacity}대 주차가능 <br>
+                                    <img src=${Cash} alt="Cash" style="width: 12px; height: 12px;"/><span style="font-weight: bold;"> &nbsp;${v.timerates.substring(0,v.timerates.indexOf("."))}분당 ${v.rates.substring(0,v.rates.indexOf("."))}원</span><br>
+                                    ${v.fullmonthly !== 0 ? `<p style="font-weight: bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;한 달 ${v.fullmonthly.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")}원</p>`: ""}
+                                    <img src=${Clock} alt="Clock" style="width: 12px; height: 12px;"/><span> &nbsp;평일 : ${v.weekdaytime}</span>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주말 : ${v.weekendtime}</p>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;공휴일 : ${v.holidaytime}</p>
+                                    <p style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${v.nightyn}</p>
+                                </div>
+                                <div style="font-size: 12px; display: flex; justify-content: center;">
+                                </div>
+                            </div>
+                        </div>`,
+            anchorSize : 0,
+            backgroundColor: null,
+            borderWidth: 0,
+            disableAutoPan: true,
+            pixelOffset: new navermaps.Point(187,100),
+        });
+        setParkIsWindow(parkinfowindow);
+        parkinfowindow.open(map,loc);
     }
     return (
         <>
@@ -124,11 +195,11 @@ function MapPageBasic () {
                         height: '100%',
                     }}
                     >   
-                        <MKBox>
-                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px",marginLeft:"15%",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow.close()}}>
+                        <MKBox style={{textAlign: "center"}}>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
                                 <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
                             </MKButton>
-                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton})}}>
+                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton}); setParkIsClicked(""); isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
                                 <DirectionsCarIcon/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
                             </MKButton>
                         </MKBox>
@@ -171,12 +242,31 @@ function MapPageBasic () {
                                         icon={{
                                             content: 
                                                 `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
-                                                    <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 1vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm}</p>
+                                                    <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
                                                 </div>`,
                                             anchor: new navermaps.Point(30,40),
                                         }}
                                         zIndex="11"
                                         onClick={(e)=>(handlerBankClick(e,v,idx))}
+                                    >
+                                    </Marker>
+                                )
+                            }) : ""}
+                            </>): ""}
+                            {/* Park */}
+                            {btIsAcitived.pkbutton ? (<>
+                            {nearpark.length !== 0 ? nearpark.map((v,idx)=>{
+                                return(
+                                    <Marker key={idx} position={new navermaps.LatLng(v.lat,v.lng)}
+                                        icon={{
+                                            content: 
+                                                `<div class=${parkisClicked !== idx ? "parkarr" : "parkarr"+idx}>
+                                                    <img src=${parking} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold; margin-right: 0.5vh;">${v.pkname} </p>
+                                                </div>`,
+                                            anchor: new navermaps.Point(30,40),
+                                        }}
+                                        zIndex="11"
+                                        onClick={(e)=>(handlerParkClick(e,v,idx))}
                                     >
                                     </Marker>
                                 )
