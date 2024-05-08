@@ -1,5 +1,7 @@
 
-> 프로젝트 URL : &nbsp; https://dwbb.vercel.app
+> 프로젝트 URL : &nbsp; https://server.dwbb.kro.kr
+
+
 
 ---
 # 1.&nbsp;프로젝트 개요
@@ -15,11 +17,7 @@
 
 ### 1-3 프로젝트 아키텍쳐
 
-
-![final_archi drawio (1)](https://github.com/pangyosim/pizzapr0ject/assets/87213815/e4472177-fd73-4cfd-89a5-94b221a2c7f3)
-
-
-
+![final_archi drawio (1)](https://github.com/pangyosim/dwbb/assets/87213815/a30dede4-e8bf-4f07-b391-af3d35be660d)
 
 ---
 # 2.&nbsp; 프로젝트 기능소개
@@ -28,31 +26,34 @@
 ~~~
 메인페이지 
 ~~~
+<img width="100%" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/c7075a75-bde7-4571-85f2-44c08498c1bb">
 
-<img width="612" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/c7b07b5f-40d3-41e4-b12d-4c7a54d98220">
+
 
 ~~~
 로그인페이지
 ~~~
-<img width="788" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/f95dff56-8296-435f-8c15-4569ce23d5d3">
+<img width="1643" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/9029357a-6d99-4404-9a4b-be8eb85ef28c">
+
 
 ~~~
-회원가입페이지 ( 입력값 검사 )
+회원가입페이지 ( 입력값 검사 && 이메일 중복 검사)
 ~~~
 
-<img width="863" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/d6e6d0d4-919e-4cf9-8408-2760fb8f8b60">
+<img width="1189" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/04805de7-b52f-4224-8338-e5e39fdbca0a">
+
+~~~
+아이디 & 비밀번호 찾기 ( 이메일로 6자리 코드 전송 )
+~~~
+<img width="1516" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/14ba70a2-9901-49fd-869a-c934a91ef63e">
+
+
 
 ~~~
 공지사항페이지 ( 사용자 & 관리자 )
 ~~~
---- 사용자 ---  
+<img width="1560" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/8c602c6a-ec47-4d7a-9d44-fb3008424efa">
 
-<img width="874" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/04e46dcf-4e12-4f00-a32a-5ccb541b1a9a">
-
-
---- 관리자 ---  
-
-<img width="867" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/61d96aac-ca2a-4ab4-9920-54d54284f7ce">
 
 
 
@@ -60,63 +61,56 @@
 Q&A페이지
 ~~~
 
-<img width="898" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/a2d8cb35-bd1f-4c15-b117-6b5bcfef0ee9">
-
-
-~~~
-내 근처 은행찾기 페이지
-~~~
-
-
-<img width="877" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/ed0caf3f-3bbc-42ee-96a1-533ad810ec15">
-
+<img width="1247" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/dda36195-9def-49b9-81e3-a34af047d8bc">
 
 
 
 ~~~
-내 근처 주차장찾기 페이지
+지도 페이지
 ~~~
 
-<img width="894" alt="image" src="https://github.com/pangyosim/pizzapr0ject/assets/87213815/9145bf8a-16f2-4490-96da-beeabb75bdfa">
+
+<img width="1629" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/fec0ed23-5a14-4373-8869-09e7cda82592">
+
+
 
 ---
 
 
 # 3.&nbsp; 프로젝트 개발결과
+
 ### 3-1 플로우 차트
 ![bank_flow drawio](https://github.com/pangyosim/pizzapr0ject/assets/87213815/dc5f8176-bedd-46e7-9371-4575eab2ea02)
 
-
 ### 3-2 Springboot Controller
 
-#### ✅ &nbsp; TransController
-- Naver Maps에 Marker로 표시하기 위해 주소값을 좌표값으로 변경 후 DB에 데이터 주입 부분
-- 순서 : 공공데이터 API > Naver Geolocation API > DB저장
+#### ✅ &nbsp; MapController
+- Naver Maps에 Marker로 표시하기 위해 주소값을 좌표값으로 변경 후 DB에 데이터 주입
+- 순서 : 공공데이터 API → Naver Geolocation API → DB저장
+- 공공데이터 API 업데이트에 따라 맵에 표시되는 데이터도 다르므로, DB데이터보다 상시 요청이 더 낫다 판단하여 상시 API 데이터 요청.
+- request& response 로직 : Frontend(React)에서 현재 좌표값 요청시 Backend(Springboot)에서 내 근처 7km 이내 은행 대기인원 현황으로 응답.
+- servicekey : application.properties 로 관리.
 
-- 메인페이지 및 평균대기인원 데이터 구하기위해 @Scheduled Annotation으로 평일 9~17시 업무시간 중 매시간 20분마다 데이터 주입 부분.
-```
+```java
 package com.web.controller;
 
-import com.web.repo.Bankaddr;
-import com.web.repo.Waitrepo;
-import com.web.service.BankaddrService;
-import com.web.service.WaitrepoService;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
-import net.minidev.json.parser.ParseException;
+import com.web.repo.Bank;
+import com.web.repo.Park;
+import com.web.service.BankService;
+import com.web.service.ParkService;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.json.JsonParseException;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -124,20 +118,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
+import java.nio.charset.StandardCharsets;
+import java.lang.*;
+import java.util.List;
 
-@Controller
+@CrossOrigin("https://dwbb.vercel.app/")
+@RestController
 @PropertySource("classpath:application.properties")
-public class TransController {
-
-    @Autowired
-    private BankaddrService bas;
-
-    @Autowired
-    private WaitrepoService was;
+public class MapController {
 
     @Value("${openapi.servicekey}")
     private String servicekey;
@@ -147,88 +135,180 @@ public class TransController {
 
     @Value("${openapi.clientsecret}")
     private String clientSecret;
-    @GetMapping("/trans")
-    public void mainpage() throws IOException, ParseException {
-        JSONArray res_arr = new JSONArray();
-        JSONArray wait_arr = wait_current();
-        if (wait_arr.size() > 1){
-            for (Object o : wait_arr) {
-                Bankaddr ba = new Bankaddr();
-                JSONObject tmp = (JSONObject) o;
-                JSONObject res_obj = new JSONObject();
-                res_obj.put("brcd", tmp.get("brcd"));
-                JSONObject addr = trans_brcd(tmp.get("brcd").toString());
-                res_obj.put("krnBrm", addr.get("krnBrm"));
-                System.out.println(addr.get("krnBrm"));
-                ba.setBrcd(tmp.get("brcd").toString());
-                ba.setKrnbrm(addr.get("krnBrm").toString());
-                res_obj.put("brncNwBscAdr", addr.get("brncNwBscAdr"));
-                ba.setBrncnwbscadr(addr.get("brncNwBscAdr").toString());
-                JSONObject geo_obj = trans_geo(URLEncoder.encode(addr.get("brncNwBscAdr").toString() ,"UTF-8"));
-                res_obj.put("geox",geo_obj.get("x"));
-                ba.setGeox(Double.parseDouble(geo_obj.get("x").toString()));
-                res_obj.put("geoy",geo_obj.get("y"));
-                ba.setGeoy(Double.parseDouble(geo_obj.get("y").toString()));
-                res_arr.add(res_obj);
-                System.out.println(ba);
-                bas.insertBankaddr(ba);
+
+    @Value("${openapi.parking.servicekey}")
+    private String park_servickey;
+    private final BankService bs;
+    private final ParkService ps;
+    public MapController(BankService bs, ParkService ps) {this.bs = bs; this.ps= ps;}
+
+    @PostMapping("/bank-data")
+    @CrossOrigin
+    public JSONArray bank_data_method(@RequestBody Bank bk) {
+        try {
+            // 은행 대기인원 API로 현재 대기인원 조회
+            StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B190021/totBrStateInq/gettotBrStateInq"); /*URL*/
+            urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + servicekey); /*Service Key*/
+            URL url = new URL(urlBuilder.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            System.out.println("Response code: " + conn.getResponseCode());
+            BufferedReader rd;
+            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
             }
-            System.out.println("res_arr: " + res_arr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            JSONParser parser = new JSONParser();
+            Object obz = parser.parse(sb.toString());
+            JSONObject obj = (JSONObject)obz;
+            JSONArray wait_arr = (JSONArray) obj.get("brcdList");
+            // DB에 저장되어있는 은행정보 불러오기
+            List<Bank> bank_data = bs.findAll();
+            JSONArray tmp_arr = new JSONArray();
+            // 현재 위치에서 5km이내 은행 조회
+            // for-loop
+            for(Bank obb : bank_data){
+                double distance = Math.round(Haversine_formula_method(bk.getGeox(), bk.getGeoy(), obb.getGeoy(), obb.getGeox()) * 100) / 100.0;
+                if( distance < 5.0 ) {
+                    obb.setDistance(distance);
+                    tmp_arr.add(obb);
+                }
+            }
+            JSONArray res = new JSONArray();
+            if(!wait_arr.isEmpty()) {
+                for (Object wait_obj : wait_arr) {
+                    JSONObject wait_json_obj = (JSONObject) wait_obj;
+                    for (Object tmp_obj : tmp_arr) {
+                        Bank tmp_bank_obj = (Bank) tmp_obj;
+                        if (tmp_bank_obj.getBrcd().equals(wait_json_obj.get("brcd"))) {
+                            JSONObject tmp_json_obj = new JSONObject();
+                            tmp_json_obj.put("brcd", tmp_bank_obj.getBrcd());
+                            tmp_json_obj.put("krnbrm", tmp_bank_obj.getKrnbrm());
+                            tmp_json_obj.put("brncnwbscadr", tmp_bank_obj.getBrncnwbscadr());
+                            tmp_json_obj.put("brncTel", tmp_bank_obj.getBrncTel());
+                            tmp_json_obj.put("rprsFax", tmp_bank_obj.getRprsFax());
+                            tmp_json_obj.put("geox", tmp_bank_obj.getGeox());
+                            tmp_json_obj.put("geoy", tmp_bank_obj.getGeoy());
+                            tmp_json_obj.put("distance", tmp_bank_obj.getDistance());
+                            tmp_json_obj.put("tlwnList", wait_json_obj.get("tlwnList"));
+                            res.add(tmp_json_obj);
+                        }
+                    }
+                }
+            } else {
+                res.addAll(tmp_arr);
+            }
+            return res;
+        } catch (Exception e){
+            e.fillInStackTrace();
         }
-        res_arr.add("운영시간이 아닙니다");
-        System.out.println("res_arr: " + res_arr);
+        return null;
     }
 
-    @ResponseBody
-    public JSONArray wait_current()  throws IOException, ParseException {
-        // 1. URL을 만들기 위한 StringBuilder.
-        StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B190021/totBrStateInq/gettotBrStateInq"); /*URL*/
-        // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + servicekey); /*Service Key*/
-        // 3. URL 객체 생성.
-        URL url = new URL(urlBuilder.toString());
-        // 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        // 5. 통신을 위한 메소드 SET.
-        conn.setRequestMethod("GET");
-        // 6. 통신을 위한 Content-type SET.
-        conn.setRequestProperty("Content-type", "application/json");
-        // 7. 통신 응답 코드 확인.
-        System.out.println("Response code: " + conn.getResponseCode());
-        // 8. 전달받은 데이터를 BufferedReader 객체로 저장.
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+    @PostMapping("/park-data")
+    @CrossOrigin
+    public JSONArray park_data_method(@RequestBody Park pk){
+        List<Park> park_data =ps.getParkingList(new Park());
+        JSONArray res = new JSONArray();
+        for(Park pob : park_data){
+            double distance = Math.round(Haversine_formula_method(pk.getLng(), pk.getLat(), pob.getLng(), pob.getLat()) * 100) / 100.0;
+            if( distance < 7.0 ) {
+                pob.setDistance(distance);
+                res.add(pob);
+            }
         }
-        // 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장.
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        // 10. 객체 해제.
-        rd.close();
-        conn.disconnect();
-        // 1. 문자열 형태의 JSON을 파싱하기 위한 JSONParser 객체 생성.
-        JSONParser parser = new JSONParser();
-        // 2. 문자열을 JSON 형태로 JSONObject 객체에 저장.
-        Object ob = parser.parse(sb.toString());
-        JSONObject obj = (JSONObject)ob;
-        // 3. 필요한 리스트 데이터 부분만 가져와 JSONArray로 저장.
-        return (JSONArray) obj.get("brcdList");
+        return res;
     }
 
-    public JSONObject trans_brcd(String brcd) throws IOException, ParseException {
-        StringBuilder brcdBuilder = new StringBuilder("http://apis.data.go.kr/B190021/branchinfo/details"); /*URL*/
-        brcdBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + servicekey); /*Service Key*/
-        brcdBuilder.append("&" + URLEncoder.encode("brcd","UTF-8") + "=" + URLEncoder.encode(brcd, "UTF-8")); /*부점코드를 조회하고자 하는 부점의 한글명*/
-        URL brcd_url = new URL(brcdBuilder.toString());
+    // Haversine formula
+    private Double Haversine_formula_method(double lat1, double lon1, double lat2, double lon2) {
+            double R = 6371;
+            double dLat = deg2rad(lat2 - lat1);
+            double dLon = deg2rad(lon2 - lon1);
+            double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+                        Math.sin(dLon/2) * Math.sin(dLon/2);
+            double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        return R * c;
+    }
+    private Double deg2rad(double deg) {
+        return deg * (Math.PI/180);
+    }
+    // Haversine formula end
+
+
+    // Trans Bank Data
+    @GetMapping("/trans-bank-data")
+    public void trans_map_data_method () throws IOException{
+        try{
+            URL url = new URL(/*URL*/"https://apis.data.go.kr/B190021/totBrStateInq/gettotBrStateInq" + "?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + servicekey /*Service Key*/
+            );
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Content-type", "application/json");
+            System.out.println("PUBLIC_DATA_Response code: " + conn.getResponseCode());
+            BufferedReader rd;
+            if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
+                rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            } else {
+                rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+            }
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) {
+                sb.append(line);
+            }
+            rd.close();
+            conn.disconnect();
+            JSONParser parser = new JSONParser();
+            JSONObject obj = (JSONObject) parser.parse(sb.toString());
+            JSONArray wait_json_arr = (JSONArray) parser.parse(obj.get("brcdList").toString());
+            System.out.println("bank-data-length : "+wait_json_arr.size());
+            if(wait_json_arr.isEmpty()){
+                System.out.println("영업시간이 아닙니다.");
+            } else {
+                for(Object ob : wait_json_arr){
+                    JSONObject job = (JSONObject) ob;
+                    JSONObject tmp = trans_brcd(job.get("brcd").toString());
+                    JSONObject coordinate = trans_geo(tmp.get("brncNwBscAdr").toString());
+                    bs.preDataSave(new Bank(null,
+                                            tmp.get("brcd").toString(),
+                                            tmp.get("krnBrm").toString(),
+                                            tmp.get("brncNwBscAdr").toString(),
+                                            tmp.get("brncTelLln").toString()+"-"+tmp.get("brncTpnTon").toString()+"-"+tmp.get("brncTpnSrn").toString(),
+                                            tmp.get("rprsFaxLln").toString()+"-"+tmp.get("rprsFaxTon").toString()+"-"+tmp.get("rprsFaxSrn").toString(),
+                                            Double.parseDouble(coordinate.get("x").toString()),
+                                            Double.parseDouble(coordinate.get("y").toString())
+                                            ));
+                }
+                System.out.println("Success Preprocessing");
+            }
+        } catch ( JsonParseException je) {
+            je.fillInStackTrace();
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    // Public_DATA_API brcd to address
+    // brcd 은행지점코드를 은행지점 주소로 변환.
+    private JSONObject trans_brcd(String brcd) throws IOException, ParseException {
+        /*URL*/
+        String brcdBuilder = "http://apis.data.go.kr/B190021/branchinfo/details" + "?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + servicekey + /*Service Key*/
+                "&" + URLEncoder.encode("brcd", "UTF-8") + "=" + URLEncoder.encode(brcd, "UTF-8"); /*부점코드를 조회하고자 하는 부점의 한글명*/
+        URL brcd_url = new URL(brcdBuilder);
         HttpURLConnection brcd_conn = (HttpURLConnection) brcd_url.openConnection();
         brcd_conn.setRequestMethod("GET");
         brcd_conn.setRequestProperty("Content-type", "application/json");
-        System.out.println("brcd_Response code: " + brcd_conn.getResponseCode());
         BufferedReader brcd_rd;
         if(brcd_conn.getResponseCode() >= 200 && brcd_conn.getResponseCode() <= 300) {
             brcd_rd = new BufferedReader(new InputStreamReader(brcd_conn.getInputStream()));
@@ -243,19 +323,15 @@ public class TransController {
         brcd_rd.close();
         brcd_conn.disconnect();
         JSONParser parser = new JSONParser();
-        JSONObject res_obj = new JSONObject();
-        JSONObject brcd_obj = (JSONObject)parser.parse(brcd_sb.toString());
-        res_obj.put("krnBrm", brcd_obj.get("krnBrm"));
-        res_obj.put("brncNwBscAdr", brcd_obj.get("brncNwBscAdr"));
-        System.out.println("res_obj : " + res_obj);
-        return res_obj;
+        return (JSONObject)parser.parse(brcd_sb.toString());
     }
 
-    @ResponseBody
-    public JSONObject trans_geo(String address) throws ParseException {
+    // Naver Geocoder
+    // 주소를 좌표 x,y로 변환
+    private JSONObject trans_geo(String address) throws ParseException {
         JSONObject res_obj = new JSONObject();
         StringBuilder html = new StringBuilder();
-        String url = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + address; // encodeURIComponent로 인코딩 된 주소
+        String url = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode"+"?query="+URLEncoder.encode(address);// encodeURIComponent로 인코딩 된 주소
         HttpClient client = HttpClientBuilder.create().build();
         HttpGet request = new HttpGet(url);
         request.addHeader("X-NCP-APIGW-API-KEY-ID", clientId);  //해더에 Clinet Id와 Client Secret을 넣습니다
@@ -264,7 +340,7 @@ public class TransController {
         try {
             HttpResponse response = client.execute(request);
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
+                    new InputStreamReader(response.getEntity().getContent(), StandardCharsets.UTF_8));
             String current = "";
             while ((current = reader.readLine()) != null) {
                 html.append(current);
@@ -288,302 +364,19 @@ public class TransController {
                 return opo;
             }
         } catch (ClientProtocolException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
         return res_obj;
     }
-//    @Scheduled( zone = "Asia/Seoul", cron = "0 0/20 9-17 * * 1-6")
-//    public void insertwait() throws IOException, ParseException {
-//        System.out.println("Scheduled test ");
-//        // 1. URL을 만들기 위한 StringBuilder.
-//        StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B190021/totBrStateInq/gettotBrStateInq"); /*URL*/
-//        // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
-//        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + servicekey); /*Service Key*/
-//        // 3. URL 객체 생성.
-//        URL url = new URL(urlBuilder.toString());
-//        // 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.
-//        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-//        // 5. 통신을 위한 메소드 SET.
-//        conn.setRequestMethod("GET");
-//        // 6. 통신을 위한 Content-type SET.
-//        conn.setRequestProperty("Content-type", "application/json");
-//        // 7. 통신 응답 코드 확인.
-//        System.out.println("Response code: " + conn.getResponseCode());
-//        // 8. 전달받은 데이터를 BufferedReader 객체로 저장.
-//        BufferedReader rd;
-//        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-//            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-//        } else {
-//            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-//        }
-//        // 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장.
-//        StringBuilder sb = new StringBuilder();
-//        String line;
-//        while ((line = rd.readLine()) != null) {
-//            sb.append(line);
-//        }
-//        // 10. 객체 해제.
-//        rd.close();
-//        conn.disconnect();
-//        // 1. 문자열 형태의 JSON을 파싱하기 위한 JSONParser 객체 생성.
-//        JSONParser parser = new JSONParser();
-//        // 2. 문자열을 JSON 형태로 JSONObject 객체에 저장.
-//        JSONObject obj = (JSONObject)parser.parse(sb.toString());
-//        // 3. 필요한 리스트 데이터 부분만 가져와 JSONArray로 저장.
-//        JSONArray wait_arr = (JSONArray) obj.get("brcdList");
-//        if (wait_arr.size() > 1){
-//            for(Object o : wait_arr){
-//                Waitrepo wao = new Waitrepo();
-//                JSONObject tmp = (JSONObject) o;
-//                wao.setBrcd(tmp.get("brcd").toString());
-//                JSONArray tlwnList = (JSONArray) tmp.get("tlwnList");
-//                System.out.println(tlwnList.toString());
-//                String[] arr = new String[5];
-//                String[] waitpeople = new String[5];
-//                for(int i=0; i<tlwnList.size();i++){
-//                    JSONObject ot = (JSONObject) tlwnList.get(i);
-//                    arr[i] = ot.get("trwnTgn").toString();
-//                    waitpeople[i] = ot.get("waitCusCnt").toString();
-//                }
-//                System.out.println(Arrays.toString(arr));
-//                System.out.println(Arrays.toString(waitpeople));
-//                wao.setTrwntgn1(arr[0]);
-//                wao.setTrwntgn2(arr[1]);
-//                wao.setTrwntgn3(arr[2]);
-//                wao.setTrwntgn4(arr[3]);
-//                wao.setTrwntgn5(arr[4]);
-//
-//                wao.setWaitpeople1(waitpeople[0]);
-//                wao.setWaitpeople2(waitpeople[1]);
-//                wao.setWaitpeople3(waitpeople[2]);
-//                wao.setWaitpeople4(waitpeople[3]);
-//                wao.setWaitpeople5(waitpeople[4]);
-//
-//
-//                ZoneId zone = ZoneId.of("Asia/Seoul");
-//                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-//                String time = ZonedDateTime.now(zone).format(formatter);
-//                wao.setCreateday(time);
-//                System.out.println(wao.toString());
-//                Bankaddr ba = bas.findByBrcd(tmp.get("brcd").toString());
-//                wao.setAddr(ba.getBrncnwbscadr());
-//
-//                System.out.println(wao.toString());
-//
-//                was.insertwait(wao);
-//                System.out.println("waitpeople Scheduled : " + wao);
-//            }
-//        } else {
-//            System.out.println("영업시간이 아닙니다.");
-//        }
-//    }
-}
-```
-
-#### ✅ &nbsp; MainController
-- 공공데이터 API 업데이트에 따라 맵에 표시되는 데이터도 다르므로, DB데이터보다 상시 요청이 더 낫다 판단하여 상시 API 데이터 요청.
-- /map 요청시 대기인원 현황 + 좌표값 데이터 React로 응답.
-```
-package com.web.controller;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.web.repo.Bankaddr;
-import com.web.repo.RefineWaitrepo;
-import com.web.repo.Waitrepo;
-import com.web.service.BankaddrService;
-import com.web.service.RefineWaitrepoService;
-import com.web.service.WaitrepoService;
-import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
-import net.minidev.json.parser.JSONParser;
-import net.minidev.json.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-@RestController
-@PropertySource("classpath:application.properties")
-public class MainController {
-
-    @Autowired
-    private BankaddrService bas;
-
-    @Value("${openapi.servicekey}")
-    private String servicekey;
-
-    @Autowired
-    private RefineWaitrepoService rws;
-
-    @GetMapping("/map")
-    public List<Object> mappage() throws IOException, ParseException {
-        // 1. URL을 만들기 위한 StringBuilder.
-        StringBuilder urlBuilder = new StringBuilder("https://apis.data.go.kr/B190021/totBrStateInq/gettotBrStateInq"); /*URL*/
-        // 2. 오픈 API의요청 규격에 맞는 파라미터 생성, 발급받은 인증키.
-        urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=" + servicekey); /*Service Key*/
-        // 3. URL 객체 생성.
-        URL url = new URL(urlBuilder.toString());
-        // 4. 요청하고자 하는 URL과 통신하기 위한 Connection 객체 생성.
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        // 5. 통신을 위한 메소드 SET.
-        conn.setRequestMethod("GET");
-        // 6. 통신을 위한 Content-type SET.
-        conn.setRequestProperty("Content-type", "application/json");
-        // 7. 통신 응답 코드 확인.
-        System.out.println("Response code: " + conn.getResponseCode());
-        // 8. 전달받은 데이터를 BufferedReader 객체로 저장.
-        BufferedReader rd;
-        if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
-            rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        } else {
-            rd = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
-        }
-        // 9. 저장된 데이터를 라인별로 읽어 StringBuilder 객체로 저장.
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = rd.readLine()) != null) {
-            sb.append(line);
-        }
-        // 10. 객체 해제.
-        rd.close();
-        conn.disconnect();
-        // 1. 문자열 형태의 JSON을 파싱하기 위한 JSONParser 객체 생성.
-        JSONParser parser = new JSONParser();
-        // 2. 문자열을 JSON 형태로 JSONObject 객체에 저장.
-        Object obz = parser.parse(sb.toString());
-        JSONObject obj = (JSONObject)obz;
-        // 3. 필요한 리스트 데이터 부분만 가져와 JSONArray로 저장.
-        JSONArray wait_arr = (JSONArray) obj.get("brcdList");
-        List<Bankaddr> res = bas.getBankaddrList(new Bankaddr());
-        // DB 조회된 brcd 값과 대기인원 brcd 값으로 현재 대기인원 포함한 객체 데이터 가공.
-        List<Object> wait_list = new ArrayList<>();
-        for(Object ob : wait_arr){
-            Map<String, Object> tmp_map = new HashMap<>();
-            JSONObject job = (JSONObject) ob;
-            JSONArray jsr = (JSONArray) job.get("tlwnList");
-            for(int i=0;i<jsr.size();i++){
-                Object obw = jsr.get(i);
-                JSONObject jw = (JSONObject) obw;
-                tmp_map.put("trwntgn"+(i+1),jw.get("trwnTgn"));
-                tmp_map.put("waitcuscnt"+(i+1),jw.get("waitCusCnt"));
-            }
-            wait_list.add(tmp_map);
-        }
-        // System.out.println(wait_list);
-        List<Object> result = new ArrayList<>();
-        // System.out.println(res.size());
-        // System.out.println(wait_arr.size());
-        if (wait_arr.size() > 2) {
-            for (int k = 0; k < res.size(); k++) {
-                    Map<String, Object> detail_wait = new HashMap<>();
-                    Bankaddr baw = res.get(k);
-                    // System.out.println("baw : " + baw);
-                    detail_wait.put("seq", baw.getSeq());
-                    detail_wait.put("krnbrm", baw.getKrnbrm());
-                    detail_wait.put("brncnwbscadr", baw.getBrncnwbscadr());
-                    detail_wait.put("geox", baw.getGeox());
-                    detail_wait.put("geoy", baw.getGeoy());
-                    ObjectMapper obm = new ObjectMapper();
-                    Map<String, Object> map = obm.convertValue(wait_list.get(k), Map.class);
-                    detail_wait.put("trwntgn1", map.get("trwntgn1"));
-                    detail_wait.put("waitcuscnt1", map.get("waitcuscnt1"));
-                    detail_wait.put("trwntgn2", map.get("trwntgn2"));
-                    detail_wait.put("waitcuscnt2", map.get("waitcuscnt2"));
-                    detail_wait.put("trwntgn3", map.get("trwntgn3"));
-                    detail_wait.put("waitcuscnt3", map.get("waitcuscnt3"));
-                    detail_wait.put("trwntgn4", map.get("trwntgn4"));
-                    detail_wait.put("waitcuscnt4", map.get("waitcuscnt4"));
-                    detail_wait.put("trwntgn5", map.get("trwntgn5"));
-                    detail_wait.put("waitcuscnt5", map.get("waitcuscnt5"));
-                    result.add(detail_wait);
-            }
-            // System.out.println("result : " + result);
-        } else {
-            for (Bankaddr ba : res) {
-                Map<String, Object> detail = new HashMap<>();
-                detail.put("seq", ba.getSeq());
-                detail.put("krnbrm", ba.getKrnbrm());
-                detail.put("brncnwbscadr", ba.getBrncnwbscadr());
-                detail.put("geox", ba.getGeox());
-                detail.put("geoy", ba.getGeoy());
-                detail.put("tncdCon", obj.get("tncdCon").toString());
-                result.add(detail);
-            }
-            System.out.println("영업시간이 아닙니다.");
-        }
-
-        return result;
-    }
-
-    @GetMapping("/minwait")
-    public List<RefineWaitrepo> minwait(){
-        List<RefineWaitrepo> rewait = rws.getWaitrepoList(new RefineWaitrepo());
-        System.out.println(rewait);
-//        List<Waitrepo> tmp_list = new ArrayList<>();
-//        for(RefineWaitrepo rw : rewait){
-//            if ()
-//        }
-        return rewait;
-    }
-}
-```
-
-#### ✅ &nbsp; ParkController
-- 주차장 정보를 불러오는 API : 주소 + 주차장이름 + 운영시간 + 요금
-
-```
-package com.web.controller;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-
-import com.web.repo.ParkingEntity;
-import com.web.service.ParkService;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.util.List;
 
 
-@RestController
-@PropertySource("classpath:application.properties")
-public class ParkController {
-
-    @Value("${openapi.parking.servicekey}")
-    private String servickey;
-    @Autowired
-    private ParkService ps;
-    @GetMapping("/getpark")
-    public List<ParkingEntity> getparking(){
-        return ps.getParkingList(new ParkingEntity());
-    }
-    @GetMapping("/transpark")
+    @GetMapping("/trans-park-data")
     public void parking() {
 
         try {
-            URL url = new URL("http://openapi.seoul.go.kr:8088/" + servickey + "/json/GetParkInfo/1/1000");
+            URL url = new URL("http://openapi.seoul.go.kr:8088/" + park_servickey + "/json/GetParkInfo/1/1000");
             BufferedReader bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
             StringBuilder resultBuilder = new StringBuilder();
             String line;
@@ -591,8 +384,6 @@ public class ParkController {
                 resultBuilder.append(line);
             }
             String result = resultBuilder.toString();
-
-
             JSONParser jsonParser = new JSONParser();
             JSONObject json_obj = (JSONObject) jsonParser.parse(result);
             JSONObject getParkInfo = (JSONObject) json_obj.get("GetParkInfo");
@@ -602,9 +393,7 @@ public class ParkController {
                 JSONObject jso = (JSONObject) ob;
                 // API와 미연계중인 데이터 가공 처리
                 if(!jso.get("QUE_STATUS_NM").equals("미연계중")){
-                    ParkingEntity pe = new ParkingEntity();
-                    System.out.println(jso.toString());
-                    if(jso.get("PARKING_TYPE_NM") != null && jso.get("LNG") !=null &&
+                    if(jso.get("PARKING_TYPE_NM") != null && Double.parseDouble(jso.get("LNG").toString()) != 0 &&
                             jso.get("QUE_STATUS_NM") != null && jso.get("OPERATION_RULE_NM")!=null &&
                             jso.get("WEEKEND_END_TIME") != null && jso.get("WEEKEND_BEGIN_TIME") != null &&
                             jso.get("WEEKEND_BEGIN_TIME") != null && jso.get("PAY_NM") != null &&
@@ -613,42 +402,306 @@ public class ParkController {
                             !jso.get("FULLTIME_MONTHLY").equals("") && jso.get("ADDR") != null &&
                             jso.get("PARKING_CODE") != null && jso.get("HOLIDAY_BEGIN_TIME") != null &&
                             jso.get("HOLIDAY_PAY_YN") != null && !jso.get("TEL").equals("") &&
-                            jso.get("NIGHT_FREE_OPEN_NM") != null && jso.get("LAT") != null &&
+                            jso.get("NIGHT_FREE_OPEN_NM") != null && Double.parseDouble(jso.get("LAT").toString()) != 0 &&
                             jso.get("SATURDAY_PAY_YN") != null && jso.get("HOLIDAY_PAY_YN") != null) {
-                        pe.setType(jso.get("PARKING_TYPE_NM").toString());
-                        pe.setLng(Double.parseDouble(jso.get("LNG").toString()));
-                        pe.setPkstatus(jso.get("QUE_STATUS_NM").toString());
-                        pe.setPkrule(jso.get("OPERATION_RULE_NM").toString());
-                        pe.setEndweek(jso.get("WEEKEND_END_TIME").toString());
-                        pe.setBeginweek(jso.get("WEEKEND_BEGIN_TIME").toString());
-                        pe.setPaytype(jso.get("PAY_NM").toString());
-                        pe.setSaturdaypay(jso.get("SATURDAY_PAY_NM").toString());
-                        pe.setSaturdaypayyn(jso.get("SATURDAY_PAY_YN").toString());
-                        pe.setPkname(jso.get("PARKING_NAME").toString());
-                        pe.setEndholi(jso.get("HOLIDAY_END_TIME").toString());
-                        pe.setPaytypeholi(jso.get("HOLIDAY_PAY_NM").toString());
-                        pe.setHolipayyn(jso.get("HOLIDAY_PAY_YN").toString());
-                        pe.setFullmon(Integer.parseInt(jso.get("FULLTIME_MONTHLY").toString()));
-                        pe.setPkaddr(jso.get("ADDR").toString());
-                        pe.setPkcode(jso.get("PARKING_CODE").toString());
-                        pe.setBeginholi(jso.get("HOLIDAY_BEGIN_TIME").toString());
-                        pe.setPaytypeholi(jso.get("HOLIDAY_PAY_YN").toString());
-                        pe.setTel(jso.get("TEL").toString());
-                        pe.setNightyn(jso.get("NIGHT_FREE_OPEN_NM").toString());
-                        pe.setLat(Double.parseDouble(jso.get("LAT").toString()));
-                        ps.insertParking(pe);
+                        System.out.println(jso);
+                        Park tmp = new Park();
+                        tmp.setType(jso.get("PARKING_TYPE_NM").toString());
+                        tmp.setLat(Double.parseDouble(jso.get("LAT").toString()));
+                        tmp.setLng(Double.parseDouble(jso.get("LNG").toString()));
+                        tmp.setPkname(jso.get("PARKING_NAME").toString());
+                        tmp.setPkrule(jso.get("OPERATION_RULE_NM").toString());
+                        tmp.setCapacity(Integer.parseInt(jso.get("CAPACITY").toString().substring(0,jso.get("CAPACITY").toString().indexOf("."))));
+                        tmp.setPaytype(jso.get("PAY_NM").toString());
+                        tmp.setHolidaytime(jso.get("HOLIDAY_BEGIN_TIME").toString()+"~"+jso.get("HOLIDAY_END_TIME").toString());
+                        tmp.setHolidaypaytype(jso.get("HOLIDAY_PAY_NM").toString());
+                        tmp.setWeekdaytime(jso.get("WEEKDAY_BEGIN_TIME").toString()+"~"+jso.get("WEEKDAY_END_TIME").toString());
+                        tmp.setWeekendtime(jso.get("WEEKEND_BEGIN_TIME").toString()+"~"+jso.get("WEEKEND_END_TIME").toString());
+                        tmp.setSaturdaypay(jso.get("SATURDAY_PAY_NM").toString());
+                        tmp.setRates(jso.get("RATES").toString());
+                        tmp.setTimerates(jso.get("TIME_RATE").toString());
+                        tmp.setAddrates(jso.get("ADD_RATES").toString());
+                        tmp.setAddtimerates(jso.get("ADD_TIME_RATE").toString());
+                        tmp.setDaymaximum(jso.get("DAY_MAXIMUM").toString());
+                        tmp.setFullmonthly(Integer.parseInt(jso.get("FULLTIME_MONTHLY").toString()));
+                        tmp.setPkaddr(jso.get("ADDR").toString());
+                        tmp.setPkcode(jso.get("PARKING_CODE").toString());
+                        tmp.setTel(jso.get("TEL").toString());
+                        tmp.setNightyn(jso.get("NIGHT_FREE_OPEN_NM").toString());
+                        ps.insertParking(tmp);
                     } else {
                         continue;
                     }
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
         }
 
     }
-
 }
+
+```
+
+#### ✅ &nbsp; NoticeController
+- 공지사항, 공지사항 상세 페이지, 공지사항 등록페이지
+- USER : 공지사항 조회만 가능
+- ADMIN : 공지사항 등록, 삭제 가능.
+  
+```java
+package com.web.controller;
+
+import com.web.repo.Notice;
+import com.web.repo.QnA;
+import com.web.service.NoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
+@CrossOrigin("https://dwbb.vercel.app/")
+@RestController
+public class NoticeController {
+    private final NoticeService ns;
+
+    @Autowired
+    public NoticeController(NoticeService ns) {
+        this.ns = ns;
+    }
+
+    @PostMapping("/notice-all")
+    @CrossOrigin
+    public List<Notice> noticeall_method (){
+        try{
+            return ns.findAll();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return null;
+    }
+
+    @PostMapping("/notice-views")
+    @CrossOrigin
+    public int update_views_method(@RequestBody Notice notice){
+        try{
+            return ns.updateviewsByseq(notice.getNoticeseq());
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return -1;
+    }
+
+    @PostMapping("/notice-register")
+    @CrossOrigin
+    public String register_notice_method(@RequestBody Notice notice){
+        try {
+            notice.setNoticecreateday(new Date());
+            notice.setNoticefile("C:\\TESTDATAVOLUME");
+            ns.noticeRegister(notice);
+            return "register-success";
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return "";
+    }
+
+    @PostMapping("/notice-delete")
+    @CrossOrigin
+    public String delete_notice_method(@RequestBody Notice notice){
+        ns.noticeDelete(notice);
+        return "delete-success";
+    }
+}
+
+```
+
+#### ✅ &nbsp; QnAController
+- QnA , QnA 상세페이지, QnA등록페이지
+- 구성 : 공지사항 3row + QnA 7row 
+- USER : QnA등록, 본인이 작성한 글만 삭제 가능.
+- ADMIN : QnA등록, 모든 사람이 작성한 글 삭제 가능.
+
+```
+package com.web.controller;
+
+import com.web.repo.Notice;
+import com.web.repo.QnA;
+import com.web.service.QnAService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.transaction.Transactional;
+import java.util.Date;
+import java.util.List;
+@CrossOrigin("https://dwbb.vercel.app/")
+@RestController
+public class QnAController {
+
+    private final QnAService qas;
+
+    @Autowired
+    public QnAController(QnAService qas) {
+        this.qas = qas;
+    }
+
+    @PostMapping("/qna-all")
+    @CrossOrigin
+    public List<QnA> qnaall_method (){
+        try {
+            return qas.findAll();
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return null;
+    }
+
+    @PostMapping("/qna-views")
+    @CrossOrigin
+    public int update_views_method(@RequestBody QnA qna){
+        try{
+            return qas.updateviewsByseq(qna.getQnaseq());
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return -1;
+    }
+
+    @PostMapping("/qna-register")
+    @CrossOrigin
+    public String register_qna_method(@RequestBody QnA qna){
+        qna.setQnacreateday(new Date());
+        qas.qnaRegister(qna);
+        return "register-success";
+    }
+
+    @PostMapping("/qna-delete")
+    @CrossOrigin
+    public String delete_qna_method(@RequestBody QnA qna){
+        qas.deleteqna(qna);
+        return "delete-success";
+    }
+}
+
+```
+
+#### ✅ &nbsp; UserController
+- 로그인, 회원가입, 아이디/비밀번호찾기 페이지
+- 로그인 : Frontend 에서 Client가 입력한 값들 검증 후 성공할 시 Username을 Hash256 사용하여 JWT 토큰화 후 Frontend로 전달.
+- 회원가입 : Frontend에서 입력값 검증 후 DB에 저장.
+- 아이디/비밀번호찾기 : Frontend에서 검증된 이메일로 DB에서 where절로 확인.
+  
+```java
+package com.web.controller;
+
+import com.web.service.MailService;
+import com.web.service.UserService;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+import com.web.repo.*;
+@CrossOrigin("https://dwbb.vercel.app/")
+@RestController
+public class UserController {
+    // key 부분 설정 비공개 
+    private final String securityKey = "{key}";
+    private final Long expiredTime = 1000 * 60L * 60L * 3L;
+    private final UserService us;
+    private final MailService ms;
+    @Autowired
+    public UserController(UserService us,MailService ms) {
+        this.us = us;
+        this.ms = ms;
+    }
+
+    @PostMapping("/check-login")
+    @CrossOrigin
+    public String[] loginMethod (@RequestBody User usr){
+        try {
+            Date now = new Date();
+            User login_result = us.loginCheckByIdPw(usr.getId(),usr.getPw());
+            System.out.println(login_result);
+            if( login_result != null) {
+                String[] res_arr = new String[3];
+                res_arr[0] = login_result.getNickname();
+                res_arr[1] = login_result.getRole();
+                res_arr[2] = Jwts.builder()
+                                .setSubject(login_result.getNickname())
+                                .setHeader(createHeader())
+                                .setClaims(createClaims(login_result))
+                                .setExpiration(new Date(now.getTime()+expiredTime))
+                                .signWith(SignatureAlgorithm.HS256,securityKey)
+                                .compact();
+                return res_arr;
+            }
+        } catch (Exception e) {
+                e.fillInStackTrace();
+        }
+        return null;
+    }
+    @PostMapping("/signup")
+    @CrossOrigin
+    public String signup (@RequestBody User usr){
+        us.signup(usr);
+        return "signupsuccess";
+    }
+
+    @PostMapping("/check-email")
+    @CrossOrigin
+    public User checkemailMethod (@RequestBody User usr){
+        try{
+            User finduser = us.findUserByEmail(usr.getEmail());
+            if(finduser != null) {
+                int i = ms.sendMail(usr.getEmail());
+                finduser.setSeq(Long.parseLong(Integer.toString(i)));
+                return finduser;
+            } else {
+                User find_fail = new User();
+                find_fail.setEmail("findfail");
+                return find_fail;
+            }
+        } catch (Exception e){
+            e.fillInStackTrace();
+        }
+        return null;
+    }
+
+    @PostMapping("/distinct-email")
+    @CrossOrigin
+    public String checkdistinctemail (@RequestBody User usr){
+        try{
+            User distinct_check = us.findUserByEmail(usr.getEmail());
+            if( distinct_check != null){
+                return "distinct";
+            } else {
+                return "available";
+            }
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+        return  "";
+    }
+
+    private Map<String, Object> createHeader() {
+        Map<String, Object> header = new HashMap<>();
+        header.put("type", "JWT");
+        header.put("alg", "HS256"); // 해시 256 사용하여 암호화
+        header.put("regDate", System.currentTimeMillis());
+        return header;
+    }
+    private Map<String, Object> createClaims(User user) {
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("pw", user.getPw()); // username
+        claims.put("roles", user.getRole()); // 인가정보
+        return claims;
+    }
+}
+
 ```
 ---
 # 4. &nbsp; 결론
