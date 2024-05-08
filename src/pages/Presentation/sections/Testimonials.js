@@ -14,7 +14,7 @@ import axios from "axios";
 function Information() {
   const [qnaData, setQnaData] = useState([]);
   useEffect(()=>{
-    axios.post("https://129.213.127.53:8080/qna-all")
+    axios.post("https://server.dwbb.kro.kr:8080/qna-all")
     .then((res)=> {
       if(res.data){
         res.data = res.data.sort(function compare (a,b){

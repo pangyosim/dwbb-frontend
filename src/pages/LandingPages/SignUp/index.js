@@ -153,6 +153,7 @@ function SignUpBasic() {
                 email: values.email
             })
             .then((res)=>{
+                console.log(res.data)
                 if(res.data === "distinct"){
                     setisChecked((preValues)=>({
                         ...preValues,
