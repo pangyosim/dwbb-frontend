@@ -1,9 +1,9 @@
+<br></br>
 
-> 프로젝트 URL : &nbsp; https://server.dwbb.kro.kr
+> 💁🏻 <a href="https://server.dwbb.kro.kr">사이트로 이동</a>
 
+<br></br>
 
-
----
 # 1.&nbsp;프로젝트 개요
 
 ### 1-1 프로젝트 기획 및 분석
@@ -19,16 +19,16 @@
 
 ![final_archi drawio (1)](https://github.com/pangyosim/dwbb/assets/87213815/a30dede4-e8bf-4f07-b391-af3d35be660d)
 
+### 1-4 플로우 차트
+![bank_flow drawio](https://github.com/pangyosim/pizzapr0ject/assets/87213815/dc5f8176-bedd-46e7-9371-4575eab2ea02)
+
 ---
 # 2.&nbsp; 프로젝트 기능소개
-
-### 2-1 기능 요약
+### 📎 &nbsp;기능 요약
 ~~~
 메인페이지 
 ~~~
 <img width="100%" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/c7075a75-bde7-4571-85f2-44c08498c1bb">
-
-
 
 ~~~
 로그인페이지
@@ -71,7 +71,6 @@ Q&A페이지
 
 
 <img width="1629" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/fec0ed23-5a14-4373-8869-09e7cda82592">
-
 
 
 ---
