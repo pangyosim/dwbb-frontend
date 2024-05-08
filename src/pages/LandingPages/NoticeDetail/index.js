@@ -30,7 +30,7 @@ function NoticeDetail ({notice}) {
         }
     })
     const handlerDelete = () => {
-        axios.post("https://129.213.127.53:8080/notice-delete",{
+        axios.post("https://server.dwbb.kro.kr:8080/notice-delete",{
             noticeseq :Number(notice.seq),
         })
         .then((res)=>{

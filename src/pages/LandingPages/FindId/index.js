@@ -44,7 +44,7 @@ function FindIDBasic () {
         const errcheck = Object.values(errors).includes(true);
         const nullcheck = values.email === null ? true : false;
         if (!errcheck && !nullcheck ){
-            axios.post("https://129.213.127.53:8080/check-email",{
+            axios.post("https://server.dwbb.kro.kr:8080/check-email",{
                 email: values.email
             })
             .then((res)=>{

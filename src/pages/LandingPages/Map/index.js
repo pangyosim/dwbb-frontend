@@ -68,7 +68,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post("https://129.213.127.53:8080/bank-data",{
+            axios.post("https://server.dwbb.kro.kr:8080/bank-data",{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -80,7 +80,7 @@ function MapPageBasic () {
                 }
             })
             .catch((error) => console.log('bank-data-error : ' + error))
-            axios.post("https://129.213.127.53:8080/park-data",{
+            axios.post("https://server.dwbb.kro.kr:8080/park-data",{
                 lat: loc.lat,
                 lng: loc.lng
             })

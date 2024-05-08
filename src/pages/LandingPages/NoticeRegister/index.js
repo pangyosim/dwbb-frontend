@@ -75,7 +75,7 @@ function NoticeRegisterBasic () {
         const errcheck = Object.values(errors).includes(true);
         const nullcheck = Object.values(values).includes("");
         if (!errcheck && !nullcheck){
-            axios.post('https://129.213.127.53:8080/notice-register',{
+            axios.post('https://server.dwbb.kro.kr:8080/notice-register',{
                 noticetitle: values.renoticetitle,
                 noticecontents: values.renoticecontents,
                 noticeid: localStorage.getItem("nickname"),
