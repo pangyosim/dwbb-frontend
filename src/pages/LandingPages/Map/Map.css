@@ -41,10 +41,10 @@
     left: 20px;
 }
 .arr:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 .parkarr:hover{
-    transform: scale(1.02);
+    transform: scale(1.01);
 }
 
 .wrap_myloc {
@@ -161,7 +161,7 @@
     }
     .parkarr0:after, .parkarr1:after, .parkarr2:after, .parkarr3:after, .parkarr4:after, .parkarr5:after, .parkarr6:after, .parkarr7:after, .parkarr8:after, .parkarr9:after, .parkarr10:after,
     .parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after{ 
-        top: 41px;
+        top: 37px;
         left: 20px;
     }
 }
