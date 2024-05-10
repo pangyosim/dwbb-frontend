@@ -71,7 +71,8 @@ Q&A페이지
 ~~~
 
 
-<img width="1629" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/fec0ed23-5a14-4373-8869-09e7cda82592">
+<img width="1529" alt="image" src="https://github.com/pangyosim/dwbb-frontend/assets/87213815/0cb6729e-479f-459c-b8fb-75778c4d36dc">
+
 
 
 ---
