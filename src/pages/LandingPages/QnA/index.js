@@ -54,7 +54,7 @@ function QnABasic () {
 
     useEffect(()=>{
         // qna list 
-        axios.post("https://server.dwbb.kro.kr:8080/qna-all")
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}:8080/qna-all`)
         .then((res)=> {
             setQnaData(res.data)
             setPagingData((prev)=>({
@@ -69,7 +69,7 @@ function QnABasic () {
         })
         .catch((error)=> alert('qna-all error : ' + error));
         // notice list
-        axios.post('https://server.dwbb.kro.kr:8080/notice-all',{
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-all`,{
         })
         .then((res)=>setNoticeData(res.data.sort((a,b)=>(a.noticeseq-b.noticeseq)).reverse().slice(0,3)))
         .catch((error)=>{
@@ -116,7 +116,7 @@ function QnABasic () {
 
     const handlerTitle = (qna,e) => {
         e.preventDefault();
-        axios.post('https://server.dwbb.kro.kr:8080/qna-views', qna)
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-views`, qna)
         .catch((error) => alert('qna views error : ' + error));
         navigator('/pages/landing-pages/qnadetail', {
             state : {

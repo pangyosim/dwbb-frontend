@@ -15,7 +15,7 @@ function BuiltByDevelopers() {
   const bgImage =
     "https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/desktop.jpg";
     useEffect(()=>{
-      axios.post('https://server.dwbb.kro.kr:8080/notice-all')
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-all`)
       .then((res)=>{
         const arr = res.data;
         arr.sort(function compare (a,b){

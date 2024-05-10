@@ -82,7 +82,7 @@ function Notice() {
   }
 
   const handlerNoticeClick = (notice,e) => {
-    axios.post('https://server.dwbb.kro.kr:8080/notice-views', notice)
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-views`, notice)
     .catch((error) => alert('notice views error : ' + error));
     e.preventDefault();
     navigator('/pages/landing-pages/noticedetail', {
@@ -102,7 +102,7 @@ function Notice() {
   }
 
   useEffect(()=>{
-    axios.post('https://server.dwbb.kro.kr:8080/notice-all',{
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-all`,{
     })
     .then((res)=>{
       setPagingData((prev)=>({

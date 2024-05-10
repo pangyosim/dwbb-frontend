@@ -47,7 +47,6 @@
     transform: scale(1.02);
 }
 
-
 .wrap_myloc {
     width: 30vh;
     height: 30vh;
@@ -57,11 +56,32 @@
     background-color: #0675f4;
     opacity: 0.1;
     z-index: 0;
+    position: absolute;
+    margin-left: -14vh;
+    margin-top: -14vh;
 }
 .wrap_myloc img {
     margin-top: 30vh;
     z-index: 10;
 }
+
+.reservbutton {
+    cursor: pointer; 
+    border: 1px solid #0675f4; 
+    background-color: #0675f4; 
+    border-radius: 7px; 
+    width: 100%; 
+    height:3vh; 
+    color: white; 
+    font-weight: bold;
+    transition: all 0.1s linear;
+}
+.reservbutton:hover {
+    opacity: 0.9;
+    transform: scale(1.01);
+}
+
+
 .arr0, .arr1, .arr2, .arr3, .arr4, .arr5, .arr6, .arr7, .arr8, .arr9, .arr10,
 .arr11, .arr12, .arr13, .arr14, .arr15, .arr16, .arr17, .arr18, .arr19, .arr20 {
     margin: 0;

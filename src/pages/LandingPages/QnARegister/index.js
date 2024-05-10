@@ -76,7 +76,7 @@ function QnAResgisterBasic () {
         const errcheck = Object.values(errors).includes(true);
         const nullcheck = Object.values(values).includes("");
         if (!errcheck && !nullcheck){
-            axios.post('https://server.dwbb.kro.kr:8080/qna-register',{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-register`,{
                 qnatitle: values.reqnatitle,
                 qnacontents: values.reqnacontents,
                 qnanickname: localStorage.getItem("nickname"),

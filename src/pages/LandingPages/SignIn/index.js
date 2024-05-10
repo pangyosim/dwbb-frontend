@@ -62,7 +62,7 @@ function SignInBasic() {
     }
   } 
   const handleSubmit = () => {
-      axios.post('https://server.dwbb.kro.kr:8080/check-login',{
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/check-login`,{
         id: values.id,
         pw: values.pw
       }).then((res)=>{

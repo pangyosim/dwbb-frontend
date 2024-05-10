@@ -126,7 +126,7 @@ function SignUpBasic() {
         const emailcheck = Object.values(isChecked).includes(true);
         const nullcheck = Object.values(values).includes("");
         if (!errcheck && !nullcheck && !emailcheck){
-            axios.post('https://server.dwbb.kro.kr:8080/signup',{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}:8080/signup`,{
                 nickname: values.nickname,
                 id: values.id,
                 pw: values.pw,
@@ -149,7 +149,7 @@ function SignUpBasic() {
     const handleDistinct = () => {
         const null_check = values.email !== "" ? true : false;
         if(null_check){
-            axios.post('https://server.dwbb.kro.kr:8080/distinct-email',{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/distinct-email`,{
                 email: values.email
             })
             .then((res)=>{

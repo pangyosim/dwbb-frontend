@@ -46,7 +46,6 @@ function MapPageBasic () {
     const [ isParkWindow, setParkIsWindow ] = useState();
     const [ nearbank, setNearbank ] = useState([]);
     const [ nearpark, setNearpark ] = useState([]);
-
     const navigate = useNavigate();
     
     useEffect(()=>{
@@ -68,7 +67,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post("https://server.dwbb.kro.kr:8080/bank-data",{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/bank-data`,{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -80,7 +79,7 @@ function MapPageBasic () {
                 }
             })
             .catch((error) => console.log('bank-data-error : ' + error))
-            axios.post("https://server.dwbb.kro.kr:8080/park-data",{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/park-data`,{
                 lat: loc.lat,
                 lng: loc.lng
             })
@@ -119,6 +118,7 @@ function MapPageBasic () {
                                             `
                                     ).join(''): `<div style="font-weight: bold; color: red;">영업시간이 아닙니다.</div>`}
                                 </div>
+                                ${v.tlwnList ? `<button class="reservbutton" onclick="window.open('https://map.naver.com/p/search/IBK기업은행 ${v.krnbrm}')">예약</button><p style="font-size:9px; color: red;">* 당일,공휴일예약은 불가합니다.</p>` :""}
                             </div>
                         </div>`,
             anchorSize : 0,
@@ -209,29 +209,21 @@ function MapPageBasic () {
                         maxZoom={18}
                         ref={setMap}
                         >
-                            <Marker position={new navermaps.LatLng(loc.lat,loc.lng)}
-                                icon={{
-                                    content:
-                                    `
-                                        <div class="wrap_myloc">
-                                        </div>
-                                    `,
-                                    anchor: new navermaps.Point(132,132),
-                                }}
-                                zIndex="-1"
-                            />
-                            {/* my location */}
                             <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} 
                                 icon={{
                                     content: 
-                                    `
-                                        <div>
-                                            <img src=${myloc}/ style="width: 2vh; height: 2vh;">
+                                    `   
+                                        <div style="position: relative;">
+                                            <div class="wrap_myloc">
+                                            </div>
+                                            <div style="position: absolute;">
+                                                <img src=${myloc}/ style="width: 2vh; height: 2vh;">
+                                            </div>
                                         </div>
                                     `,
                                     anchor: new navermaps.Point(15,15),
                                 }}
-                                zIndex="99"
+                                zIndex="-1"
                             />
                             {/* Bank */}
                             {btIsAcitived.bkbutton ? (<>

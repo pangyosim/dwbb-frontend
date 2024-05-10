@@ -32,7 +32,7 @@ function QnADetailBasic ({qna}) {
     })
 
     const handlerDelete = () => {
-        axios.post("https://server.dwbb.kro.kr:8080/qna-delete",{
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-delete`,{
             qnaseq :Number(qna.seq),
         })
         .then((res)=>{
