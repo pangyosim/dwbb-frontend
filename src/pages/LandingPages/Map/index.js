@@ -116,9 +116,9 @@ function MapPageBasic () {
                                                 ${val.waitCusCnt}
                                             </div>
                                             `
-                                    ).join(''): `<div style="font-weight: bold; color: red;">영업시간이 아닙니다.</div>`}
+                                    ).join(''): `<div style="font-weight: bold; color: red; margin-bottom: 5px;">영업시간이 아닙니다.</div>`}
                                 </div>
-                                ${v.tlwnList ? `<button class="reservbutton" onclick="window.open('https://map.naver.com/p/search/IBK기업은행 ${v.krnbrm}')">예약</button><p style="font-size:9px; color: red;">* 당일,공휴일예약은 불가합니다.</p>` :""}
+                                <button class="reservbutton" onclick="window.open('https://map.naver.com/p/search/IBK기업은행 ${v.krnbrm}')">예약</button><p style="font-size:9px; color: red;">* 당일,공휴일예약은 불가합니다.</p>
                             </div>
                         </div>`,
             anchorSize : 0,
@@ -166,6 +166,13 @@ function MapPageBasic () {
         setParkIsWindow(parkinfowindow);
         parkinfowindow.open(map,loc);
     }
+    // navermaps.Event.addListener(map, 'zoom_changed', function(zoom) {
+    //     console.log('zoom 값이 '+ zoom +'으로 변경되었습니다!');
+    
+    //     // for (var i=0, ii=markerList.length; i<ii; i++) {
+    //     //     markerList[i].setMap(null);
+    //     // }
+    // });
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">

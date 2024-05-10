@@ -35,7 +35,7 @@ function QnABasic () {
     const [pagingData, setPagingData] = useState({
         totalPage: Math.floor(qnaData.length/2)+1,
         page: 1,
-        limit: 7,
+        limit: 5,
         offset: 0,
         prev: 0,
       });
@@ -54,7 +54,7 @@ function QnABasic () {
 
     useEffect(()=>{
         // qna list 
-        axios.post(`${process.env.REACT_APP_BACKEND_URL}:8080/qna-all`)
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-all`)
         .then((res)=> {
             setQnaData(res.data)
             setPagingData((prev)=>({
