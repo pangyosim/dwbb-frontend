@@ -1,16 +1,16 @@
 {
-  "name": "material-kit-2-react",
+  "name": "dwbb",
   "version": "2.1.0",
   "private": true,
   "author": "DWBB",
-  "license": "See license in https://github.com/pangyosim/dwbb",
+  "license": "See license in https://github.com/pangyosim/dwbb-frontend",
   "description": "DWBB",
   "bugs": {
-    "url": "https://github.com/creativetimofficial/ct-material-kit-react/issues"
+    "url": "https://github.com/pangyosim/dwbb/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/ct-material-kit-react.git"
+    "url": "git+https://github.com/pangyosim/dwbb-frontend/dwbb-frontend.git"
   },
   "dependencies": {
     "@emotion/cache": "11.10.7",
