@@ -20,6 +20,8 @@ import parkbefore from "../../../assets/images/parkbefore.png";
 import parkafter from "../../../assets/images/parkafter.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
+import menu from "../../../assets/images/menu.png";
+// import mylocation from "../../../assets/images/mylocation.png";
 import "./Map.css";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
@@ -43,13 +45,14 @@ function MapPageBasic () {
     const [ isClicked, setIsClicked ] = useState("");
     const [ parkisClicked, setParkIsClicked ] = useState("");
     const [ btIsAcitived, setBtIsActived ] = useState({
+        all: false,
         bkbutton : true,
         pkbutton : false
     })
     const [ isWindow, setIsWindow ] = useState("");
     const [ isParkWindow, setParkIsWindow ] = useState();
     const [ nearbank, setNearbank ] = useState([]);
-    const [ zoom, setZoom ] = useState(17);
+    const [ zoom, setZoom ] = useState(15);
     const [ nearpark, setNearpark ] = useState([]);
     const navigate = useNavigate();
     
@@ -60,11 +63,8 @@ function MapPageBasic () {
     })
     
     useEffect(()=>{
-        let tmp = { geox : 0, geoy: 0};
         if (navigator.geolocation !== null) {
             navigator.geolocation.getCurrentPosition((position)=>{
-                tmp.geox=position.coords.latitude
-                tmp.geoy=position.coords.longitude
                 setLoc({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
@@ -72,7 +72,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/bank-data`,{
+            axios.post(`${process.env.REACT_APP_DEV_URL}/bank-data`,{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -84,7 +84,7 @@ function MapPageBasic () {
                 }
             })
             .catch((error) => console.log('bank-data-error : ' + error))
-            axios.post(`${process.env.REACT_APP_BACKEND_URL}/park-data`,{
+            axios.post(`${process.env.REACT_APP_DEV_URL}/park-data`,{
                 lat: loc.lat,
                 lng: loc.lng
             })
@@ -98,8 +98,14 @@ function MapPageBasic () {
             .catch((error)=> console.log('park-data-error : ' + error))
         }
     },[loc.lat,loc.lng])
+    if (map !== null ){
+        navermaps.Event.addListener(map,'zoom_changed',function(zoom){
+            setZoom(zoom);
+        })
+    }
 
     const handlerBankClick = (e,v,idx) => {
+        map.setCenter(new navermaps.LatLng(v.geoy,v.geox));
         setParkIsClicked("");
         setIsClicked(idx)
         const loc = new navermaps.LatLng(v.geoy,v.geox);
@@ -111,7 +117,7 @@ function MapPageBasic () {
                                 <div style="font-size: 12px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 내 위치에서부터 ${v.distance}km</div>
                                 <div style="font-size: 12px;"><img src=${Call} alt="call" style="width: 12px; height: 12px;"> &nbsp;${v.brncTel}</div>
                                 <div style="font-size: 12px;"><img src=${Fax} alt="Fax" style="width: 12px; height: 12px;"> &nbsp;${v.rprsFax}</div>
-                                <div style="font-size: 12px; margin-bottom: 10px;"><img src=${Clock} alt="call" style="width: 12px; height: 12px;"> &nbsp;영업시간:<span style="">09:00~16:00</span></div>
+                                <div style="font-size: 12px; margin-bottom: 10px;"><img src=${Clock} alt="call" style="width: 12px; height: 12px;"> &nbsp;영업시간: 평일<span style=""> 09:00~16:00</span></div>
                                 <div style="font-size: 12px; display: flex; justify-content: center;">
                                     ${v.tlwnList ? v.tlwnList.map((val)=>
                                             `<div style="text-align: center; padding: 3px; ">
@@ -130,13 +136,14 @@ function MapPageBasic () {
             backgroundColor: null,
             borderWidth: 0,
             disableAutoPan: true,
-            pixelOffset: new navermaps.Point(187,100),
+            pixelOffset: new navermaps.Point(0,-40),
         });
         setIsWindow(infowindow);
         infowindow.open(map,loc);
     }
 
     const handlerParkClick = (e,v,idx) => {
+        map.setCenter(new navermaps.LatLng(v.lat+0.002,v.lng));
         setIsClicked("");
         setParkIsClicked(idx)
         const loc = new navermaps.LatLng(v.lat,v.lng);
@@ -166,7 +173,7 @@ function MapPageBasic () {
             backgroundColor: null,
             borderWidth: 0,
             disableAutoPan: true,
-            pixelOffset: new navermaps.Point(187,100),
+            pixelOffset: new navermaps.Point(0,-40),
         });
         setParkIsWindow(parkinfowindow);
         parkinfowindow.open(map,loc);
@@ -201,17 +208,23 @@ function MapPageBasic () {
                     }}
                     >   
                         <MKBox style={{textAlign: "center"}}>
-                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",height:"25px",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
+                            {/* <MKButton color="white" style={{border: "1px solid black",borderRadius:"10px", marginTop:"95px"}} size="small">
+                                <img src={mylocation} alt="mylocation" width={15} height={15}/>
+                            </MKButton> */}
+                            <MKButton color={btIsAcitived.bkbutton && btIsAcitived.pkbutton ? "dark" : "secondary"} style={{borderRadius:"30px",marginTop:"95px",marginLeft: "10px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: true,bkbutton: true, pkbutton: true});setIsClicked("");setParkIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
+                                <img src={menu} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>전체</MKTypography>
+                            </MKButton>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all,bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
                                 <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
                             </MKButton>
-                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px",height:"25px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="medium" onClick={()=>{setBtIsActived({bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton}); setParkIsClicked(""); isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
+                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px", marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"15px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all, bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton}); setParkIsClicked(""); isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
                                 <DirectionsCarIcon/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
                             </MKButton>
                         </MKBox>
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
-                        defaultZoom={17}
-                        minZoom={15}
+                        defaultZoom={15}
+                        minZoom={13}
                         maxZoom={19}
                         ref={setMap}
                         >
@@ -234,16 +247,12 @@ function MapPageBasic () {
                             {/* Bank */}
                             {btIsAcitived.bkbutton ? (<>
                             {nearbank.length !== 0 && map !== null ? nearbank.map((v,idx)=>{
-                                if( idx === 0 ){
-                                    navermaps.Event.addListener(map,'zoom_changed',function(zoom){
-                                        setZoom(zoom);
-                                    })
-                                } 
+                                
                                 return(
                                     <Marker key={idx} position={new navermaps.LatLng(v.geoy,v.geox)}
                                         map={map}
                                         icon={{
-                                            content: zoom > 16 ? 
+                                            content: zoom > 15 ? 
                                                     `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
                                                         <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
                                                     </div>` : 
@@ -261,12 +270,12 @@ function MapPageBasic () {
                             </>): ""}
                             {/* Park */}
                             {btIsAcitived.pkbutton ? (<>
-                            {nearpark.length !== 0 ? nearpark.map((v,idx)=>{
+                            {nearpark.length !== 0 && map !== null ? nearpark.map((v,idx)=>{
                                 return(
                                     <Marker key={idx} position={new navermaps.LatLng(v.lat,v.lng)}
                                         map={map}
                                         icon={{
-                                            content: zoom > 16 ? 
+                                            content: zoom > 15 ? 
                                                 `<div class=${parkisClicked !== idx ? "parkarr" : "parkarr"+idx}>
                                                     <img src=${parking} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold; margin-right: 0.5vh;">${v.pkname} </p>
                                                 </div>`:
