@@ -13,7 +13,11 @@ import Loading from "pages/Presentation/components/Loading";
 
 // Marker Image
 import ibk from "../../../assets/images/ibk.png";
+import ibkafter from "../../../assets/images/ibkmarker.png";
+import ibkbefore from "../../../assets/images/ibkbeforemarker.png";
 import parking from "../../../assets/images/parking.png";
+import parkbefore from "../../../assets/images/parkbefore.png";
+import parkafter from "../../../assets/images/parkafter.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
 import "./Map.css";
@@ -45,6 +49,7 @@ function MapPageBasic () {
     const [ isWindow, setIsWindow ] = useState("");
     const [ isParkWindow, setParkIsWindow ] = useState();
     const [ nearbank, setNearbank ] = useState([]);
+    const [ zoom, setZoom ] = useState(17);
     const [ nearpark, setNearpark ] = useState([]);
     const navigate = useNavigate();
     
@@ -53,7 +58,7 @@ function MapPageBasic () {
             navigate("/pages/authentication/sign-in");
         }
     })
-
+    
     useEffect(()=>{
         let tmp = { geox : 0, geoy: 0};
         if (navigator.geolocation !== null) {
@@ -166,13 +171,7 @@ function MapPageBasic () {
         setParkIsWindow(parkinfowindow);
         parkinfowindow.open(map,loc);
     }
-    // navermaps.Event.addListener(map, 'zoom_changed', function(zoom) {
-    //     console.log('zoom 값이 '+ zoom +'으로 변경되었습니다!');
-    
-    //     // for (var i=0, ii=markerList.length; i<ii; i++) {
-    //     //     markerList[i].setMap(null);
-    //     // }
-    // });
+  
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -212,21 +211,21 @@ function MapPageBasic () {
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
                         defaultZoom={17}
-                        minZoom={14}
-                        maxZoom={18}
+                        minZoom={15}
+                        maxZoom={19}
                         ref={setMap}
                         >
                             <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} 
                                 icon={{
                                     content: 
-                                    `   
-                                        <div style="position: relative;">
-                                            <div class="wrap_myloc">
-                                            </div>
-                                            <div style="position: absolute;">
-                                                <img src=${myloc}/ style="width: 2vh; height: 2vh;">
-                                            </div>
+                                    `  
+                                    <div style="position: relative;">
+                                        <div class="wrap_myloc">
                                         </div>
+                                        <div style="position: absolute;">
+                                        <img src=${myloc} style="width: 2vh; height: 2vh;">
+                                        </div>
+                                    </div>
                                     `,
                                     anchor: new navermaps.Point(15,15),
                                 }}
@@ -234,15 +233,23 @@ function MapPageBasic () {
                             />
                             {/* Bank */}
                             {btIsAcitived.bkbutton ? (<>
-                            {nearbank.length !== 0 ? nearbank.map((v,idx)=>{
+                            {nearbank.length !== 0 && map !== null ? nearbank.map((v,idx)=>{
+                                if( idx === 0 ){
+                                    navermaps.Event.addListener(map,'zoom_changed',function(zoom){
+                                        setZoom(zoom);
+                                    })
+                                } 
                                 return(
                                     <Marker key={idx} position={new navermaps.LatLng(v.geoy,v.geox)}
                                         map={map}
                                         icon={{
-                                            content: 
-                                                `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
-                                                    <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
-                                                </div>`,
+                                            content: zoom > 16 ? 
+                                                    `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
+                                                        <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
+                                                    </div>` : 
+                                                    `<div style="padding: 0; margin: 0;">
+                                                        <img src=${isClicked !== idx ? ibkbefore : ibkafter} style=" width: 5vh; height: 5vh;"/>
+                                                    </div>`,
                                             anchor: new navermaps.Point(30,40),
                                         }}
                                         zIndex="11"
@@ -259,9 +266,12 @@ function MapPageBasic () {
                                     <Marker key={idx} position={new navermaps.LatLng(v.lat,v.lng)}
                                         map={map}
                                         icon={{
-                                            content: 
+                                            content: zoom > 16 ? 
                                                 `<div class=${parkisClicked !== idx ? "parkarr" : "parkarr"+idx}>
                                                     <img src=${parking} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold; margin-right: 0.5vh;">${v.pkname} </p>
+                                                </div>`:
+                                                `<div style="padding: 0; margin: 0;">
+                                                    <img src=${parkisClicked !== idx ? parkbefore : parkafter} style=" width: 5vh; height: 5vh;"/>
                                                 </div>`,
                                             anchor: new navermaps.Point(30,40),
                                         }}
