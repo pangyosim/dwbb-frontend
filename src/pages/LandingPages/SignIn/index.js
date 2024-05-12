@@ -62,7 +62,7 @@ function SignInBasic() {
     }
   } 
   const handleSubmit = () => {
-      axios.post(`${process.env.REACT_APP_DEV_URL}/check-login`,{
+      axios.post(`${process.env.REACT_APP_BACKEND_URL}/check-login`,{
         id: values.id,
         pw: values.pw
       }).then((res)=>{

@@ -21,7 +21,7 @@ import parkafter from "../../../assets/images/parkafter.png";
 import loadingimg from "../../../assets/images/Loading.gif";
 import myloc from "../../../assets/images/myloc.png";
 import menu from "../../../assets/images/menu.png";
-// import mylocation from "../../../assets/images/mylocation.png";
+import mylocation from "../../../assets/images/mylocation.png";
 import "./Map.css";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
@@ -72,7 +72,7 @@ function MapPageBasic () {
             });
         }
         if(loc.lat!==0){
-            axios.post(`${process.env.REACT_APP_DEV_URL}/bank-data`,{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/bank-data`,{
                 geox: loc.lat,
                 geoy: loc.lng
             })
@@ -84,7 +84,7 @@ function MapPageBasic () {
                 }
             })
             .catch((error) => console.log('bank-data-error : ' + error))
-            axios.post(`${process.env.REACT_APP_DEV_URL}/park-data`,{
+            axios.post(`${process.env.REACT_APP_BACKEND_URL}/park-data`,{
                 lat: loc.lat,
                 lng: loc.lng
             })
@@ -208,11 +208,11 @@ function MapPageBasic () {
                     }}
                     >   
                         <MKBox style={{textAlign: "center"}}>
-                            {/* <MKButton color="white" style={{border: "1px solid black",borderRadius:"10px", marginTop:"95px"}} size="small">
-                                <img src={mylocation} alt="mylocation" width={15} height={15}/>
-                            </MKButton> */}
+                            <MKButton style={{borderRadius:"30px",marginTop:"95px",paddingTop:"8px",paddingBottom:"8px",paddingLeft:"0",paddingRight:"0"}} color="white" size="small" onClick={()=>{map.setCenter(new navermaps.LatLng(loc.lat,loc.lng))}}>
+                                <img src={mylocation} alt="mylocation" width={20} height={20}/>
+                            </MKButton>
                             <MKButton color={btIsAcitived.bkbutton && btIsAcitived.pkbutton ? "dark" : "secondary"} style={{borderRadius:"30px",marginTop:"95px",marginLeft: "10px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: true,bkbutton: true, pkbutton: true});setIsClicked("");setParkIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
-                                <img src={menu} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>전체</MKTypography>
+                                <img src={menu} alt="ibk" width={25} height={20}/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>전체</MKTypography>
                             </MKButton>
                             <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",marginLeft: "10px",marginTop:"95px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all,bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
                                 <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>

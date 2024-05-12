@@ -221,7 +221,7 @@ export default styled(Button)(({ theme, ownerState }) => {
     let sizeValue = pxToRem(38);
 
     if (size === "small") {
-      sizeValue = pxToRem(10.4);
+      sizeValue = pxToRem(25.4);
     } else if (size === "large") {
       sizeValue = pxToRem(52);
     }
