@@ -200,7 +200,7 @@ function MapPageBasic () {
                 />
             </MKBox>
             <MKBox px={1} width="100%" height="100vh" style={{margin:"0", padding:"0"}} mx="auto" position="relative" zIndex={1}>
-                {loc.lat !== 0 && loc.lng && nearbank.length !== 0 ?
+                {loc.lat !== 0 && loc.lng !== 0 && nearbank.length !== 0 ?
                     <MapDiv
                     style={{
                         width: '100%',
