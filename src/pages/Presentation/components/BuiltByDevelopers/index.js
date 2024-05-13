@@ -68,7 +68,7 @@ function BuiltByDevelopers() {
                   {window.innerWidth > 768 || v.noticetitle.length <= 13 ? v.noticetitle : v.noticetitle.substring(0,13)+"..."}
                 </Grid>
                 <Grid  item md={4} xs={window.innerWidth > 768 ? 4 : 3} py={0} style={{color: "white"}}>
-                  {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
+                   {v.noticecreateday.substring(0,v.noticecreateday.indexOf('T'))}
                 </Grid>
             </Grid>
           );
