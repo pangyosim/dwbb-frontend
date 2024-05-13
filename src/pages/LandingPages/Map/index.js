@@ -105,7 +105,7 @@ function MapPageBasic () {
     }
 
     const handlerBankClick = (e,v,idx) => {
-        map.setCenter(new navermaps.LatLng(v.geoy,v.geox));
+        map.setCenter(new navermaps.LatLng(v.geoy+0.005,v.geox));
         setParkIsClicked("");
         setIsClicked(idx)
         const loc = new navermaps.LatLng(v.geoy,v.geox);
@@ -143,7 +143,7 @@ function MapPageBasic () {
     }
 
     const handlerParkClick = (e,v,idx) => {
-        map.setCenter(new navermaps.LatLng(v.lat+0.002,v.lng));
+        map.setCenter(new navermaps.LatLng(v.lat+0.005,v.lng));
         setIsClicked("");
         setParkIsClicked(idx)
         const loc = new navermaps.LatLng(v.lat,v.lng);
