@@ -141,18 +141,18 @@ function NoticeDetail ({notice}) {
                                         </MKTypography>
                                     </Grid>
                                     {/* line F*/}
-                                    <Grid item mb={3} md={12} xs={12} borderRadius="lg" >
+                                    <Grid item mb={3} md={11} xs={11} borderRadius="lg" >
                                         <MKTypography  fontWeight="light" fontSize="13px">
                                             {notice.contents}
                                         </MKTypography>
                                     </Grid>
                                     {/* line 5*/}
-                                    <Grid item mb={3} md={8.5} xs={6.5} borderRadius="lg" >
+                                    <Grid item mb={3} md={9} xs={6.5} borderRadius="lg" >
                                     <MKTypography mt={2} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
                                         <ArrowBackIcon /> 뒤로가기
                                     </MKTypography>
                                     </Grid>
-                                    <Grid item mb={3} md={3.5} xs={4.5} borderRadius="lg" >
+                                    <Grid item mb={3} md={3} xs={4.5} borderRadius="lg" >
                                     {localStorage.getItem("role") === "ADMIN" ? 
                                     <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>공지삭제</MKButton>
                                     :

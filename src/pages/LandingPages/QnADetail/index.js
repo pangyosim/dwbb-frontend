@@ -19,18 +19,27 @@ import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function QnADetailBasic ({qna}) { 
     let isLogin = localStorage.getItem("token");
     const navigator = useNavigate();
-    
+    const [values, setValues] = useState({
+        comments: '',
+      })
     useEffect(()=>{
         if(localStorage.getItem("token") ===null){
             navigator("/pages/authentication/sign-in");
         }
     })
-
+    console.log(qna)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setValues((prevValues) => ({
+          ...prevValues,
+          [name]: value,
+        }));
+    }
     const handlerDelete = () => {
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-delete`,{
             qnaseq :Number(qna.seq),
@@ -44,6 +53,24 @@ function QnADetailBasic ({qna}) {
         .catch((err)=> console.log('qna-delete error : ' + err))
     }
 
+    const handlerReComment = () => {
+        const nullcheck = Object.values(values).includes("");
+        if( !nullcheck ){
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/qna-comments`,{
+            qnaseq :Number(qna.seq),
+            comments: values.comments
+        })
+        .then((res)=>{
+            if(res.data === "comments-success"){
+                alert("댓글 등록 완료 !");
+                navigator(-1);
+            }
+        })
+        .catch((err)=> console.log('qna-comments error : ' + err))
+        } else{
+            alert('댓글을 입력해주세요.');
+        }
+    }
     return(
         <>
              <MKBox position="fixed" top="0rem" width="100%">
@@ -142,9 +169,9 @@ function QnADetailBasic ({qna}) {
                                             {qna.createday.substring(0,qna.createday.indexOf('T'))} {qna.createday.substring(qna.createday.indexOf('T')+1,qna.createday.indexOf('.'))}
                                         </MKTypography>
                                     </Grid><Grid item md={3.4} xs={4} borderRadius="lg" >
-                                        <MKTypography fontWeight="light"  fontSize="13px">
-                                            {qna.state ? "답변완료": "작성완료"}
-                                        </MKTypography>
+                                        {qna.states ? 
+                                        <MKTypography style={{ width:"70%" ,fontWeight:"bold",borderRadius:"20px",backgroundColor:"#57b05c",color:"white",fontSize:"11px",textAlign:"center"}}>답변완료</MKTypography>:
+                                        <MKTypography style={{ width:"70%" ,fontWeight:"bold",borderRadius:"20px",backgroundColor:"#686f7e",color:"white",fontSize:"11px",textAlign:"center"}}>접수완료</MKTypography>} 
                                     </Grid>
                                     {/* line F*/}
                                     <Grid item mb={3} md={12} xs={12} borderRadius="lg" >
@@ -153,17 +180,40 @@ function QnADetailBasic ({qna}) {
                                         </MKTypography>
                                     </Grid>
                                     {/* line 5*/}
-                                    <Grid item mb={3} md={8.5} xs={6.5} borderRadius="lg" >
+                                    <Grid item mb={2} md={8.9} xs={6} borderRadius="lg" >
                                     <MKTypography mt={2} color="dark" style={{fontSize:"15px",cursor:"pointer"}} fontWeight="bold" onClick={()=>(navigator(-1))}>
                                         <ArrowBackIcon /> 뒤로가기
                                     </MKTypography>
                                     </Grid>
-                                    <Grid item mb={3} md={3.5} xs={4.5} borderRadius="lg" >
                                     {localStorage.getItem("nickname") === qna.nickname || localStorage.getItem("role") === "ADMIN" ? 
-                                    <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>글삭제</MKButton>
+                                    <Grid item mb={1} md={3.1} xs={5} borderRadius="lg" >
+                                        <MKButton color="error" style={{width:"120px",fontSize:"15px",borderRadius:"0"}} size="large" onClick={handlerDelete}>글삭제</MKButton>
+                                    </Grid>
                                     :
                                     ""}
-                                    </Grid>
+                                    {qna.states === true ? 
+                                    <Grid item mb={2} md={11} xs={11} borderRadius="lg" >
+                                        <MKTypography pl={1} mb={2} fontSize="20px" fontWeight="bold">
+                                            관리자 답변
+                                        </MKTypography>
+                                        <MKTypography pl={2} py={3} pr={2} fontSize="15px" border="1px solid #f1f1f1" borderRadius="7px" width="100%">
+                                            {qna.comments}
+                                        </MKTypography>
+                                    </Grid>:""}
+                                    {localStorage.getItem("role") === "ADMIN" && qna.states !== true? 
+                                        <Grid item mb={3} md={11} xs={11} borderRadius="lg" >
+                                            <MKBox mb={2} textAlign="right">
+                                                <textarea type="comments" id="comments" name="comments" style={{marginBottom: "20px",height:"100px",width:"100%",padding:"20px", margin:"0", border:"1px solid lightgray",borderRadius:"10px"}} onChange={handleChange}/>
+                                                <MKButton type="button" size="large" 
+                                                color="secondary" 
+                                                style={{width:"120px",fontSize:"15px",borderRadius:"0"}}
+                                                onClick={handlerReComment}
+                                                >
+                                                    댓글달기
+                                                </MKButton>
+                                            </MKBox>
+                                        </Grid>
+                                    :""}
                                 </Grid>
                             </MKBox>
                         </MKBox>

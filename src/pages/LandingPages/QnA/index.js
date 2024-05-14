@@ -23,9 +23,9 @@ import { useNavigate } from "react-router-dom";
 
 const title_style = {
     fontSize:"12px",
-    color:"black",
     cursor: "pointer",
-    textDecoration: "underline"
+    color:"#666666",
+    fontWeight:"bold"
 }
 
 function QnABasic () {
@@ -71,7 +71,7 @@ function QnABasic () {
         // notice list
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-all`,{
         })
-        .then((res)=>setNoticeData(res.data.sort((a,b)=>(a.noticeseq-b.noticeseq)).reverse().slice(0,3)))
+        .then((res)=>setNoticeData(res.data.sort((a,b)=>(a.noticeseq-b.noticeseq)).reverse().slice(0,2)))
         .catch((error)=>{
             alert('Notice Error : ' + error);
         })
@@ -125,6 +125,8 @@ function QnABasic () {
               contents : qna.qnacontents,
               nickname : qna.qnanickname,
               views : qna.qnaviews+1,
+              states : qna.qnastate,
+              comments : qna.comments,
               createday : qna.qnacreateday
             },
         });
@@ -205,41 +207,45 @@ function QnABasic () {
                         </MKBox>
                         <MKBox p={3}>
                             <MKBox>
-                                <Grid container mb={2} borderTop="1px solid black">
-                                    <Grid item xs={1} md={1.2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 번호 </MKTypography>
+                                <Grid container mb={2} borderTop="1.5px solid #9b9b9b">
+                                    <Grid item xs={1.2} md={1.2} py={1} pt={2} pb={2} borderRadius="lg" borderBottom="2px solid white" textAlign="center" >
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"#222222"}} > 번호 </MKTypography>
                                     </Grid>
-                                    <Grid item xs={4.8} md={4.8} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 글제목 </MKTypography>
+                                    <Grid item xs={3.3} md={4.8} py={1} pt={2} pb={2} borderRadius="lg"  borderBottom="2px solid white" textAlign="center">
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"#222222"}}> 글제목 </MKTypography>
                                     </Grid>
-                                    <Grid item xs={2} md={1.5} py={1} borderRadius="lg"borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 작성자 </MKTypography>
+                                    <Grid item xs={2.5} md={1.5} py={1} pt={2} pb={2} borderRadius="lg" borderBottom="2px solid white" textAlign="center">
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"#222222"}} > 작성자 </MKTypography>
                                     </Grid>
-                                    <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 등록일 </MKTypography>
+                                    <Grid item xs={2.3} md={3} py={1} pt={2} pb={2} borderRadius="lg"  borderBottom="2px solid white" textAlign="center">
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"#222222"}} > 등록일 </MKTypography>
                                     </Grid>
-                                    <Grid item xs={2} md={2} py={1} borderRadius="lg" borderTop="1px solid black" borderBottom="1px solid black" textAlign="center">
-                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"black"}}> 조회/상태 </MKTypography>
+                                    <Grid item xs={2.5} md={1} py={1} pt={2} pb={2} borderRadius="lg" borderBottom="2px solid white" textAlign="center">
+                                        <MKTypography style={{fontSize:"12px",fontWeight:"bold", color:"#222222"}}> 조회/상태 </MKTypography>
                                     </Grid>
                                     {noticeData.map((notice,idx)=>{
                                         let noticecday = notice.noticecreateday;
                                         
                                         return(
-                                            <Grid container mb={0} spacing={0} key={idx} style={{background:"#f4f4f4",borderLeft:"3px solid red"}}>
-                                                <Grid item xs={1} md={1.1} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> 공지 </MKTypography>
+                                            <Grid container mb={0} spacing={0} key={idx} style={{background:"#f8f8f8",cursor: "pointer"}} borderBottom="2px solid white" onClick={(e)=>handlerNoticeTitle(notice,e)} sx={{
+                                                "&:hover" : {
+                                                    opacity:"0.7"
+                                                },
+                                            }}>
+                                                <Grid item xs={1.2} md={1.2} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#0675f4", fontWeight:"bold"}}>[공지]</MKTypography>
                                                 </Grid>
-                                                <Grid item xs={4.8} md={4.9} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"red", cursor: "pointer", fontWeight:"bold"}} onClick={(e)=>handlerNoticeTitle(notice,e)}> {window.innerWidth > 768 || notice.noticetitle.length <= 10 ? notice.noticetitle :notice.noticetitle.substring(0,10)+"..."} </MKTypography>
+                                                <Grid item xs={3.3} md={4.8} py={1} pt={2} pb={2}  borderRadius="lg"  textAlign="left">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666", fontWeight:"bold"}}> {window.innerWidth > 768 || notice.noticetitle.length <= 10 ? notice.noticetitle.substring(0,20) :notice.noticetitle.substring(0,8)+"..."} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2} md={1.5} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {window.innerWidth > 768 || notice.noticeid.length <= 7 ? notice.noticeid : notice.noticeid.substring(0,7)+"..."} </MKTypography>
+                                                <Grid item xs={2.5} md={1.5} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {window.innerWidth > 768 || notice.noticeid.length <= 7 ? notice.noticeid.substring(0,10) : notice.noticeid.substring(0,7)+"..."} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {noticecday.substring(0,noticecday.indexOf('T'))} </MKTypography>
+                                                <Grid item xs={2.3} md={3} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {noticecday.substring(0,noticecday.indexOf('T'))} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2} md={2} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {notice.noticeviews} </MKTypography>
+                                                <Grid item xs={2.5} md={1} py={1} pt={2} pb={2} borderRadius="lg" textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {notice.noticeviews} </MKTypography>
                                                 </Grid>
                                             </Grid>
                                         );
@@ -248,21 +254,27 @@ function QnABasic () {
                                         let qnacreateday = qna.qnacreateday;
                                         
                                         return(
-                                            <Grid container mb={0} spacing={0} key={idx}>
-                                                <Grid item xs={1} md={1.2} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnaseq} </MKTypography>
+                                            <Grid container mb={0} spacing={0} key={idx} borderBottom="2px solid white" backgroundColor="#fbfbfb" style={{cursor:"pointer"}} onClick={(e)=>handlerTitle(qna,e)} sx={{
+                                                "&:hover" : {
+                                                    opacity:"0.7"
+                                                },
+                                            }}>
+                                                <Grid item xs={1} md={1.2} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {qna.qnaseq} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={4.8} md={4.8} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={title_style} onClick={(e)=>handlerTitle(qna,e)}> {window.innerWidth > 768 || qna.qnatitle.length <= 10 ? qna.qnatitle :qna.qnatitle.substring(0,10)+"..."} </MKTypography>
+                                                <Grid item xs={3.7} md={4.8} py={1} pt={2} pb={2}  borderRadius="lg"  textAlign="left">
+                                                    <MKTypography style={title_style}> {window.innerWidth > 768 || qna.qnatitle.length <= 10 ? qna.qnatitle.substring(0,20) :qna.qnatitle.substring(0,10)+"..."} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2} md={1.5} py={1} borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {window.innerWidth > 768 || qna.qnanickname.length <= 7 ? qna.qnanickname : qna.qnanickname.substring(0,7)+"..."} </MKTypography>
+                                                <Grid item xs={2} md={1.5} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {window.innerWidth > 768 || qna.qnanickname.length <= 7 ? qna.qnanickname : qna.qnanickname.substring(0,7)+"..."} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2.2} md={2.5} py={1} borderRadius="lg"  borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {qnacreateday.substring(0,qnacreateday.indexOf('T'))} </MKTypography>
+                                                <Grid item xs={3} md={3} py={1} pt={2} pb={2} borderRadius="lg"  textAlign="center">
+                                                    <MKTypography style={{fontSize:"12px", color:"#666666",fontWeight:"bold"}}> {qnacreateday.substring(0,qnacreateday.indexOf('T'))} </MKTypography>
                                                 </Grid>
-                                                <Grid item xs={2} md={2} py={1}  borderRadius="lg" borderBottom="1px solid black" textAlign="center">
-                                                    <MKTypography style={{fontSize:"12px", color:"black"}}> {qna.qnastate ? "답변완료" : "접수완료"} </MKTypography>
+                                                <Grid item xs={2.3} md={1.5} py={1} pt={2} pb={2}  borderRadius="lg" textAlign="center">
+                                                    {qna.qnastate ? 
+                                                    <MKTypography style={{ width:"70%" ,fontWeight:"bold",borderRadius:"20px",backgroundColor:"#57b05c",color:"white",fontSize:"11px"}}>답변완료</MKTypography>:
+                                                    <MKTypography style={{ width:"70%" ,fontWeight:"bold",borderRadius:"20px",backgroundColor:"#686f7e",color:"white",fontSize:"11px"}}>접수완료</MKTypography>} 
                                                 </Grid>
                                             </Grid>
                                         );
