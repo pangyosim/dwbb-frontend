@@ -105,7 +105,7 @@ function MapPageBasic () {
     }
 
     const handlerBankClick = (e,v,idx) => {
-        map.setCenter(new navermaps.LatLng(v.geoy+0.005,v.geox));
+        map.setCenter(new navermaps.LatLng(v.geoy,v.geox));
         setParkIsClicked("");
         setIsClicked(idx)
         const loc = new navermaps.LatLng(v.geoy,v.geox);
@@ -143,7 +143,7 @@ function MapPageBasic () {
     }
 
     const handlerParkClick = (e,v,idx) => {
-        map.setCenter(new navermaps.LatLng(v.lat+0.005,v.lng));
+        map.setCenter(new navermaps.LatLng(v.lat,v.lng));
         setIsClicked("");
         setParkIsClicked(idx)
         const loc = new navermaps.LatLng(v.lat,v.lng);
@@ -291,7 +291,7 @@ function MapPageBasic () {
                             }) : ""}
                             </>): ""}
                         </NaverMap>
-                        <MKBox style={{position:"fixed", zIndex:"8",bottom:"20px"}}>
+                        <MKBox style={{position:"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           fixed", zIndex:"8",bottom:"20px"}}>
                             <MKButton style={{border:"2px solid #f2f2f2",paddingTop:"8px",paddingBottom:"8px",paddingLeft:"0",paddingRight:"0"}} color="white" size="small" onClick={()=>{map.setCenter(new navermaps.LatLng(loc.lat,loc.lng))}}>
                                 <img src={mylocation} alt="mylocation" width={20} height={20}/>
                             </MKButton>
