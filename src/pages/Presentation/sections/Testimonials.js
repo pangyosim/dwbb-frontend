@@ -46,7 +46,7 @@ function Information() {
           sx={{ mx: "auto", textAlign: "center" }}
         >
           <Grid item xs={12} md={12} lg={12}>
-            <MKTypography variant="h2" mb={3}>Q&A 게시판</MKTypography> 
+            <MKTypography variant="h1" mb={3}>Q&A</MKTypography> 
           </Grid>
           <Grid item xs={12} md={12} lg={12}>
             <MKTypography variant="h5" color="info" textGradient mb={2}>
