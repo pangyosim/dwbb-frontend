@@ -178,7 +178,6 @@ function MapPageBasic () {
         setParkIsWindow(parkinfowindow);
         parkinfowindow.open(map,loc);
     }
-  
     return (
         <>
             <MKBox position="fixed" top="0rem" width="100%" zIndex="99">
@@ -205,8 +204,21 @@ function MapPageBasic () {
                     style={{
                         width: '100%',
                         height: '100%',
+                        display:"flex",
+                        justifyContent:"center"
                     }}
                     >   
+                        <MKBox style={{position:"fixed", zIndex:"8",marginTop:"90px"}}>
+                            <MKButton color={btIsAcitived.bkbutton && btIsAcitived.pkbutton ? "dark" : "secondary"} style={{borderRadius:"30px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: true,bkbutton: true, pkbutton: true});setIsClicked("");setParkIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
+                                <img src={menu} alt="ibk" width={25} height={20}/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>전체</MKTypography>
+                            </MKButton>
+                            <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{borderRadius:"30px",marginLeft: "10px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all,bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
+                                <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
+                            </MKButton>
+                            <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{borderRadius:"30px", marginLeft: "10px",paddingLeft:"15px",paddingRight:"15px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all, bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton}); setParkIsClicked(""); isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
+                                <DirectionsCarIcon/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
+                            </MKButton>
+                        </MKBox>
                         <NaverMap
                         defaultCenter={new navermaps.LatLng(loc.lat, loc.lng)}
                         defaultZoom={15}
@@ -215,20 +227,6 @@ function MapPageBasic () {
                         ref={setMap}
                         zIndex="9"
                         >
-                            <MKBox style={{position:"fixed", zIndex:"8",marginTop:"90px",textAlign:"center",width:"100%"}}>
-                                <MKButton color={btIsAcitived.bkbutton && btIsAcitived.pkbutton ? "dark" : "secondary"} style={{marginTop:"5px",borderRadius:"30px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: true,bkbutton: true, pkbutton: true});setIsClicked("");setParkIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
-                                    <img src={menu} alt="ibk" width={25} height={20}/>&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>전체</MKTypography>
-                                </MKButton>
-                                <MKButton color={btIsAcitived.bkbutton ? "info" : "secondary"} style={{marginTop:"5px",borderRadius:"30px",marginLeft: "10px",paddingLeft:"15px",paddingRight:"20px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all,bkbutton: !btIsAcitived.bkbutton,pkbutton:btIsAcitived.pkbutton});setIsClicked(""); isWindow !== "" && btIsAcitived.bkbutton  ? isWindow.close() : setIsWindow("");}}>
-                                    <img src={ibk} alt="ibk" width={15} height={15}/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>IBK기업은행</MKTypography>
-                                </MKButton>
-                                <MKButton color={btIsAcitived.pkbutton ? "success" : "secondary"} style={{marginTop:"5px",borderRadius:"30px", marginLeft: "10px",paddingLeft:"15px",paddingRight:"15px"}} size="small" onClick={()=>{setBtIsActived({all: btIsAcitived.all, bkbutton: btIsAcitived.bkbutton,pkbutton: !btIsAcitived.pkbutton}); setParkIsClicked(""); isParkWindow !== "" && btIsAcitived.pkbutton  ? isParkWindow.close() : setParkIsWindow("");}}>
-                                    <DirectionsCarIcon/>&nbsp;&nbsp;<MKTypography color="white" fontWeight="bold" style={{fontSize:"15px"}}>주차장</MKTypography>
-                                </MKButton>
-                                <MKButton style={{border:"2px solid #f2f2f2",marginTop:"5px",paddingTop:"8px",marginLeft: "10px",paddingBottom:"8px",paddingLeft:"0",paddingRight:"0"}} color="white" size="small" onClick={()=>{map.setCenter(new navermaps.LatLng(loc.lat,loc.lng))}}>
-                                        <img src={mylocation} alt="mylocation" width={20} height={20}/>
-                                </MKButton>
-                            </MKBox>
                             <Marker position={new navermaps.LatLng(loc.lat, loc.lng)} 
                                 icon={{
                                     content: 
@@ -293,6 +291,11 @@ function MapPageBasic () {
                             }) : ""}
                             </>): ""}
                         </NaverMap>
+                        <MKBox style={{position:"fixed", zIndex:"8",marginTop:"48rem"}}>
+                            <MKButton style={{border:"2px solid #f2f2f2",paddingTop:"8px",paddingBottom:"8px",paddingLeft:"0",paddingRight:"0"}} color="white" size="small" onClick={()=>{map.setCenter(new navermaps.LatLng(loc.lat,loc.lng))}}>
+                                <img src={mylocation} alt="mylocation" width={20} height={20}/>
+                            </MKButton>
+                        </MKBox>
                     </MapDiv>
                 : <Loading image={loadingimg}/>}
             </MKBox>
