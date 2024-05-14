@@ -68,7 +68,7 @@ function Information() {
                     color="info"
                     name={data.qnanickname}
                     date={data.qnacreateday.substring(0,data.qnacreateday.indexOf("T"))}
-                    review={data.qnacontents}
+                    review={data.qnatitle}
                     // rating={5}
                     state={data.qnastate}
                   />
