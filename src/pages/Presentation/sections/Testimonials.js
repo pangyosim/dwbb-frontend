@@ -39,7 +39,7 @@ function Information() {
         <Grid
           container
           item
-          mt={10}
+          mt={8}
           xs={12}
           lg={6}
           justifyContent="center"
