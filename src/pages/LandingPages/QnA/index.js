@@ -134,6 +134,8 @@ function QnABasic () {
 
     const handlerNoticeTitle = (notice,e) => {
         e.preventDefault();
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/notice-views`, notice)
+        .catch((error) => alert('notice views error : ' + error));
         navigator('/pages/landing-pages/noticedetail', {
             state : {
               seq : notice.noticeseq,
