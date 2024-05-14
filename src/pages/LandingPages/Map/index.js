@@ -291,7 +291,7 @@ function MapPageBasic () {
                             }) : ""}
                             </>): ""}
                         </NaverMap>
-                        <MKBox style={{position:"fixed", zIndex:"8",marginTop:"750px"}}>
+                        <MKBox style={{position:"fixed", zIndex:"8",bottom:"100px"}}>
                             <MKButton style={{border:"2px solid #f2f2f2",paddingTop:"8px",paddingBottom:"8px",paddingLeft:"0",paddingRight:"0"}} color="white" size="small" onClick={()=>{map.setCenter(new navermaps.LatLng(loc.lat,loc.lng))}}>
                                 <img src={mylocation} alt="mylocation" width={20} height={20}/>
                             </MKButton>
