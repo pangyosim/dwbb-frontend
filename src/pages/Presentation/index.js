@@ -22,35 +22,10 @@ import BuiltByDevelopers from "pages/Presentation/components/BuiltByDevelopers";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 import exceptionroutes from "exceptionroutes";
-
-// Carousel
-//import {Carousel} from "react-responsive-carousel";
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import bgImage from "../../assets/images/background3dimg.png";
-// import bgImage1 from "../../assets/images/background3dimg1.png";
-// import bgImage2 from "../../assets/images/background3dimg2.png";
-// import bgImage3 from "../../assets/images/background3dimg3.png";
-// import { useState } from "react";
-
-// const slide_items = [
-//   {
-//     alt : "Slide image 1",
-//     url : bgImage1,
-//   },
-//   {
-//     alt : "Slide image 2",
-//     url : bgImage2,
-//   },
-//   {
-//     alt : "Slide image 3",
-//     url : bgImage3,
-//   }
-// ]
+import Spline from '@splinetool/react-spline';
 
 function Presentation() {
   let isLogin = localStorage.getItem("token");
-  // const [currentIndex, setCurrentIndex] = useState();
-  // const [slideIndex, setSlideIndex] = useState(1);
   return (
     <>
       <DefaultNavbar
@@ -69,71 +44,39 @@ function Presentation() {
             color:"info",
         }}
       />
-      {/* <Carousel
-          showArrows={false}
-          autoPlay={true}
-          infiniteLoop={true}
-          showThumbs={false}
-          stopOnHover={false}
-          showIndicators={false}
-          showStatus={false}
-          onChange={(idx)=> setCurrentIndex(idx)}
-          selectedItem={slide_items[currentIndex]}
-        >
-        {slide_items.map((va,idx)=>{
-          console.log('idx : ' + idx)
-          console.log(slide_items)
-          if(idx === slide_items.length-1) {
-            slide_items.push({
-              alt: `Slide image ${slideIndex}`,
-              url: require(`../../assets/images/background3dimg${slideIndex}.png`)
-            })
-            setSlideIndex(()=>1);
-          } else if (idx > 3){
-            slide_items.shift()
-          }
-          return(
-            <div key={va.alt}>
-              <img src={va.url}  alt={va.alt}/>
-            </div>
-          )
-        })}
-      </Carousel> */}
       <MKBox
         minHeight="105vh"
         width="100%"
         sx={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
           display: "grid",
           placeItems: "center",
-          //borderImage: "fill top linear-gradient(#fff,#fff1)",
         }}
       >
+        <Spline scene="https://prod.spline.design/ZarEaflWKqZJOWNn/scene.splinecode" style={{position:"absolute"}}/>
         <Container>
-          <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
-            <MKTypography
-              variant="h1"
-              mt={-30}
-              mb={0}
-              sx={({ breakpoints, typography: { size } }) => ({
-                [breakpoints.down("md")]: {
-                  fontSize: size["3xl"],
-                },
-              })}
-              textAlign="center"
-            >
-              은행 대기인원 <br></br> DWBB에서 간편하게
-            </MKTypography>
-            <MKTypography
-              variant="body1"
-              textAlign="center"
-              px={{ xs: 6, lg: 12 }}
-              mt={-10}
-            >
-              IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
-            </MKTypography>
+          <Grid container item xs={12} md={12} lg={7} justifyContent="center" mx="auto">
+              <MKTypography
+                variant="h1"
+                mt={-30}
+                mb={0}
+                sx={({ breakpoints, typography: { size } }) => ({
+                  [breakpoints.down("md")]: {
+                    fontSize: size["4xl"],
+                  },
+                  zIndex:"0"
+                })}
+                textAlign="center"
+              >
+                은행 대기인원 <br></br> DWBB에서 간편하게
+              </MKTypography>
+              <MKTypography
+                variant="body1"
+                textAlign="center"
+                px={{ xs: 6, lg: 12 }}
+                mt={-10}
+              >
+                IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
+              </MKTypography>
           </Grid>
         </Container>
       </MKBox>
