@@ -54,14 +54,14 @@ function Presentation() {
       >
         <Spline scene="https://prod.spline.design/ZarEaflWKqZJOWNn/scene.splinecode" style={{position:"absolute"}}/>
         <Container>
-          <Grid container item xs={12} md={12} lg={7} justifyContent="center" mx="auto">
+          <Grid container item xs={12}  lg={7} justifyContent="center" mx="auto">
               <MKTypography
                 variant="h1"
-                mt={-30}
+                mt={-35}
                 mb={0}
                 sx={({ breakpoints, typography: { size } }) => ({
                   [breakpoints.down("md")]: {
-                    fontSize: size["4xl"],
+                    fontSize: size["3xl"],
                   },
                   zIndex:"0"
                 })}
@@ -73,7 +73,8 @@ function Presentation() {
                 variant="body1"
                 textAlign="center"
                 px={{ xs: 6, lg: 12 }}
-                mt={-10}
+                mt={-15}
+                zIndex="0"
               >
                 IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
               </MKTypography>
