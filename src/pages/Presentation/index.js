@@ -73,7 +73,7 @@ function Presentation() {
                 variant="body1"
                 textAlign="center"
                 px={{ xs: 6, lg: 12 }}
-                mt={-15}
+                mt={-18}
                 zIndex="0"
               >
                 IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
