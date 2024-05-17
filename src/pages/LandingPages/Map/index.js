@@ -146,7 +146,7 @@ function MapPageBasic () {
         map.setCenter(new navermaps.LatLng(v.lat,v.lng));
         setIsClicked("");
         setParkIsClicked(idx)
-        const loc = new navermaps.LatLng(v.lat+0.002,v.lng);
+        const loc = new navermaps.LatLng(v.lat+0.005,v.lng);
         const parkinfowindow = new navermaps.InfoWindow({
             content :   `<div style="padding: 0; width: 27vh; margin: 0; border: 2px solid #4caf50; border-radius: 10px; background-color: white;">
                             <div style="padding: 13px;">
