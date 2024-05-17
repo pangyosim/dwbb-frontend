@@ -45,16 +45,17 @@ function Presentation() {
         }}
       />
       <MKBox
-        minHeight="105vh"
+        minHeight="100vh"
         width="100%"
         sx={{
           display: "grid",
           placeItems: "center",
         }}
       >
-        <Spline scene="https://prod.spline.design/ZarEaflWKqZJOWNn/scene.splinecode" style={{position:"absolute"}}/>
-        <Container>
-          <Grid container item xs={12}  lg={7} justifyContent="center" mx="auto">
+        <MKBox style={{ width:"100%",height:"100vh", position:"absolute",zIndex:"0",background:"white",opacity:"0.05"}}></MKBox>
+        <Spline scene="https://prod.spline.design/BJhdaQEIZcZmSt5U/scene.splinecode" style={{position:"absolute", zIndex:"-1"}}/>
+        <Container zIndex="1">
+          <Grid container xs={12} lg={7} justifyContent="center" mx="auto">
               <MKTypography
                 variant="h1"
                 mt={-35}
@@ -63,9 +64,10 @@ function Presentation() {
                   [breakpoints.down("md")]: {
                     fontSize: size["3xl"],
                   },
-                  zIndex:"0"
+                  zIndex:"1"
                 })}
                 textAlign="center"
+                style={{color:"#fcfcfe"}}
               >
                 은행 대기인원 <br></br> DWBB에서 간편하게
               </MKTypography>
@@ -74,7 +76,8 @@ function Presentation() {
                 textAlign="center"
                 px={{ xs: 6, lg: 12 }}
                 mt={-18}
-                zIndex="0"
+                zIndex="1"
+                style={{color:"#fcfcfe"}}
               >
                 IBK기업은행 대기인원 현황,<br></br> 주차장 정보 확인 웹사이트
               </MKTypography>
