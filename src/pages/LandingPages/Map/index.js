@@ -108,7 +108,7 @@ function MapPageBasic () {
         map.setCenter(new navermaps.LatLng(v.geoy,v.geox));
         setParkIsClicked("");
         setIsClicked(idx)
-        const loc = new navermaps.LatLng(v.geoy,v.geox);
+        const loc = new navermaps.LatLng(v.geoy+0.002,v.geox);
         const infowindow = new navermaps.InfoWindow({
             content :   `<div style="padding: 0; width: 25vh; margin: 0; border: 2px solid #0675f4; border-radius: 10px; background-color: white;">
                             <div style="padding: 13px;">
@@ -146,7 +146,7 @@ function MapPageBasic () {
         map.setCenter(new navermaps.LatLng(v.lat,v.lng));
         setIsClicked("");
         setParkIsClicked(idx)
-        const loc = new navermaps.LatLng(v.lat,v.lng);
+        const loc = new navermaps.LatLng(v.lat+0.002,v.lng);
         const parkinfowindow = new navermaps.InfoWindow({
             content :   `<div style="padding: 0; width: 27vh; margin: 0; border: 2px solid #4caf50; border-radius: 10px; background-color: white;">
                             <div style="padding: 13px;">
