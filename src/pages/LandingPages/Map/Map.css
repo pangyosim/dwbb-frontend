@@ -83,7 +83,9 @@
 
 
 .arr0, .arr1, .arr2, .arr3, .arr4, .arr5, .arr6, .arr7, .arr8, .arr9, .arr10,
-.arr11, .arr12, .arr13, .arr14, .arr15, .arr16, .arr17, .arr18, .arr19, .arr20 {
+.arr11, .arr12, .arr13, .arr14, .arr15, .arr16, .arr17, .arr18, .arr19, .arr20,
+.arr21, .arr22, .arr23, .arr24, .arr25, .arr26, .arr27, .arr28, .arr29, .arr30,
+.arr31, .arr32, .arr33, .arr34, .arr35, .arr36, .arr37, .arr38, .arr39, .arr40 {
     margin: 0;
     padding: 0;
     width: 12vh; 
@@ -98,7 +100,9 @@
 }
 
 .arr0:after, .arr1:after, .arr2:after, .arr3:after, .arr4:after, .arr5:after, .arr6:after, .arr7:after, .arr8:after, .arr9:after, .arr10:after,
-.arr11:after, .arr12:after, .arr13:after, .arr14:after, .arr15:after, .arr16:after, .arr17:after, .arr18:after, .arr19:after, .arr20:after{ 
+.arr11:after, .arr12:after, .arr13:after, .arr14:after, .arr15:after, .arr16:after, .arr17:after, .arr18:after, .arr19:after, .arr20:after,
+.arr21:after, .arr22:after, .arr23:after, .arr24:after, .arr25:after, .arr26:after, .arr27:after, .arr28:after, .arr29:after, .arr30:after,
+.arr31:after, .arr32:after, .arr33:after, .arr34:after, .arr35:after, .arr36:after, .arr37:after, .arr38:after, .arr39:after, .arr40:after{ 
     border-top: 5px solid #0675f4;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -109,7 +113,9 @@
 }
 
 .parkarr0, .parkarr1, .parkarr2, .parkarr3, .parkarr4, .parkarr5, .parkarr6, .parkarr7, .parkarr8, .parkarr9, .parkarr10,
-.parkarr11, .parkarr12, .parkarr13, .parkarr14, .parkarr15, .parkarr16, .parkarr17, .parkarr18, .parkarr19, .parkarr20 {
+.parkarr11, .parkarr12, .parkarr13, .parkarr14, .parkarr15, .parkarr16, .parkarr17, .parkarr18, .parkarr19, .parkarr20,
+.parkarr21, .parkarr22, .parkarr23, .parkarr24, .parkarr25, .parkarr26, .parkarr27, .parkarr28, .parkarr29, .parkarr30,
+.parkarr31, .parkarr32, .parkarr33, .parkarr34, .parkarr35, .parkarr36, .parkarr37, .parkarr38, .parkarr39, .parkarr40 {
     margin: 0;
     padding: 0;
     width: 12vh; 
@@ -124,7 +130,9 @@
 }
 
 .parkarr0:after, .parkarr1:after, .parkarr2:after, .parkarr3:after, .parkarr4:after, .parkarr5:after, .parkarr6:after, .parkarr7:after, .parkarr8:after, .parkarr9:after, .parkarr10:after,
-.parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after{ 
+.parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after,
+.parkarr21:after, .parkarr22:after, .parkarr23:after, .parkarr24:after, .parkarr25:after, .parkarr26:after, .parkarr27:after, .parkarr28:after, .parkarr29:after, .parkarr30:after,
+.parkarr31:after, .parkarr32:after, .parkarr33:after, .parkarr34:after, .parkarr35:after, .parkarr36:after, .parkarr37:after, .parkarr38:after, .parkarr39:after, .parkarr40:after{ 
     border-top: 5px solid #4caf50;
     border-left: 4px solid transparent;
     border-right: 4px solid transparent;
@@ -146,7 +154,9 @@
         top: 37px;
     }
     .arr0:after, .arr1:after, .arr2:after, .arr3:after, .arr4:after, .arr5:after, .arr6:after, .arr7:after, .arr8:after, .arr9:after, .arr10:after,
-    .arr11:after, .arr12:after, .arr13:after, .arr14:after, .arr15:after, .arr16:after, .arr17:after, .arr18:after, .arr19:after, .arr20:after{ 
+    .arr11:after, .arr12:after, .arr13:after, .arr14:after, .arr15:after, .arr16:after, .arr17:after, .arr18:after, .arr19:after, .arr20:after,
+    .arr21:after, .arr22:after, .arr23:after, .arr24:after, .arr25:after, .arr26:after, .arr27:after, .arr28:after, .arr29:after, .arr30:after,
+    .arr31:after, .arr32:after, .arr33:after, .arr34:after, .arr35:after, .arr36:after, .arr37:after, .arr38:after, .arr39:after, .arr40:after{ 
         top: 37px;
         left: 20px;
     }
@@ -160,7 +170,9 @@
         top: 37px;
     }
     .parkarr0:after, .parkarr1:after, .parkarr2:after, .parkarr3:after, .parkarr4:after, .parkarr5:after, .parkarr6:after, .parkarr7:after, .parkarr8:after, .parkarr9:after, .parkarr10:after,
-    .parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after{ 
+    .parkarr11:after, .parkarr12:after, .parkarr13:after, .parkarr14:after, .parkarr15:after, .parkarr16:after, .parkarr17:after, .parkarr18:after, .parkarr19:after, .parkarr20:after,
+    .parkarr21:after, .parkarr22:after, .parkarr23:after, .parkarr24:after, .parkarr25:after, .parkarr26:after, .parkarr27:after, .parkarr28:after, .parkarr29:after, .parkarr30:after,
+    .parkarr31:after, .parkarr32:after, .parkarr33:after, .parkarr34:after, .parkarr35:after, .parkarr36:after, .parkarr37:after, .parkarr38:after, .parkarr39:after, .parkarr40:after{ 
         top: 37px;
         left: 20px;
     }

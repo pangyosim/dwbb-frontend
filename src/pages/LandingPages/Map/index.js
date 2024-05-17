@@ -127,7 +127,7 @@ function MapPageBasic () {
                                                 ${val.waitCusCnt}
                                             </div>
                                             `
-                                    ).join(''): `<div style="font-weight: bold; color: red; margin-bottom: 5px;">영업시간이 아닙니다.</div>`}
+                                    ).join(''): nearbank[0] === "Bank API 점검" ? `<div style="font-weight: bold; color: red; margin-bottom: 5px;">API 시스템 점검 중...</div>`: `<div style="font-weight: bold; color: red; margin-bottom: 5px;">영업시간이 아닙니다.</div>`}
                                 </div>
                                 <button class="reservbutton" onclick="window.open('https://map.naver.com/p/search/IBK기업은행 ${v.krnbrm}')">예약</button><p style="font-size:9px; color: red;">* 당일,공휴일예약은 불가합니다.</p>
                             </div>
@@ -253,7 +253,7 @@ function MapPageBasic () {
                                         icon={{
                                             content: zoom > 15 ? 
                                                     `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
-                                                        <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
+                                                        <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm && v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
                                                     </div>` : 
                                                     `<div style="padding: 0; margin: 0;">
                                                         <img src=${isClicked !== idx ? ibkbefore : ibkafter} style=" width: 5vh; height: 5vh;"/>

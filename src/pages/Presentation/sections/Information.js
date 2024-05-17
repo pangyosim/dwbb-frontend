@@ -39,7 +39,7 @@ function Information() {
               <RotatingCardBack
                 image={bgimg}
                 title={<>은행 대기인원 현황<br></br> & 주차장정보</>}
-                description={<>내 근처 7km 이내<br></br>지점을 확인할 수 있습니다.</>}
+                description={<>내 근처 5km 이내<br></br>지점을 확인할 수 있습니다.</>}
                 action={{
                   type: "internal",
                   route: isLogin != null ? "/pages/landing-pages/map" : "/pages/authentication/sign-in",
