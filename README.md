@@ -29,7 +29,8 @@
 ~~~
 메인페이지 
 ~~~
-<img width="100%" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/c7075a75-bde7-4571-85f2-44c08498c1bb">
+<img width="1643" alt="image" src="https://github.com/pangyosim/dwbb-frontend/assets/87213815/c086ece2-397a-4c77-8070-4f5baca8e63a">
+
 
 ~~~
 로그인페이지
@@ -62,7 +63,8 @@
 Q&A페이지
 ~~~
 
-<img width="1247" alt="image" src="https://github.com/pangyosim/dwbb/assets/87213815/dda36195-9def-49b9-81e3-a34af047d8bc">
+<img width="1220" alt="image" src="https://github.com/pangyosim/dwbb-frontend/assets/87213815/246d93af-2345-4f19-9efa-2001aea50816">
+
 
 
 
@@ -71,7 +73,8 @@ Q&A페이지
 ~~~
 
 
-<img width="1529" alt="image" src="https://github.com/pangyosim/dwbb-frontend/assets/87213815/0cb6729e-479f-459c-b8fb-75778c4d36dc">
+<img width="1728" alt="image" src="https://github.com/pangyosim/dwbb-frontend/assets/87213815/68136d5d-f6e8-4b69-aac1-b7e7708b95da">
+
 
 
 
