@@ -53,6 +53,12 @@ function SignInBasic() {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
+  useEffect(()=>{
+    if(cookies.rememberUserId !== values.id ) {
+      setRememberMe(false)
+    }
+  },[cookies.rememberUserId,values.id])
+
   const handleSetRememberMe = (e) =>{
     setRememberMe(e.target.checked);
     if (e.target.checked) {
