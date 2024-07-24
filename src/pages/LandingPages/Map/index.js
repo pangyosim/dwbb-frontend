@@ -251,7 +251,7 @@ function MapPageBasic () {
                                     <Marker key={idx} position={new navermaps.LatLng(v.geoy,v.geox)}
                                         map={map}
                                         icon={{
-                                            content: zoom > 15 ? 
+                                            content: zoom > 16 ? 
                                                     `<div class=${isClicked !== idx ? "arr" : "arr"+idx}>
                                                         <img src=${ibk} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold;"> IBK기업은행 <br>${v.krnbrm && v.krnbrm.length > 7 ? v.krnbrm.substring(0,5)+"..." : v.krnbrm}</p>
                                                     </div>` : 
@@ -274,7 +274,7 @@ function MapPageBasic () {
                                     <Marker key={idx} position={new navermaps.LatLng(v.lat,v.lng)}
                                         map={map}
                                         icon={{
-                                            content: zoom > 15 ? 
+                                            content: zoom > 16 ? 
                                                 `<div class=${parkisClicked !== idx ? "parkarr" : "parkarr"+idx}>
                                                     <img src=${parking} style="margin-left: 0.75vh; width: 2.5vh; height: 2.5vh;"/><p style="margin-top: 0.5vh; margin-left: 0.5vh; font-size: 10px; font-weight: bold; margin-right: 0.5vh;">${v.pkname} </p>
                                                 </div>`:
